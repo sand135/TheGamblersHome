@@ -142,7 +142,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _nod
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ \"./node_modules/vue/dist/vue.runtime.esm.js\");\n/* harmony import */ var _CounterButton_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CounterButton.vue */ \"./CounterButton.vue\");\n\n\n\n\nnew vue__WEBPACK_IMPORTED_MODULE_0__[\"default\"]({\n  el: '#app',\n  render: h => h(_CounterButton_vue__WEBPACK_IMPORTED_MODULE_1__[\"default\"])\n})\n\n\n//# sourceURL=webpack:///./index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ \"./node_modules/vue/dist/vue.runtime.esm.js\");\n/* harmony import */ var _CounterButton_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CounterButton.vue */ \"./CounterButton.vue\");\n\n\n\n\nnew vue__WEBPACK_IMPORTED_MODULE_0__[\"default\"]({\n\n  data: {\n    katt: \"Hej\"\n  },\n\n  el: '#app',\n\n  \n  render: h => h(_CounterButton_vue__WEBPACK_IMPORTED_MODULE_1__[\"default\"])\n \n  \n})\n\n\n\n//# sourceURL=webpack:///./index.js?");
 
 /***/ }),
 
