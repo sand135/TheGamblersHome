@@ -11,12 +11,4 @@ new Vue({
 
   },
   render: h => h(App)
-
-<<<<<<< HEAD
-  
-  render: h => h(App),
-  
-  
-=======
->>>>>>> Jonatan
 })
