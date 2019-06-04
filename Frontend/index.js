@@ -1,18 +1,15 @@
 import Vue from 'vue'
 
-import CounterButton from './CounterButton.vue'
+import App from './App.vue'
 
 new Vue({
-
+  el: '#app',
   data: {
     katt: "Hej"
   },
+  methods: {
 
-  el: '#app',
+  },
+  render: h => h(App)
 
-  
-  render: h => h(CounterButton)
- 
-  
 })
-
