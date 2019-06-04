@@ -3,16 +3,12 @@ import Vue from 'vue'
 import App from './App.vue'
 
 new Vue({
-
+  el: '#app',
   data: {
     katt: "Hej"
   },
+  methods: {
 
-  el: '#app',
-
-  
-  render: h => h(App),
-  
-  
+  },
+  render: h => h(App)
 })
-
