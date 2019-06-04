@@ -6,17 +6,13 @@
             <img src="Images/Playing_cards/2_of_hearts.png" id="tablecard3">
             <img src="Images/Playing_cards/2_of_spades.png" id="tablecard4">
              <img src="Images/Playing_cards/3_of_clubs.png" id="tablecard5">
-            <span id="player1">                 
-                <img src ="Images/player_avatars/avatar1.png" class="avatar"> 
-                <div class="playerNameText">JONATAN</div>
-            </span>
-            <span id="player2">
-                 <img src ="Images/player_avatars/avatar2.png" class="avatar">
-                 <div class="playerNameText">ALEXANDER</div>
-                </span>
-            
-             
-             
+            <picture id="avatar1" class="player1">
+                <img src ="Images/player_avatars/avatar1.png" class="avatar">
+                <div id="player1" class="player1">Kalle</div>
+            </picture>
+             <img src ="Images/player_avatars/avatar2.png" id="avatar2" class="avatar">
+
+
  </div>
 </template>
 <script>
@@ -25,12 +21,12 @@
   export default {
     data() {
       return {
-     
+
       }
     },
     methods: {
       onClick() {
-       
+
       }
     }
   }
@@ -41,10 +37,7 @@ input {
 }
 
 #backgroundImage {
-    position: sticky;
-    position: center;
-    width: 1300px; 
-    
+    width: 1300px;
 }
 
  #tablecard1 {
@@ -83,32 +76,24 @@ input {
     width: 100px;
 
  }
- #player1 {
+ #avatar1 {
         position: fixed;
     bottom: 100px;
     right: 180px;
     width: 100px;
-    
+    color: blue;
+
  }
 
-#player2 {
-    position: fixed;
-    bottom: 650px;
+#avatar2 {
+            position: fixed;
+    bottom: 550px;
     right: 150px;
     width: 100px;
  }
 
-.avatar {
-    width: 100px
-}
 
-.playerNameText {
-    color: blue; 
-    text-align: center;
-    font-weight: bold;
-    font-size: 22px;
-    font-family: fantasy;
-}
+
 
 
 </style>
