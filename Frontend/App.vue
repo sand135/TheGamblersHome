@@ -1,6 +1,6 @@
 <template>
   <div>
-    <counter-button />
+  
    <poker-table />
   </div>
 </template>
