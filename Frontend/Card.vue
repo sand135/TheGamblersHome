@@ -16,6 +16,12 @@
       }
     },
     methods: {
+      onClick() {
+
+	        console.log(this.deck[0].suit+this.deck[0].value)
+	        this.deck.splice(0,1)
+	        this.card = this.deck[0].suit+this.deck[0].value
+	      },
       renderOneCard() {
         //Lägger till översta kortet i kortleken och tar bort det ur arrayen
         // console.log(this.deck[0].suit+this.deck[0].value)
