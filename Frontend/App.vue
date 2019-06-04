@@ -1,8 +1,13 @@
 <template>
   <div>
+<<<<<<< HEAD
     <card />
     <counter-button />
     <poker-table />
+=======
+  
+   <poker-table />
+>>>>>>> Tommy
   </div>
 </template>
 <script>
