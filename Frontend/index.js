@@ -1,18 +1,10 @@
 import Vue from 'vue'
+import App from './App.vue'
+import Router from './router'
 
-import CounterButton from './CounterButton.vue'
 
 new Vue({
-
-  data: {
-    katt: "Hej"
-  },
-
   el: '#app',
-
-  
-  render: h => h(CounterButton)
- 
-  
+  router:Router,
+  render: h => h(App)
 })
-
