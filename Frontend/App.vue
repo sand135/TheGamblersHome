@@ -1,11 +1,11 @@
 <template>
-  <sign-in-up></sign-in-up>
+  <sign-up-helper></sign-up-helper>
 </template>
 <script>
-  import SignInUp from './loginFunctionality/SignInUp.vue'
+  import SignupHelper from './loginFunctionality/SignupHelper.vue'
   export default{
     components: {
-      'sign-in-up': SignInUp
+      'sign-up-helper': SignupHelper
     }
   }
 </script>
