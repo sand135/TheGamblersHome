@@ -1,6 +1,6 @@
 <template>
   <div class="outline">
-    <div v-on:click="onClick"> {{ this.card }}</div>
+    <div v-on:click="onClick" class="card"> {{ this.card }}</div>
   </div>
 </template>
 <script>
@@ -53,5 +53,9 @@
 <style scoped>
   input {
     width: 100%;
+  }
+
+  .outline {
+    color: white;
   }
 </style>
