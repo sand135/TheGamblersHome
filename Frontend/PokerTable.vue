@@ -41,7 +41,8 @@ input {
 }
 
 #backgroundImage {
-    position: center; 
+    position: sticky;
+    position: center;
     width: 1300px; 
     
 }
