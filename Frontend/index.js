@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-import CounterButton from './CounterButton.vue'
+import App from './App.vue'
 
 new Vue({
 
@@ -11,8 +11,8 @@ new Vue({
   el: '#app',
 
   
-  render: h => h(CounterButton)
- 
+  render: h => h(App),
+  
   
 })
 
