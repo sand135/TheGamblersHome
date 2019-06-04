@@ -84,27 +84,27 @@ input {
 
  }
  #player1 {
-        position: fixed;
-    bottom: 100px;
-    right: 180px;
-    width: 100px;
+    position: fixed;
+    bottom: 8%;
+    right: 3%;
+   
     
  }
 
 #player2 {
     position: fixed;
-    bottom: 650px;
-    right: 150px;
-    width: 100px;
+    bottom: 80%;
+    right: 3%;
+    
  }
 
 .avatar {
-    width: 100px
+    width: 40%;
 }
 
 .playerNameText {
     color: blue; 
-    text-align: center;
+    text-align: left;
     font-weight: bold;
     font-size: 22px;
     font-family: fantasy;
