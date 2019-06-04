@@ -16,7 +16,7 @@ export default {
   methods: {
     redirectToLogin(){
         this.$router.replace({ name: "SignIn" })
-    }
+    },
 
     redirectToRegister(){
       this.$router.replace({ name: "Register" })
