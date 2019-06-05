@@ -1,17 +1,25 @@
 <template>
   <div>
-    <counter-button />
-    <cards />
+    <card />
+    <poker-table />
   </div>
 </template>
 <script>
   import CounterButton from './CounterButton.vue'
-  import Cards from './Cards.vue'
+  import Card from './Card.vue'
+  import PokerTable from './PokerTable.vue'
 
   export default {
     components: {
        'counter-button': CounterButton,
-       'cards': Cards
+       'card': Card,
+       'poker-table' : PokerTable
     }
   }
 </script>
+<style>
+    body{
+        background-color: black
+    }
+</style>
+
