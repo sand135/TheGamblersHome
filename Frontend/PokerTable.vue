@@ -14,9 +14,7 @@
                  <img src ="Images/player_avatars/avatar2.png" class="avatar">
                  <div class="playerNameText">ALEXANDER</div>
                 </span>
-            
-             
-             
+                
  </div>
 </template>
 <script>
