@@ -15,11 +15,11 @@ export default {
 
   methods: {
     redirectToLogin(){
-        this.$router.replace({ name: "SignIn" })
+        this.$router.push({ name: "SignIn" })
     },
 
     redirectToRegister(){
-      this.$router.replace({ name: "Register" })
+      this.$router.push({ name: "Register" })
     }
   }
 }

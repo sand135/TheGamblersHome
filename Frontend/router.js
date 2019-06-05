@@ -28,7 +28,7 @@ export default new Router({
     },
 
     {
-      path: "/signin",
+      path: "/signinup/signin",
       name: "SignIn",
       component: LoginComponent
     },

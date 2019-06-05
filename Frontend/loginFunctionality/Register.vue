@@ -22,15 +22,28 @@
         input: {
           username: "",
           password: ""
-        }
+        },
+        successfullRegistration:true,
       }
     },
     methods: {
       register() {
-        //Kolla mot sql databasen att användarnamnet inte redan finns-
-        //Om OK ladda in användaren  i databasen och gå över till main
-        //OM INTE visa pop-up att användarnamnet redan används.
-        this.$router.replace({ name: "main" })
+        fetch('http://localhost:8080/api/', {
+          body: '{"username":"'+ this.input.username+'", "password":'+this.input.password+'}',
+          headers: {
+            'Content-Type':'application/json'
+          },
+          method: 'POST'
+        }).then(response => response.json())
+          .then(result =>{
+            console.log(result.status)
+            if(result === "Bad request"){
+              console.log('registration failed')
+            }else{
+              console.log('registration sucessfull'+ result)
+              this.$router.replace({ name: "main" })
+            }
+          })
       }
     }
   }
