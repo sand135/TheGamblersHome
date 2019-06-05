@@ -1,6 +1,6 @@
 <template>
   <div class="outline">
-    <div v-on:click="onClick" class="card"> {{ this.card }}</div>
+    <div v-on:click="renderOneCard"> {{ this.card }}</div>
   </div>
 </template>
 <script>
@@ -16,12 +16,6 @@
       }
     },
     methods: {
-      onClick() {
-
-	        console.log(this.deck[0].suit+this.deck[0].value)
-	        this.deck.splice(0,1)
-	        this.card = this.deck[0].suit+this.deck[0].value
-	      },
       renderOneCard() {
         //Lägger till översta kortet i kortleken och tar bort det ur arrayen
         // console.log(this.deck[0].suit+this.deck[0].value)
@@ -53,9 +47,5 @@
 <style scoped>
   input {
     width: 100%;
-  }
-
-  .outline {
-    color: white;
   }
 </style>
