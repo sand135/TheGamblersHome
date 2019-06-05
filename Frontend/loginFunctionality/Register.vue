@@ -12,6 +12,10 @@
       type="button"
       value="Register"
       v-on:click="register()">>
+      <input
+      type="button"
+      value="Back"
+      v-on:click="back()">>
   </div>
 </template>
 <script>
@@ -28,6 +32,7 @@
     },
     methods: {
       register() {
+
         fetch('http://localhost:8080/api/', {
           body: '{"username":"'+ this.input.username+'", "password":'+this.input.password+'}',
           headers: {
@@ -44,9 +49,20 @@
               this.$router.replace({ name: "main" })
             }
           })
+          
+        if(this.authenticated){
+          this.$router.replace({ name: "main" })
+        }
+      },
+      back(){
+        this.$router.replace({ name: "SignInUp" })
+
       }
+
     }
   }
+
+
 </script>
 <style scoped>
   #register {
