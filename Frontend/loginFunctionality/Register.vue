@@ -12,6 +12,10 @@
       type="button"
       value="Register"
       v-on:click="register()">>
+      <input
+      type="button"
+      value="Back"
+      v-on:click="back()">>
   </div>
 </template>
 <script>
@@ -30,10 +34,18 @@
         //Kolla mot sql databasen att användarnamnet inte redan finns-
         //Om OK ladda in användaren  i databasen och gå över till main
         //OM INTE visa pop-up att användarnamnet redan används.
-        this.$router.replace({ name: "main" })
+        if(this.authenticated){
+          this.$router.replace({ name: "main" })
+        }
+      },
+      back(){
+        this.$router.replace({ name: "SignInUp" })
       }
+
     }
   }
+
+
 </script>
 <style scoped>
   #register {
