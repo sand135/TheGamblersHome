@@ -12,9 +12,21 @@
       type="button"
       value="Sign in"
       v-on:click="login()">>
+
+    <input
+    type="button"
+    value="Back"
+    v-on:click="back()">>
   </div>
+
+
+
+
 </template>
 <script>
+
+
+
   export default {
     name: 'SignIn',
     data() {
@@ -38,9 +50,21 @@
         } else {
           console.log("A username and password must be present")
         }
+      },
+      back(){
+        this.$router.replace({ name: "SignInUp" });
       }
+
     }
+
+
   }
+  function preventBack(){window.history.forward();}
+      setTimeout("preventBack()", 0);
+      window.onunload=function(){null};
+
+
+
 </script>
 <style scoped>
     #login {
