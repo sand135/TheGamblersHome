@@ -17,9 +17,9 @@
     }
   }
 </script>
-<style>
-    body{
-        background-color: black;
-    }
+<style> 
+body{
+  background-color: black;
+}
 </style>
 
