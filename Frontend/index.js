@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 
+<<<<<<< HEAD
 
 new Vue({
   el: '#app',
@@ -43,6 +44,19 @@ new Vue({
 
   render: h => h(App)
 
+=======
+import App from './App.vue'
+
+new Vue({
+  el: '#app',
+  data: {
+    katt: "Hej"
+  },
+  methods: {
+
+  },
+  render: h => h(App)
+>>>>>>> master
 })
 
 
