@@ -36,7 +36,6 @@
             deck.push({suit:suits[i], value: values[n]})
           }
         }
-        //console.log(deck)
         this.shuffle(deck)
       },
       shuffle(array) {
@@ -54,8 +53,11 @@
   input {
     width: 100%;
   }
-
   .outline {
     color: white;
+    width: 110px; 
+    text-align: center;
+     padding: 10px;
   }
+  
 </style>

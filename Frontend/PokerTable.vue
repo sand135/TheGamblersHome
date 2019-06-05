@@ -2,10 +2,10 @@
  <div>
  <img src="poker-table-drawing-11.png" id="backgroundImage">
             <img src="Images/Playing_cards/2_of_clubs.png" id="tablecard1">
-            <img src="Images/Playing_cards/2_of_diamonds.png" id="tablecard2">
+            <!-- <img src="Images/Playing_cards/2_of_diamonds.png" id="tablecard2">
             <img src="Images/Playing_cards/2_of_hearts.png" id="tablecard3">
             <img src="Images/Playing_cards/2_of_spades.png" id="tablecard4">
-             <img src="Images/Playing_cards/3_of_clubs.png" id="tablecard5">
+             <img src="Images/Playing_cards/3_of_clubs.png" id="tablecard5"> -->
             <span id="player1">                 
                 <img src ="Images/player_avatars/avatar1.png" class="avatar"> 
                 <div class="playerNameText">JONATAN</div>
