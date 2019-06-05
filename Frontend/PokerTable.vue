@@ -1,33 +1,28 @@
 <template>
  <div>
  <img src="poker-table-drawing-11.png" id="backgroundImage">
-            <img src="Images/Playing_cards/2_of_clubs.png" id="tablecard1">
-            <img src="Images/Playing_cards/2_of_diamonds.png" id="tablecard2">
+    <!-- <img src="Images/Playing_cards/2_of_clubs.png" id="tablecard1"> -->
+            <!-- <img src="Images/Playing_cards/2_of_diamonds.png" id="tablecard2">
             <img src="Images/Playing_cards/2_of_hearts.png" id="tablecard3">
             <img src="Images/Playing_cards/2_of_spades.png" id="tablecard4">
-             <img src="Images/Playing_cards/3_of_clubs.png" id="tablecard5">
+             <img src="Images/Playing_cards/3_of_clubs.png" id="tablecard5"> -->
             <picture id="avatar1" class="player1">
                 <img src ="Images/player_avatars/avatar1.png" class="avatar">
                 <div id="player1" class="player1">Kalle</div>
             </picture>
-             <img src ="Images/player_avatars/avatar2.png" id="avatar2" class="avatar">
-
-
+             <img src ="Images/player_avatars/avatar2.png" id="avatar2" class="avatar"> -->
  </div>
 </template>
 <script>
 
-
   export default {
     data() {
       return {
-
+        
       }
     },
     methods: {
-      onClick() {
 
-      }
     }
   }
 </script>
@@ -91,9 +86,5 @@ input {
     right: 150px;
     width: 100px;
  }
-
-
-
-
 
 </style>
