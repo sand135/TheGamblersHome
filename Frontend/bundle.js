@@ -297,7 +297,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var vue_
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("exports = module.exports = __webpack_require__(/*! ./node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\")(false);\n// Module\nexports.push([module.i, \"\\nbody{\\n    background-color: black\\n}\\n\", \"\"]);\n\n\n\n//# sourceURL=webpack:///./App.vue?./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options");
+eval("exports = module.exports = __webpack_require__(/*! ./node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\")(false);\n// Module\nexports.push([module.i, \"\\nbody {\\n  background-color: black;\\n}\\n\", \"\"]);\n\n\n\n//# sourceURL=webpack:///./App.vue?./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options");
 
 /***/ }),
 
@@ -387,7 +387,7 @@ eval("/* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _CounterButton_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CounterButton.vue */ \"./CounterButton.vue\");\n/* harmony import */ var _Card_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Card.vue */ \"./Card.vue\");\n/* harmony import */ var _PokerTable_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PokerTable.vue */ \"./PokerTable.vue\");\n//\n//\n//\n//\n//\n//\n\n\n\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  components: {\n     'counter-button': _CounterButton_vue__WEBPACK_IMPORTED_MODULE_0__[\"default\"],\n     'card': _Card_vue__WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n     'poker-table' : _PokerTable_vue__WEBPACK_IMPORTED_MODULE_2__[\"default\"]\n  }\n});\n\n\n//# sourceURL=webpack:///./App.vue?./node_modules/vue-loader/lib??vue-loader-options");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _CounterButton_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CounterButton.vue */ \"./CounterButton.vue\");\n/* harmony import */ var _Card_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Card.vue */ \"./Card.vue\");\n/* harmony import */ var _PokerTable_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PokerTable.vue */ \"./PokerTable.vue\");\n//\n//\n//\n//\n//\n//\n\n\n\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  components: {\n     'counter-button': _CounterButton_vue__WEBPACK_IMPORTED_MODULE_0__[\"default\"],\n     'card': _Card_vue__WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n     'poker-table': _PokerTable_vue__WEBPACK_IMPORTED_MODULE_2__[\"default\"]\n  }\n});\n\n\n//# sourceURL=webpack:///./App.vue?./node_modules/vue-loader/lib??vue-loader-options");
 
 /***/ }),
 
