@@ -1,6 +1,7 @@
 <template>
   <div>
     <card />
+    <counter-button />
     <poker-table />
   </div>
 </template>
@@ -20,6 +21,6 @@
 
 <style>
 body {
-  background-color: black; 
+  background-color: black;
 }
 </style>
