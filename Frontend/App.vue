@@ -13,13 +13,13 @@
     components: {
        'counter-button': CounterButton,
        'card': Card,
-       'poker-table' : PokerTable
+       'poker-table': PokerTable
     }
   }
 </script>
 <style>
     body{
-        background-color: black
+        background-color: black;
     }
 </style>
 
