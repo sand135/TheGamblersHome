@@ -3,6 +3,7 @@
     <card />
     <poker-table />
   </div>
+  
 </template>
 <script>
   import CounterButton from './CounterButton.vue'
@@ -20,6 +21,9 @@
 
 <style>
 body {
-  background-color: black; 
+    width: 200%;
+    height: 200%;
+     background-color: black; 
 }
+
 </style>
