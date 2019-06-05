@@ -94,7 +94,7 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _App_vue_vue_type_template_id_472cff63___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App.vue?vue&type=template&id=472cff63& */ \"./App.vue?vue&type=template&id=472cff63&\");\n/* harmony import */ var _App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./App.vue?vue&type=script&lang=js& */ \"./App.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport *//* harmony import */ var _App_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./App.vue?vue&type=style&index=0&lang=css& */ \"./App.vue?vue&type=style&index=0&lang=css&\");\n/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__[\"default\"])(\n  _App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _App_vue_vue_type_template_id_472cff63___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _App_vue_vue_type_template_id_472cff63___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  null,\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"App.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);\n\n//# sourceURL=webpack:///./App.vue?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _App_vue_vue_type_template_id_472cff63___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App.vue?vue&type=template&id=472cff63& */ \"./App.vue?vue&type=template&id=472cff63&\");\n/* harmony import */ var _App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./App.vue?vue&type=script&lang=js& */ \"./App.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(\n  _App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _App_vue_vue_type_template_id_472cff63___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _App_vue_vue_type_template_id_472cff63___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  null,\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"App.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);\n\n//# sourceURL=webpack:///./App.vue?");
 
 /***/ }),
 
@@ -107,18 +107,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _App
 
 "use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!./node_modules/vue-loader/lib??vue-loader-options!./App.vue?vue&type=script&lang=js& */ \"./node_modules/vue-loader/lib/index.js?!./App.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"default\"]); \n\n//# sourceURL=webpack:///./App.vue?");
-
-/***/ }),
-
-/***/ "./App.vue?vue&type=style&index=0&lang=css&":
-/*!**************************************************!*\
-  !*** ./App.vue?vue&type=style&index=0&lang=css& ***!
-  \**************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!./node_modules/vue-style-loader!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./App.vue?vue&type=style&index=0&lang=css& */ \"./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./App.vue?vue&type=style&index=0&lang=css&\");\n/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);\n/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));\n /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); \n\n//# sourceURL=webpack:///./App.vue?");
 
 /***/ }),
 
@@ -182,54 +170,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _nod
 
 /***/ }),
 
-/***/ "./CounterButton.vue":
-/*!***************************!*\
-  !*** ./CounterButton.vue ***!
-  \***************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _CounterButton_vue_vue_type_template_id_5ec53690_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CounterButton.vue?vue&type=template&id=5ec53690&scoped=true& */ \"./CounterButton.vue?vue&type=template&id=5ec53690&scoped=true&\");\n/* harmony import */ var _CounterButton_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CounterButton.vue?vue&type=script&lang=js& */ \"./CounterButton.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport *//* harmony import */ var _CounterButton_vue_vue_type_style_index_0_id_5ec53690_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CounterButton.vue?vue&type=style&index=0&id=5ec53690&scoped=true&lang=css& */ \"./CounterButton.vue?vue&type=style&index=0&id=5ec53690&scoped=true&lang=css&\");\n/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__[\"default\"])(\n  _CounterButton_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _CounterButton_vue_vue_type_template_id_5ec53690_scoped_true___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _CounterButton_vue_vue_type_template_id_5ec53690_scoped_true___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  \"5ec53690\",\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"CounterButton.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);\n\n//# sourceURL=webpack:///./CounterButton.vue?");
-
-/***/ }),
-
-/***/ "./CounterButton.vue?vue&type=script&lang=js&":
-/*!****************************************************!*\
-  !*** ./CounterButton.vue?vue&type=script&lang=js& ***!
-  \****************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_index_js_vue_loader_options_CounterButton_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!./node_modules/vue-loader/lib??vue-loader-options!./CounterButton.vue?vue&type=script&lang=js& */ \"./node_modules/vue-loader/lib/index.js?!./CounterButton.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_vue_loader_lib_index_js_vue_loader_options_CounterButton_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"default\"]); \n\n//# sourceURL=webpack:///./CounterButton.vue?");
-
-/***/ }),
-
-/***/ "./CounterButton.vue?vue&type=style&index=0&id=5ec53690&scoped=true&lang=css&":
-/*!************************************************************************************!*\
-  !*** ./CounterButton.vue?vue&type=style&index=0&id=5ec53690&scoped=true&lang=css& ***!
-  \************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_CounterButton_vue_vue_type_style_index_0_id_5ec53690_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!./node_modules/vue-style-loader!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./CounterButton.vue?vue&type=style&index=0&id=5ec53690&scoped=true&lang=css& */ \"./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./CounterButton.vue?vue&type=style&index=0&id=5ec53690&scoped=true&lang=css&\");\n/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_CounterButton_vue_vue_type_style_index_0_id_5ec53690_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_CounterButton_vue_vue_type_style_index_0_id_5ec53690_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);\n/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_CounterButton_vue_vue_type_style_index_0_id_5ec53690_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_CounterButton_vue_vue_type_style_index_0_id_5ec53690_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));\n /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_vue_style_loader_index_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_CounterButton_vue_vue_type_style_index_0_id_5ec53690_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); \n\n//# sourceURL=webpack:///./CounterButton.vue?");
-
-/***/ }),
-
-/***/ "./CounterButton.vue?vue&type=template&id=5ec53690&scoped=true&":
-/*!**********************************************************************!*\
-  !*** ./CounterButton.vue?vue&type=template&id=5ec53690&scoped=true& ***!
-  \**********************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CounterButton_vue_vue_type_template_id_5ec53690_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./CounterButton.vue?vue&type=template&id=5ec53690&scoped=true& */ \"./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./CounterButton.vue?vue&type=template&id=5ec53690&scoped=true&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CounterButton_vue_vue_type_template_id_5ec53690_scoped_true___WEBPACK_IMPORTED_MODULE_0__[\"render\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CounterButton_vue_vue_type_template_id_5ec53690_scoped_true___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"]; });\n\n\n\n//# sourceURL=webpack:///./CounterButton.vue?");
-
-/***/ }),
-
 /***/ "./PokerTable.vue":
 /*!************************!*\
   !*** ./PokerTable.vue ***!
@@ -290,17 +230,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var vue_
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./App.vue?vue&type=style&index=0&lang=css&":
-/*!***************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./App.vue?vue&type=style&index=0&lang=css& ***!
-  \***************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("exports = module.exports = __webpack_require__(/*! ./node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\")(false);\n// Module\nexports.push([module.i, \"\\nbody {\\n    width: 200%;\\n    height: 200%;\\n     background-color: black;\\n}\\n\\n\", \"\"]);\n\n\n\n//# sourceURL=webpack:///./App.vue?./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
 /***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./Card.vue?vue&type=style&index=0&id=5af9bfbe&scoped=true&lang=css&":
 /*!****************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./Card.vue?vue&type=style&index=0&id=5af9bfbe&scoped=true&lang=css& ***!
@@ -312,17 +241,6 @@ eval("exports = module.exports = __webpack_require__(/*! ./node_modules/css-load
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./CounterButton.vue?vue&type=style&index=0&id=5ec53690&scoped=true&lang=css&":
-/*!*************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./CounterButton.vue?vue&type=style&index=0&id=5ec53690&scoped=true&lang=css& ***!
-  \*************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("exports = module.exports = __webpack_require__(/*! ./node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\")(false);\n// Module\nexports.push([module.i, \"\\ninput[data-v-5ec53690] {\\n  width: 100%;\\n}\\n\", \"\"]);\n\n\n\n//# sourceURL=webpack:///./CounterButton.vue?./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
 /***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./PokerTable.vue?vue&type=style&index=0&id=c85095fa&scoped=true&lang=css&":
 /*!**********************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./PokerTable.vue?vue&type=style&index=0&id=c85095fa&scoped=true&lang=css& ***!
@@ -330,7 +248,7 @@ eval("exports = module.exports = __webpack_require__(/*! ./node_modules/css-load
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("exports = module.exports = __webpack_require__(/*! ./node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\")(false);\n// Module\nexports.push([module.i, \"\\n#bg[data-v-c85095fa] {\\n  position: fixed;\\n  top: -50%;\\n  left: -50%;\\n  width: 200%;\\n  height: 200%;\\n}\\n#bg img[data-v-c85095fa] {\\n  position: absolute;\\n  top: 0;\\n  left: 0;\\n  right: 0;\\n  bottom: 0;\\n  margin: auto;\\n  min-width: 45%;\\n  min-height: 45%;\\n}\\n#thetable[data-v-c85095fa] {\\n  position: relative;\\n  bottom: center;\\n  right: center;\\n  width: 80%;\\n  z-index: 1;\\n}\\n\\n/* #table {\\n  position: center;\\n  width: 80%;\\n  resize: both;\\n  overflow: auto;\\n} */\\n#tablecard1[data-v-c85095fa] {\\n  position: fixed;\\n  bottom: 40%;\\n  right: 50%;\\n}\\n#tablecard2[data-v-c85095fa] {\\n  position: fixed;\\n  bottom: 40%;\\n  right: 40%;\\n}\\n#tablecard3[data-v-c85095fa] {\\n  position: fixed;\\n  bottom: 40%;\\n  right: 46.5%;\\n}\\n#tablecard4[data-v-c85095fa] {\\n  position: fixed;\\n  bottom: 40%;\\n  right: 30%;\\n}\\n#tablecard5[data-v-c85095fa] {\\n  position: fixed;\\n  bottom: 40%;\\n  right: 20%;\\n}\\n.tablecards[data-v-c85095fa] {\\n  z-index: 2;\\n  width: 7%;\\n}\\n#player1[data-v-c85095fa] {\\n  position: fixed;\\n  bottom: 8%;\\n  right: 0%;\\n}\\n#player2[data-v-c85095fa] {\\n  position: fixed;\\n  bottom: 80%;\\n  right: 0%;\\n}\\n.avatar[data-v-c85095fa] {\\n  width: 40%;\\n}\\n.playerNameText[data-v-c85095fa] {\\n  color: green;\\n  text-align: left;\\n  font-weight: bold;\\n  font-size: 5%;\\n  font-family: fantasy;\\n}\\n\", \"\"]);\n\n\n\n//# sourceURL=webpack:///./PokerTable.vue?./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options");
+eval("exports = module.exports = __webpack_require__(/*! ./node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\")(false);\n// Module\nexports.push([module.i, \"\\n#bg[data-v-c85095fa] {\\n  position: fixed;\\n  top: -50%;\\n  left: -50%;\\n  width: 200%;\\n  height: 200%;\\n  background-color: black;\\n}\\n#bg img[data-v-c85095fa] {\\n  position: absolute;\\n  top: 0;\\n  left: 0;\\n  right: 0;\\n  bottom: 0;\\n  margin: auto;\\n  min-width: 45%;\\n  min-height: 45%;\\n}\\n\\n/* #thetable {\\n  /* position: relative;\\n  bottom: center;\\n  right: center;\\n  width: 80%;\\n  z-index: 1;\\n} */\\n\\n/* #table {\\n  position: center;\\n  width: 80%;\\n  resize: both;\\n  overflow: auto;\\n} */\\n#tablecard1[data-v-c85095fa] {\\n  position: fixed;\\n  bottom: 40%;\\n  right: 61.5%;\\n}\\n#tablecard2[data-v-c85095fa] {\\n  position: fixed;\\n  bottom: 40%;\\n  right: 54%;\\n}\\n#tablecard3[data-v-c85095fa] {\\n  position: fixed;\\n  bottom: 40%;\\n  right: 46.5%;\\n}\\n#tablecard4[data-v-c85095fa] {\\n  position: fixed;\\n  bottom: 40%;\\n  right: 39%;\\n}\\n#tablecard5[data-v-c85095fa] {\\n  position: fixed;\\n  bottom: 40%;\\n  right: 31.5%;\\n}\\n.tablecards[data-v-c85095fa] {\\n  z-index: 2;\\n  width: 7%;\\n}\\n#player1[data-v-c85095fa] {\\n  position: fixed;\\n  left: 80%;\\n}\\n#player2[data-v-c85095fa] {\\n  position: fixed;\\n  bottom: 40%;\\n  left: 80%;\\n}\\n.avatar[data-v-c85095fa] {\\n  width: 25%;\\n}\\n.playerNameText[data-v-c85095fa] {\\n  color: green;\\n  text-align: left;\\n  font-weight: bold;\\n  font-size: 1em;\\n  font-family: sans-serif;\\n}\\n.playercards[data-v-c85095fa] {\\n    \\n    width: 15%;\\n}\\n\", \"\"]);\n\n\n\n//# sourceURL=webpack:///./PokerTable.vue?./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options");
 
 /***/ }),
 
@@ -387,7 +305,7 @@ eval("/* WEBPACK VAR INJECTION */(function(global) {var scope = (typeof global !
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _CounterButton_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CounterButton.vue */ \"./CounterButton.vue\");\n/* harmony import */ var _Card_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Card.vue */ \"./Card.vue\");\n/* harmony import */ var _PokerTable_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PokerTable.vue */ \"./PokerTable.vue\");\n//\n//\n//\n//\n//\n//\n//\n\n\n\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  components: {\n     'counter-button': _CounterButton_vue__WEBPACK_IMPORTED_MODULE_0__[\"default\"],\n     'card': _Card_vue__WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n     'poker-table': _PokerTable_vue__WEBPACK_IMPORTED_MODULE_2__[\"default\"]\n  }\n});\n\n\n//# sourceURL=webpack:///./App.vue?./node_modules/vue-loader/lib??vue-loader-options");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Card_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Card.vue */ \"./Card.vue\");\n/* harmony import */ var _PokerTable_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PokerTable.vue */ \"./PokerTable.vue\");\n//\n//\n//\n//\n//\n//\n//\n//\n\n\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  components: {\n     \n     'card': _Card_vue__WEBPACK_IMPORTED_MODULE_0__[\"default\"],\n     'poker-table': _PokerTable_vue__WEBPACK_IMPORTED_MODULE_1__[\"default\"]\n  }\n});\n\n\n//# sourceURL=webpack:///./App.vue?./node_modules/vue-loader/lib??vue-loader-options");
 
 /***/ }),
 
@@ -403,18 +321,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n//\n//\n//\n//\n//\n\n  /* ha
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/index.js?!./CounterButton.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib??vue-loader-options!./CounterButton.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n//\n//\n//\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  data() {\n    return {\n      counter: 0\n    }\n  },\n  methods: {\n    onClick() {\n      this.counter = this.counter + 1\n    }\n  }\n});\n\n\n//# sourceURL=webpack:///./CounterButton.vue?./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/index.js?!./PokerTable.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib??vue-loader-options!./PokerTable.vue?vue&type=script&lang=js& ***!
@@ -423,7 +329,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n//\n//\n//\n\n/* harmony defa
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  data() {\n    return {};\n  },\n  methods: {\n    onClick() {}\n  }\n});\n\n\n//# sourceURL=webpack:///./PokerTable.vue?./node_modules/vue-loader/lib??vue-loader-options");
+eval("__webpack_require__.r(__webpack_exports__);\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  data() {\n    return {};\n  },\n  methods: {\n    onClick() {}\n  }\n});\n\n\n//# sourceURL=webpack:///./PokerTable.vue?./node_modules/vue-loader/lib??vue-loader-options");
 
 /***/ }),
 
@@ -435,7 +341,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n//\n//\n//\n//\n//\n//\n//\n/
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\"div\", [_c(\"card\"), _vm._v(\" \"), _c(\"poker-table\")], 1)\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack:///./App.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\"div\", [_c(\"poker-table\"), _vm._v(\" \"), _c(\"card\")], 1)\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack:///./App.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
 
 /***/ }),
 
@@ -451,18 +357,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./CounterButton.vue?vue&type=template&id=5ec53690&scoped=true&":
-/*!****************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./CounterButton.vue?vue&type=template&id=5ec53690&scoped=true& ***!
-  \****************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\"input\", {\n    attrs: { value: _vm.counter, type: \"button\" },\n    on: { click: _vm.onClick }\n  })\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack:///./CounterButton.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./PokerTable.vue?vue&type=template&id=c85095fa&scoped=true&":
 /*!*************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./PokerTable.vue?vue&type=template&id=c85095fa&scoped=true& ***!
@@ -471,7 +365,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _vm._m(0)\n}\nvar staticRenderFns = [\n  function() {\n    var _vm = this\n    var _h = _vm.$createElement\n    var _c = _vm._self._c || _h\n    return _c(\"div\", [\n      _c(\"div\", { attrs: { id: \"bg\" } }, [\n        _c(\"img\", { attrs: { src: \"poker-table-drawing-11.png\" } })\n      ]),\n      _vm._v(\" \"),\n      _c(\"img\", {\n        staticClass: \"tablecards\",\n        attrs: { src: \"Images/Playing_cards/2_of_clubs.png\", id: \"tablecard1\" }\n      }),\n      _vm._v(\" \"),\n      _c(\"img\", {\n        staticClass: \"tablecards\",\n        attrs: {\n          src: \"Images/Playing_cards/2_of_diamonds.png\",\n          id: \"tablecard2\"\n        }\n      }),\n      _vm._v(\" \"),\n      _c(\"img\", {\n        staticClass: \"tablecards\",\n        attrs: { src: \"Images/Playing_cards/2_of_hearts.png\", id: \"tablecard3\" }\n      }),\n      _vm._v(\" \"),\n      _c(\"img\", {\n        staticClass: \"tablecards\",\n        attrs: { src: \"Images/Playing_cards/2_of_spades.png\", id: \"tablecard4\" }\n      }),\n      _vm._v(\" \"),\n      _c(\"img\", {\n        staticClass: \"tablecards\",\n        attrs: { src: \"Images/Playing_cards/3_of_clubs.png\", id: \"tablecard5\" }\n      }),\n      _vm._v(\" \"),\n      _c(\"span\", { attrs: { id: \"player1\" } }, [\n        _c(\"img\", {\n          staticClass: \"avatar\",\n          attrs: { src: \"Images/player_avatars/avatar1.png\" }\n        }),\n        _vm._v(\" \"),\n        _c(\"div\", { staticClass: \"playerNameText\" }, [_vm._v(\"JONATAN\")])\n      ]),\n      _vm._v(\" \"),\n      _c(\"span\", { attrs: { id: \"player2\" } }, [\n        _c(\"img\", {\n          staticClass: \"avatar\",\n          attrs: { src: \"Images/player_avatars/avatar2.png\" }\n        }),\n        _vm._v(\" \"),\n        _c(\"div\", { staticClass: \"playerNameText\" }, [_vm._v(\"ALEXANDER\")])\n      ])\n    ])\n  }\n]\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack:///./PokerTable.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _vm._m(0)\n}\nvar staticRenderFns = [\n  function() {\n    var _vm = this\n    var _h = _vm.$createElement\n    var _c = _vm._self._c || _h\n    return _c(\"div\", [\n      _c(\"div\", { attrs: { id: \"bg\" } }, [\n        _c(\"img\", { attrs: { src: \"poker-table-drawing-11.png\" } })\n      ]),\n      _vm._v(\" \"),\n      _c(\"div\", { attrs: { id: \"player1\" } }, [\n        _c(\"img\", {\n          staticClass: \"avatar\",\n          attrs: { src: \"Images/player_avatars/avatar1.png\" }\n        }),\n        _vm._v(\" \"),\n        _c(\"div\", { staticClass: \"playerNameText\" }, [_vm._v(\"JONATAN\")]),\n        _vm._v(\" \"),\n        _c(\"div\", [\n          _c(\"img\", {\n            staticClass: \"playercards\",\n            attrs: {\n              src: \"Images/Playing_cards/backsides/playingcard_backside.jpg\",\n              id: \"player1_card1\"\n            }\n          }),\n          _vm._v(\" \"),\n          _c(\"img\", {\n            staticClass: \"playercards\",\n            attrs: {\n              src: \"Images/Playing_cards/backsides/playingcard_backside.jpg\",\n              id: \"player1_card2\"\n            }\n          })\n        ])\n      ]),\n      _vm._v(\" \"),\n      _c(\"div\", { attrs: { id: \"player2\" } }, [\n        _c(\"img\", {\n          staticClass: \"avatar\",\n          attrs: { src: \"Images/player_avatars/avatar2.png\" }\n        }),\n        _vm._v(\" \"),\n        _c(\"div\", { staticClass: \"playerNameText\" }, [_vm._v(\"ALEXANDER\")])\n      ]),\n      _vm._v(\" \"),\n      _c(\"img\", {\n        staticClass: \"tablecards\",\n        attrs: { src: \"Images/Playing_cards/2_of_clubs.png\", id: \"tablecard1\" }\n      }),\n      _vm._v(\" \"),\n      _c(\"img\", {\n        staticClass: \"tablecards\",\n        attrs: {\n          src: \"Images/Playing_cards/2_of_diamonds.png\",\n          id: \"tablecard2\"\n        }\n      }),\n      _vm._v(\" \"),\n      _c(\"img\", {\n        staticClass: \"tablecards\",\n        attrs: { src: \"Images/Playing_cards/2_of_hearts.png\", id: \"tablecard3\" }\n      }),\n      _vm._v(\" \"),\n      _c(\"img\", {\n        staticClass: \"tablecards\",\n        attrs: { src: \"Images/Playing_cards/2_of_spades.png\", id: \"tablecard4\" }\n      }),\n      _vm._v(\" \"),\n      _c(\"img\", {\n        staticClass: \"tablecards\",\n        attrs: { src: \"Images/Playing_cards/3_of_clubs.png\", id: \"tablecard5\" }\n      })\n    ])\n  }\n]\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack:///./PokerTable.vue?./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options");
 
 /***/ }),
 
@@ -487,17 +381,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 
 /***/ }),
 
-/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./App.vue?vue&type=style&index=0&lang=css&":
-/*!***********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-style-loader!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./App.vue?vue&type=style&index=0&lang=css& ***!
-  \***********************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("// style-loader: Adds some css to the DOM by adding a <style> tag\n\n// load the styles\nvar content = __webpack_require__(/*! !./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./App.vue?vue&type=style&index=0&lang=css& */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./App.vue?vue&type=style&index=0&lang=css&\");\nif(typeof content === 'string') content = [[module.i, content, '']];\nif(content.locals) module.exports = content.locals;\n// add the styles to the DOM\nvar add = __webpack_require__(/*! ./node_modules/vue-style-loader/lib/addStylesClient.js */ \"./node_modules/vue-style-loader/lib/addStylesClient.js\").default\nvar update = add(\"f1c88f20\", content, false, {});\n// Hot Module Replacement\nif(false) {}\n\n//# sourceURL=webpack:///./App.vue?./node_modules/vue-style-loader!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
 /***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./Card.vue?vue&type=style&index=0&id=5af9bfbe&scoped=true&lang=css&":
 /*!************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-style-loader!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./Card.vue?vue&type=style&index=0&id=5af9bfbe&scoped=true&lang=css& ***!
@@ -506,17 +389,6 @@ eval("// style-loader: Adds some css to the DOM by adding a <style> tag\n\n// lo
 /***/ (function(module, exports, __webpack_require__) {
 
 eval("// style-loader: Adds some css to the DOM by adding a <style> tag\n\n// load the styles\nvar content = __webpack_require__(/*! !./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./Card.vue?vue&type=style&index=0&id=5af9bfbe&scoped=true&lang=css& */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./Card.vue?vue&type=style&index=0&id=5af9bfbe&scoped=true&lang=css&\");\nif(typeof content === 'string') content = [[module.i, content, '']];\nif(content.locals) module.exports = content.locals;\n// add the styles to the DOM\nvar add = __webpack_require__(/*! ./node_modules/vue-style-loader/lib/addStylesClient.js */ \"./node_modules/vue-style-loader/lib/addStylesClient.js\").default\nvar update = add(\"b1a4ca86\", content, false, {});\n// Hot Module Replacement\nif(false) {}\n\n//# sourceURL=webpack:///./Card.vue?./node_modules/vue-style-loader!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options");
-
-/***/ }),
-
-/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./CounterButton.vue?vue&type=style&index=0&id=5ec53690&scoped=true&lang=css&":
-/*!*********************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-style-loader!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./CounterButton.vue?vue&type=style&index=0&id=5ec53690&scoped=true&lang=css& ***!
-  \*********************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-eval("// style-loader: Adds some css to the DOM by adding a <style> tag\n\n// load the styles\nvar content = __webpack_require__(/*! !./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./CounterButton.vue?vue&type=style&index=0&id=5ec53690&scoped=true&lang=css& */ \"./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./CounterButton.vue?vue&type=style&index=0&id=5ec53690&scoped=true&lang=css&\");\nif(typeof content === 'string') content = [[module.i, content, '']];\nif(content.locals) module.exports = content.locals;\n// add the styles to the DOM\nvar add = __webpack_require__(/*! ./node_modules/vue-style-loader/lib/addStylesClient.js */ \"./node_modules/vue-style-loader/lib/addStylesClient.js\").default\nvar update = add(\"036600bd\", content, false, {});\n// Hot Module Replacement\nif(false) {}\n\n//# sourceURL=webpack:///./CounterButton.vue?./node_modules/vue-style-loader!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options");
 
 /***/ }),
 

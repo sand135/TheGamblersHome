@@ -1,22 +1,34 @@
 <template>
   <div>
+     
     <div id="bg">
       <img src="poker-table-drawing-11.png">
     </div>
+
+      <div id="player1">
+      <img src="Images/player_avatars/avatar1.png" class="avatar">
+      <div class="playerNameText">JONATAN</div>
+    <div>
+    <img src="Images/Playing_cards/backsides/playingcard_backside.jpg" id="player1_card1" class="playercards">
+    <img src="Images/Playing_cards/backsides/playingcard_backside.jpg" id="player1_card2" class="playercards">
+    </div>
+    </div>
+
+      <div id="player2">
+      <img src="Images/player_avatars/avatar2.png" class="avatar">
+      <div class="playerNameText">ALEXANDER</div>
+    </div>
+    
     <img src="Images/Playing_cards/2_of_clubs.png" id="tablecard1" class="tablecards">
     <img src="Images/Playing_cards/2_of_diamonds.png" id="tablecard2" class="tablecards">
     <img src="Images/Playing_cards/2_of_hearts.png" id="tablecard3" class="tablecards">
     <img src="Images/Playing_cards/2_of_spades.png" id="tablecard4" class="tablecards">
     <img src="Images/Playing_cards/3_of_clubs.png" id="tablecard5" class="tablecards">
 
-    <span id="player1">
-      <img src="Images/player_avatars/avatar1.png" class="avatar">
-      <div class="playerNameText">JONATAN</div>
-    </span>
-    <span id="player2">
-      <img src="Images/player_avatars/avatar2.png" class="avatar">
-      <div class="playerNameText">ALEXANDER</div>
-    </span>
+    
+  
+    
+  
   </div>
 </template>
 <script>
@@ -36,6 +48,8 @@ export default {
   left: -50%;
   width: 200%;
   height: 200%;
+  background-color: black;
+ 
 }
 #bg img {
   position: absolute;
@@ -46,15 +60,16 @@ export default {
   margin: auto;
   min-width: 45%;
   min-height: 45%;
+
 }
 
-#thetable {
-  position: relative;
+/* #thetable {
+  /* position: relative;
   bottom: center;
   right: center;
   width: 80%;
   z-index: 1;
-}
+} */
 
 /* #table {
   position: center;
@@ -66,14 +81,14 @@ export default {
 #tablecard1 {
   position: fixed;
   bottom: 40%;
-  right: 50%;
+  right: 61.5%;
 
 }
 
 #tablecard2 {
   position: fixed;
   bottom: 40%;
-  right: 40%;
+  right: 54%;
 }
 #tablecard3 {
   position: fixed;
@@ -83,12 +98,12 @@ export default {
 #tablecard4 {
   position: fixed;
   bottom: 40%;
-  right: 30%;
+  right: 39%;
 } 
 #tablecard5 {
   position: fixed;
   bottom: 40%;
-  right: 20%;
+  right: 31.5%;
 } 
 
 .tablecards {
@@ -97,25 +112,32 @@ export default {
 }
 #player1 {
   position: fixed;
-  bottom: 8%;
-  right: 0%;
+  left: 80%; 
+  
+  
 }
 
 #player2 {
   position: fixed;
-  bottom: 80%;
-  right: 0%;
+  bottom: 40%;
+  left: 80%;
 }
 
 .avatar {
-  width: 40%;
+  width: 25%;
 }
 
 .playerNameText {
   color: green;
   text-align: left;
   font-weight: bold;
-  font-size: 5%;
-  font-family: fantasy;
+  font-size: 1em;
+  font-family: sans-serif;
+}
+
+
+.playercards {
+    
+    width: 15%; 
 }
 </style>
