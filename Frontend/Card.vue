@@ -48,4 +48,7 @@
   input {
     width: 100%;
   }
+  .outline {
+    color: white;
+  }
 </style>
