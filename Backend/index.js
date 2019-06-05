@@ -14,28 +14,22 @@ app.get('/', (request, response) =>{
       response.send(rows)
     })
 })
+
 app.post('/', (request, response) =>{
   console.log(request.body);
   let username = request.body.username
   let password = request.body.password
-  let regOk = true
-  db.all('SELECT * FROM users').then(users=>{
-    for (var user in users) {
-      if (user.username === username) {
-        regOk = false
-      }
-    }
-    if(regOk){
       db.run('INSERT INTO users VALUES (?,?)', [username, password]).then(()=>{
-        console.log("registration ok");
         response.status(200)
-        response.send(users)
+        response.send("New user registered")
+      }).catch(err =>{
+        console.log(err);
+        console.log('registration failed!');
+        response.status(409)
+        response.send("User already excists!")
       })
-    }else{
-      console.log('registration failed!');
-      response.status(400)
-      response.send("Bad request")
-    }
+  .catch(err=>{
+    console.log(err);
   })
 })
 

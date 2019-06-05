@@ -34,22 +34,21 @@
       register() {
 
         fetch('http://localhost:8080/api/', {
-          body: '{"username":"'+ this.input.username+'", "password":'+this.input.password+'}',
+          body: '{"username":"'+ this.input.username+'", "password":"'+this.input.password+'"}',
           headers: {
             'Content-Type':'application/json'
           },
           method: 'POST'
-        }).then(response => response.json())
-          .then(result =>{
-            console.log(result.status)
-            if(result === "Bad request"){
-              console.log('registration failed')
-            }else{
-              console.log('registration sucessfull'+ result)
-              this.$router.replace({ name: "main" })
-            }
-          })
-          
+        }).then(response => {
+          console.log(response)
+          if(response.status !== 200 ){
+            alert("Username already excists. Please try again!")
+            console.log("Username already excists. Please try again!")
+          }else{
+            this.$router.replace({ name: "main" })
+          }
+        }).catch(e => console.log(e))
+
         if(this.authenticated){
           this.$router.replace({ name: "main" })
         }
