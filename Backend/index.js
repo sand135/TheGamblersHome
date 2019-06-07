@@ -19,12 +19,12 @@ app.post('/', (request, response) =>{
   console.log(request.body);
   let username = request.body.username
   let password = request.body.password
-      db.run('INSERT INTO users VALUES (?,?)', [username, password]).then(()=>{
+  let moneyForNewregisteredPlayer = 1000
+      db.run('INSERT INTO users VALUES (?,?,?)', [username, password, moneyForNewregisteredPlayer]).then(()=>{
         response.status(200)
         response.send("New user registered")
       }).catch(err =>{
         console.log(err);
-        console.log('registration failed!');
         response.status(409)
         response.send("User already excists!")
       })

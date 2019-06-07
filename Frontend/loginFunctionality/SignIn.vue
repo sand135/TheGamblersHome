@@ -42,7 +42,7 @@
         //BYT UT TILL SQL
         if(this.input.username != "" && this.input.password != "") {
           if(this.input.username == this.$parent.mockAccount.username && this.input.password == this.$parent.mockAccount.password) {
-            this.$emit("authenticated", true)
+            this.$store.state.authenticated = true
             this.$router.replace({ name: "main" })
           } else {
             console.log("The username and / or password is incorrect")
@@ -52,16 +52,13 @@
         }
       },
       back(){
-        this.$router.replace({ name: "SignInUp" });
-      }
+        this.$router.replace({ name: "SignInUp" })
+      },
 
-    }
-
+    },
 
   }
-  function preventBack(){window.history.forward();}
-      setTimeout("preventBack()", 0);
-      window.onunload=function(){null};
+
 
 
 

@@ -1,18 +1,21 @@
 <template>
   <div>
     <div id="nav">
-      <router-link v-if="authenticated" to="/signInUp" v-on:click.native="logout()" replace>Logout</router-link>
+      <router-link v-if="this.$store.state.authenticated" to="/signInUp" v-on:click.native="logout()" replace>Logout</router-link>
     </div>
-    <router-view @authenticated="setAuthenticated" />
+    <!-- <router-view @authenticated="setAuthenticated" /> -->
+    <router-view />
   </div>
 </template>
 
 <script>
   export default {
-    name: 'App',
+    name: 'SignupHelper',
+
     data() {
       return {
-        authenticated: false,
+        //authenticated: false,
+        //authenticated: this.$store.state.authenticated,
         //mockAccount ska ändras till sql!!!!!!!!!!
         mockAccount: {
           username: "nraboy",
@@ -21,16 +24,25 @@
       }
     },
     mounted() {
-      if(!this.authenticated) {
+      if(!this.$store.state.authenticated) {
         this.$router.replace({ name: "SignInUp" })
+      }
+      window.onpopstate = () => {
+        if (
+          this.$store.state.authenticated &&
+          this.$route.path == "/signinup"
+        ) {
+          this.$router.push("/main")
+        }
       }
     },
     methods: {
-      setAuthenticated(status) {
-        this.authenticated = status
-      },
+      // setAuthenticated(status) {
+      //   this.authenticated = status
+      // },
       logout() {
-        this.authenticated = false
+        //this.authenticated = false
+        this.$store.state.authenticated = false
       }
     }
   }

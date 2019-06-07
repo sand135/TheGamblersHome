@@ -45,6 +45,8 @@
             alert("Username already excists. Please try again!")
             console.log("Username already excists. Please try again!")
           }else{
+            //this.$emit("authenticated", true)
+            this.$store.state.authenticated = true
             this.$router.replace({ name: "main" })
           }
         }).catch(e => console.log(e))
