@@ -3,7 +3,6 @@
     <div id="nav">
       <router-link v-if="this.$store.state.authenticated" to="/signInUp" v-on:click.native="logout()" replace>Logout</router-link>
     </div>
-    <!-- <router-view @authenticated="setAuthenticated" /> -->
     <router-view />
   </div>
 </template>
@@ -14,8 +13,6 @@
 
     data() {
       return {
-        //authenticated: false,
-        //authenticated: this.$store.state.authenticated,
         //mockAccount ska ändras till sql!!!!!!!!!!
         mockAccount: {
           username: "nraboy",
@@ -37,11 +34,7 @@
       }
     },
     methods: {
-      // setAuthenticated(status) {
-      //   this.authenticated = status
-      // },
       logout() {
-        //this.authenticated = false
         this.$store.state.authenticated = false
       }
     }

@@ -6,6 +6,7 @@ Vue.use(Vuex)
 const state = {
   authenticated: false
 }
+
 const store = new Vuex.Store({
   state
 })
