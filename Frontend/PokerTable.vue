@@ -4,7 +4,8 @@
     <div id="bg">
       <img src="poker-table-drawing-11.png">
     </div>
-
+        
+      
       <div id="player1">
       <img src="Images/player_avatars/avatar1.png" class="avatar">
       <div class="playerNameText">JONATAN</div>
@@ -17,6 +18,8 @@
       <div id="player2">
       <img src="Images/player_avatars/avatar2.png" class="avatar">
       <div class="playerNameText">ALEXANDER</div>
+    <img src="Images/Playing_cards/backsides/playingcard_backside.jpg" id="player2_card1" class="playercards">
+    <img src="Images/Playing_cards/backsides/playingcard_backside.jpg" id="player2_card2" class="playercards">
     </div>
     
     <img src="Images/Playing_cards/2_of_clubs.png" id="tablecard1" class="tablecards">
@@ -26,7 +29,9 @@
     <img src="Images/Playing_cards/3_of_clubs.png" id="tablecard5" class="tablecards">
 
     
-  
+    <div id="totalpot">
+        Total pot: {{ this.potMoney }}
+            </div>
     
   
   </div>
@@ -34,6 +39,7 @@
 <script>
 export default {
   data() {
+    
     return {};
   },
   methods: {
@@ -42,6 +48,7 @@ export default {
 };
 </script>
 <style scoped>
+
 #bg {
   position: fixed;
   top: -50%;
@@ -78,6 +85,14 @@ export default {
   overflow: auto;
 } */
 
+#totalpot {
+    position: fixed;
+    bottom: 65%;
+    right: 50%;
+    color: black;
+    font-size: 200%;
+}
+
 #tablecard1 {
   position: fixed;
   bottom: 40%;
@@ -112,15 +127,16 @@ export default {
 }
 #player1 {
   position: fixed;
-  left: 80%; 
+  bottom: 80%;
+  left: 85%; 
   
   
 }
 
 #player2 {
   position: fixed;
-  bottom: 40%;
-  left: 80%;
+  bottom: 12%;
+  left: 85%;
 }
 
 .avatar {
