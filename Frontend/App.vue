@@ -1,8 +1,8 @@
 <template>
   <div>
    
-    <poker-table />
-     <card />
+    <poker-table></poker-table>
+     <card></card>
   </div>
   
 </template>
@@ -12,9 +12,9 @@
 
   export default {
     components: {
-       
+       'poker-table': PokerTable,
        'card': Card,
-       'poker-table': PokerTable
+       
     }
   }
 </script>
