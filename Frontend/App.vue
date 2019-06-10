@@ -1,5 +1,5 @@
 <template>
-  <sign-up-helper></sign-up-helper>
+    <sign-up-helper></sign-up-helper>
 </template>
 <script>
   import SignupHelper from './loginFunctionality/SignupHelper.vue'
@@ -10,5 +10,5 @@
   }
 </script>
 <style>
-  
+
 </style>

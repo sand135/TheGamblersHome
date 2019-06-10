@@ -48,30 +48,23 @@ app.get('/users/:username/:password', (request, response) =>{
     })
   })
 
-app.post('/', (request, response) =>{
-  console.log(request.body);
-  let username = request.body.username
-  let password = request.body.password
-  let regOk = true
-  db.all('SELECT * FROM users').then(users=>{
-    for (var user in users) {
-      if (user.username === username) {
-        regOk = false
-      }
-    }
-    if(regOk){
-      db.run('INSERT INTO users VALUES (?,?)', [username, password]).then(()=>{
-        console.log("registration ok");
-        response.status(200)
-        response.send(users)
-      })
-    }else{
-      console.log('registration failed!');
-      response.status(400)
-      response.send("Bad request")
-    }
+  app.post('/', (request, response) =>{
+    console.log(request.body);
+    let username = request.body.username
+    let password = request.body.password
+    let moneyForNewregisteredPlayer = 1000
+        db.run('INSERT INTO users VALUES (?,?,?)', [username, password, moneyForNewregisteredPlayer]).then(()=>{
+          response.status(200)
+          response.send("New user registered")
+        }).catch(err =>{
+          console.log(err);
+          response.status(409)
+          response.send("User already excists!")
+        })
+    .catch(err=>{
+      console.log(err);
+    })
   })
-})
 
 
 app.listen(3000, ()=>{

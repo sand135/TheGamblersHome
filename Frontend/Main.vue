@@ -1,17 +1,23 @@
 <template>
   <div id="secure">
-    <h1>Secure Area</h1>
-    <p>
-      This is a secure area
-    </p>
+    <div>
+      <h1>Secure Area</h1>
+      <p>
+        This is a secure area
+      </p>
+    </div>
+
   </div>
 </template>
 
 <script>
   export default {
     name: 'main',
-    data() {
-      return {}
+
+    mounted() {
+      if(!this.$store.state.authenticated) {
+        this.$router.replace({ name: "SignInUp" })
+      }
     }
   }
 </script>
