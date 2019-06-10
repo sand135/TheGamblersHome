@@ -72,6 +72,7 @@ export default {
 .betSlider{
    color: azure
 }
+
 /* #thetable {
   /* position: relative;
   bottom: center;
