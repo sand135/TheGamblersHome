@@ -25,43 +25,47 @@
 
     }
   }
+
 </script>
 <style scoped>
-input {
-    width: 100%;
+
+#bg {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background-color: black;
+ 
 }
+#bg img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  min-width: 45%;
+  min-height: 45%;
 
-#backgroundImage {
-    width: 1300px;
-}
 
- #tablecard1 {
-    position: fixed;
-    bottom: 300px;
-    right: 950px;
-    width: 100px;
 
- }
+/* #thetable {
+  /* position: relative;
+  bottom: center;
+  right: center;
+  width: 80%;
+  z-index: 1;
+} */
 
-  #tablecard2 {
-    position: fixed;
-    bottom: 300px;
-    right: 830px;
-    width: 100px;
+/* #table {
+  position: center;
+  width: 80%;
+  resize: both;
+  overflow: auto;
+} */
 
- }
- #tablecard3 {
-    position: fixed;
-    bottom: 300px;
-    right: 710px;
-    width: 100px;
 
- }
- #tablecard4 {
-    position: fixed;
-    bottom: 300px;
-    right: 590px;
-    width: 100px;
 
  }
  #tablecard5 {

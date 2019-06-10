@@ -1,6 +1,6 @@
 <template>
   <div class="outline">
-      <img v-for="image in testDeck" :src="image.imageUrl" :id="image.id"/>
+   
     <div v-on:click="renderOneCard"> {{ this.card }}</div>
   </div>
 </template>
