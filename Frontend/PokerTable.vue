@@ -35,7 +35,7 @@
 
 
     <div id="totalpot">
-        Total pot: {{ $store.state.pot }}
+        Total pot: {{ $store.state.pot }}$
             </div>
 
 
@@ -45,7 +45,7 @@
 export default {
   data() {
     return {
-        value: 50
+    
     }
   },
    computed:{
