@@ -1,11 +1,8 @@
 <template>
   <div>
-     
     <div id="bg">
       <img src="poker-table-drawing-11.png">
     </div>
-        
-      
       <div id="player1">
       <img src="Images/player_avatars/avatar1.png" class="avatar">
       <div class="playerNameText">JONATAN</div>
@@ -14,33 +11,36 @@
     <img src="Images/Playing_cards/backsides/playingcard_backside.jpg" id="player1_card2" class="playercards">
     </div>
     </div>
-
       <div id="player2">
       <img src="Images/player_avatars/avatar2.png" class="avatar">
       <div class="playerNameText">ALEXANDER</div>
     <img src="Images/Playing_cards/backsides/playingcard_backside.jpg" id="player2_card1" class="playercards">
     <img src="Images/Playing_cards/backsides/playingcard_backside.jpg" id="player2_card2" class="playercards">
+    <div class="betSlider">
+       <input type="range" min="0" max="100" step="1" v-model="value">
+       <input type="number" v-model="value"/>
+       <input type="button" value="Bet">
+       <span v-text="total"></span>
     </div>
-    
+    </div>
     <img src="Images/Playing_cards/2_of_clubs.png" id="tablecard1" class="tablecards">
     <img src="Images/Playing_cards/2_of_diamonds.png" id="tablecard2" class="tablecards">
     <img src="Images/Playing_cards/2_of_hearts.png" id="tablecard3" class="tablecards">
     <img src="Images/Playing_cards/2_of_spades.png" id="tablecard4" class="tablecards">
     <img src="Images/Playing_cards/3_of_clubs.png" id="tablecard5" class="tablecards">
-
-    
-    <div id="totalpot">
-        Total pot: {{ this.potMoney }}
-            </div>
-    
-  
   </div>
 </template>
 <script>
 export default {
   data() {
-    
-    return {};
+    return {
+       value: 50
+    }
+  },
+  computed:{
+         total: function(){
+            return this.value + "$"
+         }
   },
   methods: {
     onClick() {}
@@ -69,7 +69,9 @@ export default {
   min-height: 45%;
 
 }
-
+.betSlider{
+   color: azure
+}
 /* #thetable {
   /* position: relative;
   bottom: center;
@@ -84,6 +86,8 @@ export default {
   resize: both;
   overflow: auto;
 } */
+
+
 
 #totalpot {
     position: fixed;
@@ -150,7 +154,6 @@ export default {
   font-size: 1em;
   font-family: sans-serif;
 }
-
 
 .playercards {
     
