@@ -6,20 +6,9 @@
     <router-view />
   </div>
 </template>
-
 <script>
   export default {
     name: 'SignupHelper',
-
-    data() {
-      return {
-        //mockAccount ska ändras till sql!!!!!!!!!!
-        mockAccount: {
-          username: "nraboy",
-          password: "password"
-        }
-      }
-    },
     mounted() {
       if(!this.$store.state.authenticated) {
         this.$router.replace({ name: "SignInUp" })
