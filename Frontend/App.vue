@@ -1,10 +1,10 @@
 <template>
   <div>
-   
-    <poker-table></poker-table>
-     <card></card>
+
+    <poker-table />
+     <card />
   </div>
-  
+
 </template>
 <script>
   import Card from './Card.vue'
@@ -14,13 +14,12 @@
     components: {
        'poker-table': PokerTable,
        'card': Card,
-       
+
     }
   }
 </script>
-<style> 
+<style>
 body {
   background-color: black;
 }
 </style>
-

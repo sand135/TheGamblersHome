@@ -16,7 +16,6 @@ const state = {
   pot: 100,
   currentBet: null,
   value: 50
- 
 }
 
 const mutations = {
@@ -32,19 +31,23 @@ const mutations = {
       state.deck.splice(0, 1)
       let card = {suit: state.deck[0].suit, value: state.deck[0].value, imageUrl: state.deck[0].imageUrl, id: "tablecard3"}
       state.cardsOnTable.push(card)
-    } else {
+      state.deck.splice(0, 1)
+    } else if (state.cardsOnTable.length === 4) {
       state.deck.splice(0, 1)
       let card = {suit: state.deck[0].suit, value: state.deck[0].value, imageUrl: state.deck[0].imageUrl, id: "tablecard4"}
       state.cardsOnTable.push(card)
+      state.deck.splice(0, 1)
     }
   },
   drawFlop(state) {
+    // Tar bort översta kortet innan man delar ut flop
+    state.deck.splice(0,1)
     for (var i = 0; i < 3; i++) {
       state.deck[i].id = 'tablecard'+i
       state.cardsOnTable.push(state.deck[i])
     }
     state.deck.splice(0,3)
-    this.commit('drawTurnAndRiver')
+    // this.commit('drawTurnAndRiver')
   },
   createDeck(state) {
     const arr = []
