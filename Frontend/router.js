@@ -35,7 +35,7 @@ export default new Router({
     },
     {
       path: "/main",
-      name: "main",
+      name: "Main",
       component: GameComponent
     }
   ]

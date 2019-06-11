@@ -1,11 +1,24 @@
 import Vue from 'vue'
 import App from './App.vue'
 import Vuex from 'vuex'
-import Router from './router'
-
+import Router from './router.js'
+// const express  =require('express')
+// const cors = require('cors')
+// import Express from 'express'
+// App.use(cors())
+// Vue.use(Express)
 Vue.use(Vuex)
-
+Vue.use(Router)
+// const app = express()
+// app.use(express.json())
 Vue.config.devtools = true
+
+
+// Express.use((request, response, next) => {
+//   response.header('Access-Control-Allow-Origin', '*')
+//   next()
+// })
+
 
 const state = {
   imgArray: [],
@@ -13,8 +26,8 @@ const state = {
   bool: true,
   card: {},
   cardsOnTable: [],
-  players: [{}],
-  pot: 100,
+  players: [],
+  pot: 0,
   currentBet: null,
   value: 50,
   authenticated: false
@@ -25,7 +38,36 @@ const mutations = {
 
   bet(state) {
     state.pot = Number(state.pot) + Number(state.value)
+   
+    fetch('http://localhost:8080/api/hej12', {
+      body: JSON.stringify({
+        "money": 500
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'PUT'
+    })
+      .then(response => response.text())
+      .then(result => {
+        state.players = result
+        console.log(result)
+      })
+   
   },
+
+
+  // fetch('http://localhost:3000/')
+  //   .then(response => response.json())
+  //   .then(result => {
+  //     console.log(result)
+  //     // result[0].username = "Ankman"
+  //     console.log(result[0].username)
+  //     state.players = result
+  //   
+
+
+ 
 
   drawTurnAndRiver(state) {
     // Lägger till turn och river till cardsOnTable
