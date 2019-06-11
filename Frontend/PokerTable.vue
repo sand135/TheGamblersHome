@@ -23,15 +23,15 @@
         <div class="betSlider">
        <input type="range" min="0" max="100" step="5" v-model="$store.state.value">
        <input type="number" v-model="$store.state.value"/>
-       <input type="button" value="Bet" id="betbutton" 
+       <input type="button" value="Bet" id="betbutton"
        v-on:click="$store.commit('bet')">
        <span v-text="$store.state.value+'$'"></span>
 </div>
     </div>
 
-    
+
     <img v-for="card in $store.state.cardsOnTable" :src="card.imageUrl" :id="card.id" class="tablecards"/>
-   
+
 
 
     <div id="totalpot">
@@ -151,9 +151,9 @@ export default {
 }
 
 .betSlider{
-   color: black; 
+   color: black;
    background-color: aliceblue;
-   
+
 }
 #betbutton {
     position: relative;
