@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import App from './App.vue'
 import Vuex from 'vuex'
+import Router from './router'
 
 Vue.use(Vuex)
+Vue.use(Router)
 
 Vue.config.devtools = true
 
@@ -210,3 +212,13 @@ new Vue({
   render: h => h(App)
 })
 
+new Vue({
+  created() {
+    this.$store.commit('createDeck')
+    this.$store.commit('drawFlop')
+  },
+  el: '#app',
+  store: store,
+  router:Router,
+  render: h => h(App)
+})

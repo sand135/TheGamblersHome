@@ -42,13 +42,13 @@ export default {
             return this.value + "$"
          }
   },
+  
   methods: {
     onClick() {}
   }
 };
 </script>
 <style scoped>
-
 #bg {
   position: fixed;
   top: -50%;
@@ -56,7 +56,6 @@ export default {
   width: 200%;
   height: 200%;
   background-color: black;
- 
 }
 #bg img {
   position: absolute;
@@ -67,12 +66,7 @@ export default {
   margin: auto;
   min-width: 45%;
   min-height: 45%;
-
 }
-.betSlider{
-   color: azure
-}
-
 /* #thetable {
   /* position: relative;
   bottom: center;
@@ -80,7 +74,6 @@ export default {
   width: 80%;
   z-index: 1;
 } */
-
 /* #table {
   position: center;
   width: 80%;
@@ -97,35 +90,31 @@ export default {
     color: black;
     font-size: 200%;
 }
-
-#tablecard1 {
+#tablecard0 {
   position: fixed;
   bottom: 40%;
   right: 61.5%;
-
 }
-
-#tablecard2 {
+#tablecard1 {
   position: fixed;
   bottom: 40%;
   right: 54%;
 }
-#tablecard3 {
+#tablecard2 {
   position: fixed;
   bottom: 40%;
   right: 46.5%;
 }
-#tablecard4 {
+#tablecard3 {
   position: fixed;
   bottom: 40%;
   right: 39%;
-} 
-#tablecard5 {
+}
+#tablecard4 {
   position: fixed;
   bottom: 40%;
   right: 31.5%;
-} 
-
+}
 .tablecards {
   z-index: 2;
   width: 7%;
@@ -133,21 +122,16 @@ export default {
 #player1 {
   position: fixed;
   bottom: 80%;
-  left: 85%; 
-  
-  
+  left: 85%;
 }
-
 #player2 {
   position: fixed;
   bottom: 12%;
   left: 85%;
 }
-
 .avatar {
   width: 25%;
 }
-
 .playerNameText {
   color: green;
   text-align: left;
@@ -155,9 +139,15 @@ export default {
   font-size: 1em;
   font-family: sans-serif;
 }
+.playercards {
+    width: 15%;
+}
 
 .playercards {
     
     width: 15%; 
+}
+#betbutton {
+    position: relative;
 }
 </style>
