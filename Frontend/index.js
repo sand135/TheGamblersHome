@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import Vuex from 'vuex'
+import Router from './router'
 
 Vue.use(Vuex)
 
@@ -15,7 +16,9 @@ const state = {
   players: [{}],
   pot: 100,
   currentBet: null,
-  value: 50
+  value: 50,
+  authenticated: false
+
 }
 
 const mutations = {
@@ -234,5 +237,6 @@ new Vue({
     this.$store.commit('drawFlop')
   },
   store: store,
+  router: Router,
   render: h => h(App)
 })
