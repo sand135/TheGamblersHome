@@ -14,6 +14,8 @@ const state = {
   card: {},
   cardsOnTable: [],
   players: [{}],
+  player1: null,
+  player2: null,
   pot: 100,
   currentBet: null,
   value: 50,
@@ -26,7 +28,26 @@ const mutations = {
   bet(state) {
     state.pot = Number(state.pot) + Number(state.value)
   },
+  dealCardsToPlayer(state) {
+    state.player1 = {cards: [], money: 5000}
+    state.player2 = {cards: [], money: 5000}
 
+    let playerOne2Cards = false
+    let playerTwoCards = false
+    //Lägger till 2 kort till varje spelare, ska igentligen ge ett till p1 sen ett till p2 sen ett till p1 sen ett till p2. Ej två till p1 sen två till p2
+    while (playerOne2Cards == false && playerTwoCards == false) {
+      if(state.player1.cards.length < 2) {
+        state.player1.cards.push(state.deck[0])
+        state.deck.splice(0,1)
+      } else if(state.player2.cards.length < 2) {
+        state.player2.cards.push(state.deck[0])
+        state.deck.splice(0,1)
+      } else {
+        playerOne2Cards = true
+        playerTwoCards = true
+      }
+    }
+  },
   drawTurnAndRiver(state) {
     // Lägger till turn och river till cardsOnTable
     // Om cardsOnTable.length är 3 så ska id vara tablecard4 annars tablecard5
@@ -234,6 +255,7 @@ new Vue({
   el: '#app',
   created() {
     this.$store.commit('createDeck')
+    this.$store.commit('dealCardsToPlayer')
     this.$store.commit('drawFlop')
   },
   store: store,

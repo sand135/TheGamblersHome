@@ -18,8 +18,8 @@
       <div id="player2">
       <img src="Images/player_avatars/avatar2.png" class="avatar">
       <div class="playerNameText">ALEXANDER</div>
-    <img src="Images/Playing_cards/backsides/playingcard_backside.jpg" id="player2_card1" class="playercards">
-    <img src="Images/Playing_cards/backsides/playingcard_backside.jpg" id="player2_card2" class="playercards">
+    <img :src="$store.state.player1.cards[0].imageUrl" id="player2_card1" class="playercards">
+    <img :src="$store.state.player1.cards[1].imageUrl" id="player2_card2" class="playercards">
         <div class="betSlider">
        <input type="range" min="0" max="100" step="5" v-model="$store.state.value">
        <input type="number" v-model="$store.state.value"/>

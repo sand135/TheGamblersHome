@@ -18,7 +18,7 @@
           this.$store.state.authenticated &&
           this.$route.path == "/signinup"
         ) {
-          this.$router.push("/main")
+          this.$router.push("/game")
         }
       }
     },
@@ -41,5 +41,8 @@
     #app {
         width: 1024px;
         margin: auto;
+    }
+    .nav {
+      position: absolute;
     }
 </style>

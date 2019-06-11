@@ -57,7 +57,7 @@ app.post('/', (request, response) =>{
         response.send("User already excists!")
       })
   .catch(err=>{
-    console.log(err);
+    console.log(err)
   })
 })
 
