@@ -228,11 +228,11 @@ const store = new Vuex.Store({
 })
 
 new Vue({
+  el: '#app',
   created() {
     this.$store.commit('createDeck')
     this.$store.commit('drawFlop')
   },
-  el: '#app',
   store: store,
   render: h => h(App)
 })
