@@ -26,11 +26,14 @@ const state = {
   bool: true,
   card: {},
   cardsOnTable: [],
-  players: [],
+  playerNames: [],
   pot: 0,
   currentBet: null,
   value: 50,
-  authenticated: false
+  authenticated: false,
+  currentPlayer: null ,
+  player1: "Sandra",
+  player2: "hej12"
 
 }
 
@@ -39,7 +42,7 @@ const mutations = {
   bet(state) {
     state.pot = Number(state.pot) + Number(state.value)
    
-    fetch('http://localhost:8080/api/hej12', {
+    fetch('http://localhost:8080/api/'+state.currentPlayer , {
       body: JSON.stringify({
         "money": 500
       }),
