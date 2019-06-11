@@ -1,26 +1,13 @@
 <template>
-  <div>
-   
-    <poker-table></poker-table>
-     <card></card>
-  </div>
-  
+  <sign-up-helper></sign-up-helper>
 </template>
 <script>
-  import Card from './Card.vue'
-  import PokerTable from './PokerTable.vue'
-
-  export default {
+  import SignupHelper from './loginFunctionality/SignupHelper.vue'
+  export default{
     components: {
-       'poker-table': PokerTable,
-       'card': Card,
-       
+      'sign-up-helper': SignupHelper
     }
   }
 </script>
-<style> 
-body {
-  background-color: black;
-}
+<style>
 </style>
-
