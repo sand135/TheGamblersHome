@@ -5,10 +5,10 @@ import Router from './router'
 
 Vue.use(Vuex)
 
+
 Vue.config.devtools = true
 
 const state = {
-  imgArray: [],
   deck: null,
   bool: true,
   card: {},

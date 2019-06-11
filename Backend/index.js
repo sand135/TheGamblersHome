@@ -1,8 +1,13 @@
-const express  = require('express')
+const express = require('express')
 const app = express()
 const sqlite = require('sqlite')
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())
+
+app.use((request, response, next) => {
+  response.header('Access-Control-Allow-Origin', '*')
+  next()
+})
 
 let db
 sqlite.open('users.sqlite').then(database =>{
@@ -21,7 +26,6 @@ app.get('/users/:username/:password', (request, response) =>{
     for(var user of users){
   if (user.username === request.params.username && user.password === request.params.password) {
     isFound = true
-
     }
   }
 
