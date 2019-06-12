@@ -42,12 +42,5 @@
         width: 1024px;
         margin: auto;
     }
-<<<<<<< HEAD
-    #nav {
-      position: relative;
-=======
-    .nav {
-      position: absolute;
->>>>>>> JonatanMaster
-    }
+  
 </style>

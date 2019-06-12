@@ -8,14 +8,13 @@ import Router from './router.js'
 // App.use(cors())
 // Vue.use(Express)
 Vue.use(Vuex)
-<<<<<<< HEAD
 Vue.use(Router)
 // const app = express()
 // app.use(express.json())
-=======
 
 
->>>>>>> JonatanMaster
+
+
 Vue.config.devtools = true
 
 
@@ -30,16 +29,15 @@ const state = {
   bool: true,
   card: {},
   cardsOnTable: [],
-<<<<<<< HEAD
   //playerNames: ["player1","player2", "dealer"],
   playerNames:[{name:"dealer", money:null},{name:"Sandra", money:1000}, {name:"Esther", money:1000}],
   pot: 0,
-=======
+
   players: [{}],
   player1: {cards: [], money: 0, name: '', isTurn: true},
   player2: {cards: [], money: 0, name: 'Daniel Negreanu', isTurn: false},
   pot: 100,
->>>>>>> JonatanMaster
+
   currentBet: null,
   value: 50,
   authenticated: false,
