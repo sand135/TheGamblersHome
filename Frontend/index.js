@@ -30,11 +30,10 @@ const state = {
   card: {},
   cardsOnTable: [],
   //playerNames: ["player1","player2", "dealer"],
-  playerNames:[{name:"dealer", money:null},{name:"Sandra", money:1000}, {name:"Esther", money:1000}],
-  pot: 0,
-
-  players: [{}],
-  player1: {cards: [], money: 0, name: '', isTurn: true},
+  // playerNames:[{name:"dealer", money:null},{name:"Sandra", money:1000}, {name:"Esther", money:1000}],
+  playerNames:[{cards:[], money:null, name:"dealer", isTurn: false}],
+  dealer:{name:"dealer", money:null},
+  player1: {cards: [], money: 0, name: '', isTurn: false},
   player2: {cards: [], money: 0, name: 'Daniel Negreanu', isTurn: false},
   pot: 100,
 
@@ -292,8 +291,11 @@ const store = new Vuex.Store({
 new Vue({
   el: '#app',
   created() {
+    this.$store.state.playerNames.push(this.$store.state.player1)
+    this.$store.state.playerNames.push(this.$store.state.player2)
     this.$store.commit('createDeck')
     //this.$store.commit('drawFlop')
+    //this.$store.commit('dealCardsToPlayer')
   },
   store: store,
   router: Router,
