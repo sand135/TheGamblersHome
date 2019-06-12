@@ -33,7 +33,7 @@
       login() {
         fetch('http://localhost:8080/api/users/'+this.input.username+'/'+this.input.password,)
           .then(response => {
-            console.log(response);
+            console.log(response)
             console.log(response.status)
             if(response.status === 400){
               console.log('Login Failed')

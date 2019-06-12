@@ -1,11 +1,24 @@
 import Vue from 'vue'
 import App from './App.vue'
 import Vuex from 'vuex'
-import Router from './router'
-
+import Router from './router.js'
+// const express  =require('express')
+// const cors = require('cors')
+// import Express from 'express'
+// App.use(cors())
+// Vue.use(Express)
 Vue.use(Vuex)
-
+Vue.use(Router)
+// const app = express()
+// app.use(express.json())
 Vue.config.devtools = true
+
+
+// Express.use((request, response, next) => {
+//   response.header('Access-Control-Allow-Origin', '*')
+//   next()
+// })
+
 
 const state = {
   imgArray: [],
@@ -13,11 +26,14 @@ const state = {
   bool: true,
   card: {},
   cardsOnTable: [],
-  players: [{}],
-  pot: 100,
+  //playerNames: ["player1","player2", "dealer"],
+  playerNames:[{name:"dealer", money:null},{name:"Sandra", money:1000}, {name:"Esther", money:1000}],
+  pot: 0,
   currentBet: null,
   value: 50,
-  authenticated: false
+  authenticated: false,
+  currentPlayer: null ,
+
 
 }
 
@@ -25,7 +41,53 @@ const mutations = {
 
   bet(state) {
     state.pot = Number(state.pot) + Number(state.value)
+
+    fetch('http://localhost:8080/api/'+state.currentPlayer , {
+      body: JSON.stringify({
+        "money": 500
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'PUT'
+    })
+      .then(response => response.text())
+      .then(result => {
+        state.players = result
+        console.log(result)
+      })
+
   },
+
+
+  // fetch('http://localhost:3000/')
+  //   .then(response => response.json())
+  //   .then(result => {
+  //     console.log(result)
+  //     // result[0].username = "Ankman"
+  //     console.log(result[0].username)
+  //     state.players = result
+  //
+
+  dealCardsToPlayer(state) {
+
+    let playerOne2Cards = false
+    let playerTwoCards = false
+    //Lägger till 2 kort till varje spelare, ska igentligen ge ett till p1 sen ett till p2 sen ett till p1 sen ett till p2. Ej två till p1 sen två till p2
+    while (playerOne2Cards == false && playerTwoCards == false) {
+      if(state.player1.cards.length < 2) {
+        state.player1.cards.push(state.deck[0])
+        state.deck.splice(0,1)
+      } else if(state.player2.cards.length < 2) {
+        state.player2.cards.push(state.deck[0])
+        state.deck.splice(0,1)
+      } else {
+        playerOne2Cards = true
+        playerTwoCards = true
+      }
+    }
+  },
+
 
   drawTurnAndRiver(state) {
     // Lägger till turn och river till cardsOnTable
@@ -41,12 +103,13 @@ const mutations = {
     }
   },
   drawFlop(state) {
+    state.deck.splice(0,1)
     for (var i = 0; i < 3; i++) {
       state.deck[i].id = 'tablecard'+i
       state.cardsOnTable.push(state.deck[i])
     }
     state.deck.splice(0,3)
-    this.commit('drawTurnAndRiver')
+    //this.commit('drawTurnAndRiver')
   },
   createDeck(state) {
     const arr = []
@@ -229,7 +292,7 @@ const store = new Vuex.Store({
 new Vue({
   created() {
     this.$store.commit('createDeck')
-    this.$store.commit('drawFlop')
+    //this.$store.commit('drawFlop')
   },
   el: '#app',
   store: store,

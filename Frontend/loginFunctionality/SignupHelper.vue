@@ -42,4 +42,7 @@
         width: 1024px;
         margin: auto;
     }
+    #nav {
+      position: relative;
+    }
 </style>

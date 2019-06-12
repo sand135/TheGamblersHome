@@ -2,6 +2,12 @@ const express  =require('express')
 const app = express()
 const sqlite = require('sqlite')
 const bodyParser = require('body-parser')
+
+app.use((request, response, next) => {
+  response.header('Access-Control-Allow-Origin', '*')
+  next()
+})
+
 app.use(bodyParser.json())
 
 let db
@@ -51,6 +57,21 @@ app.post('/', (request, response) =>{
         console.log(err);
         response.status(409)
         response.send("User already excists!")
+      })
+  .catch(err=>{
+    console.log(err);
+  })
+})
+
+app.put('/:username', (request, response) =>{
+  console.log(request.body.username);
+  let username = request.params.username
+  let moneyForNewregisteredPlayer = request.body.money
+      db.run('UPDATE users SET money=? WHERE username=?', [moneyForNewregisteredPlayer, username]).then(()=>{
+      }).catch(err =>{
+        console.log(err);
+        response.status(409)
+        response.send("User not found!")
       })
   .catch(err=>{
     console.log(err);

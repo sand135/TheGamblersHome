@@ -1,5 +1,5 @@
 <template>
-  
+
 </template>
 <script>
   export default {
@@ -9,6 +9,7 @@
       return {
       }
     },
+
     methods: {
     }
   }
