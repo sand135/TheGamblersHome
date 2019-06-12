@@ -1,25 +1,27 @@
 <template>
   <div id="container">
-    <div id="image">
+    <!-- <div id="image">
       <img src="./images/casino_2.png">
-    </div>
+    </div> -->
+   
     <div id="register">
+       <h1>Register</h1>
       <input
         type="text"
         placeholder="Username"
-        v-model="input.username">>
+        v-model="input.username">
       <input
-        type="text"
+        type="password"
         v-model="input.password"
-        placeholder="password">>
+        placeholder="password">
       <input
         type="button"
         value="Register"
-        v-on:click="register()">>
+        v-on:click="register()">
       <input
         type="button"
         value="Back"
-        v-on:click="back()">>
+        v-on:click="back()">
     </div>
 </div>
 </template>
@@ -67,29 +69,52 @@
   }
 </script>
 <style scoped>
-  div {
+
+input{
+    height: 35px;
+    padding: 5px 5px;
+    margin: 10px 0px;
+    background-color: #e0dada;
+    border: none;
+    border-radius: 25px;
+
+  /* position: relative;
+  padding: 5px 0;
+ font-family: 'sans-serif', 'Segoe UI', 'Robot', sans-serif; */
+  
+}
+   /* div {
     background-color: #780001;
-  }
-  #image{
+  } 
+   #image{
     flex-grow: 1;
     margin: 40px 80px;
-    /* position: fixed; */
+     position: fixed; 
+    
   }
   #image img {
-    height: 400px;
-  }
-  #container {
+    height: 100%;
+    width: auto
+  }  */
+  /* #container {
     align-items: center;
     display: flex;
-  }
+    background-size: cover;
+  } */
   #register {
     /* position: absolute; */
     /* margin-top: 25%; */
     /* margin-left: 400px; */
-    /* width: 50%; */
-    border: 3px solid #73AD21;
-    margin: 40px 80px;
-    padding: 10px;
+     width: 30%; 
+    border: 3px solid black;
+    margin: auto;
+    margin-top: 200px;
     padding: 20px;
+    display:flex;
+    flex-direction: column;
+    padding: 15px;
+    text-align: center;
+    
+    
   }
 </style>

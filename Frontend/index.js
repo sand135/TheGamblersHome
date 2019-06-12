@@ -26,7 +26,7 @@ const mutations = {
   drawFlop(state) {
     for (var i = 0; i < 3; i++) {
       state.deck[i].id = 'tablecard'+i
-      this.cardsOnTable.push(state.deck[i])
+      state.cardsOnTable.push(state.deck[i])
     }
     console.log(state.deck[0].id)
   },
@@ -203,14 +203,7 @@ const store = new Vuex.Store({
   state
 })
 
-new Vue({
-  created() {
-    this.$store.commit('createDeck')
-  },
-  el: '#app',
-  store: store,
-  render: h => h(App)
-})
+
 
 new Vue({
   created() {
