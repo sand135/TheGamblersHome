@@ -14,8 +14,8 @@ const state = {
   card: {},
   cardsOnTable: [],
   players: [{}],
-  player1: null,
-  player2: null,
+  player1: {cards: [], money: 0, name: '', isTurn: true},
+  player2: {cards: [], money: 0, name: 'Daniel Negreanu', isTurn: false},
   pot: 100,
   currentBet: null,
   value: 50,
@@ -29,8 +29,6 @@ const mutations = {
     state.pot = Number(state.pot) + Number(state.value)
   },
   dealCardsToPlayer(state) {
-    state.player1 = {cards: [], money: 5000}
-    state.player2 = {cards: [], money: 5000}
 
     let playerOne2Cards = false
     let playerTwoCards = false
@@ -74,6 +72,7 @@ const mutations = {
     // this.commit('drawTurnAndRiver')
   },
   createDeck(state) {
+
     const arr = []
     const suits = ['♥', '♠', '♦', '♣']
     const values = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K']

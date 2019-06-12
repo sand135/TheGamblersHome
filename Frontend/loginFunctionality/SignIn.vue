@@ -40,7 +40,7 @@
             }else{
               console.log('Login Successfull' + response.statusText)
               this.$store.state.authenticated = true
-              //TODO: Samma som i register
+              this.$store.state.player1.name = this.input.username
               this.$router.replace({ name: "game" })
             }
           })

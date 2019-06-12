@@ -50,7 +50,7 @@
             console.log("Username already excists. Please try again!")
           }else{
             this.$store.state.authenticated = true
-            //TODO: Sätta playerobjekt namn med input värde
+            this.$store.state.player1.name = this.input.username
             this.$router.replace({ name: "game" })
           }
         }).catch(e => console.log(e))
