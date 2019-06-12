@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="nav">
-      <router-link v-if="this.$store.state.authenticated" to="/SignInUp" v-on:click.native="logout()" replace>Logout</router-link>
+      <router-link id="logout" v-if="this.$store.state.authenticated" to="/SignInUp" v-on:click.native="logout()" replace>Logout</router-link>
     </div>
     <router-view />
   </div>
@@ -41,5 +41,10 @@
     #app {
         width: 1024px;
         margin: auto;
+    }
+    #logout {
+      position: relative;
+      z-index: 2;
+      color: white;
     }
 </style>
