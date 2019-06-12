@@ -1,9 +1,8 @@
 <template>
   <div>
-    <sign-up-helper />
-    <card />
-    <poker-table />
+    <sign-up-helper></sign-up-helper>
   </div>
+
 </template>
 <script>
   import SignupHelper from './loginFunctionality/SignupHelper.vue'
@@ -11,11 +10,12 @@
   import PokerTable from './PokerTable.vue'
   export default{
     components: {
-      'card': Card,
-      'poker-table': PokerTable,
-      'sign-up-helper': SignupHelper,
+       'sign-up-helper': SignupHelper
     }
   }
 </script>
 <style>
+body {
+  background-color: black;
+}
 </style>

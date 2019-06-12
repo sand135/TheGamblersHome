@@ -8,9 +8,14 @@ import Router from './router.js'
 // App.use(cors())
 // Vue.use(Express)
 Vue.use(Vuex)
+<<<<<<< HEAD
 Vue.use(Router)
 // const app = express()
 // app.use(express.json())
+=======
+
+
+>>>>>>> JonatanMaster
 Vue.config.devtools = true
 
 
@@ -21,14 +26,20 @@ Vue.config.devtools = true
 
 
 const state = {
-  imgArray: [],
   deck: null,
   bool: true,
   card: {},
   cardsOnTable: [],
+<<<<<<< HEAD
   //playerNames: ["player1","player2", "dealer"],
   playerNames:[{name:"dealer", money:null},{name:"Sandra", money:1000}, {name:"Esther", money:1000}],
   pot: 0,
+=======
+  players: [{}],
+  player1: {cards: [], money: 0, name: '', isTurn: true},
+  player2: {cards: [], money: 0, name: 'Daniel Negreanu', isTurn: false},
+  pot: 100,
+>>>>>>> JonatanMaster
   currentBet: null,
   value: 50,
   authenticated: false,
@@ -58,17 +69,6 @@ const mutations = {
       })
 
   },
-
-
-  // fetch('http://localhost:3000/')
-  //   .then(response => response.json())
-  //   .then(result => {
-  //     console.log(result)
-  //     // result[0].username = "Ankman"
-  //     console.log(result[0].username)
-  //     state.players = result
-  //
-
   dealCardsToPlayer(state) {
 
     let playerOne2Cards = false
@@ -87,8 +87,6 @@ const mutations = {
       }
     }
   },
-
-
   drawTurnAndRiver(state) {
     // Lägger till turn och river till cardsOnTable
     // Om cardsOnTable.length är 3 så ska id vara tablecard4 annars tablecard5
@@ -96,22 +94,26 @@ const mutations = {
       state.deck.splice(0, 1)
       let card = {suit: state.deck[0].suit, value: state.deck[0].value, imageUrl: state.deck[0].imageUrl, id: "tablecard3"}
       state.cardsOnTable.push(card)
-    } else {
+      state.deck.splice(0, 1)
+    } else if (state.cardsOnTable.length === 4) {
       state.deck.splice(0, 1)
       let card = {suit: state.deck[0].suit, value: state.deck[0].value, imageUrl: state.deck[0].imageUrl, id: "tablecard4"}
       state.cardsOnTable.push(card)
+      state.deck.splice(0, 1)
     }
   },
   drawFlop(state) {
+    // Tar bort översta kortet innan man delar ut flop
     state.deck.splice(0,1)
     for (var i = 0; i < 3; i++) {
       state.deck[i].id = 'tablecard'+i
       state.cardsOnTable.push(state.deck[i])
     }
     state.deck.splice(0,3)
-    //this.commit('drawTurnAndRiver')
+    // this.commit('drawTurnAndRiver')
   },
   createDeck(state) {
+
     const arr = []
     const suits = ['♥', '♠', '♦', '♣']
     const values = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K']
@@ -290,12 +292,12 @@ const store = new Vuex.Store({
 })
 
 new Vue({
+  el: '#app',
   created() {
     this.$store.commit('createDeck')
     //this.$store.commit('drawFlop')
   },
-  el: '#app',
   store: store,
-  router:Router,
+  router: Router,
   render: h => h(App)
 })
