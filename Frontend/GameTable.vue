@@ -1,18 +1,18 @@
 
 <template>
   <div>
-    <poker-table></poker-table>
-     <card></card>
+    <poker-table />
+    <card />
   </div>
-
 </template>
 <script>
   import Card from './Card.vue'
   import PokerTable from './PokerTable.vue'
   export default {
     components: {
-      'poker-table': PokerTable,
       'card': Card,
+      'poker-table': PokerTable,
+
     },
     mounted() {
       if(!this.$store.state.authenticated) {

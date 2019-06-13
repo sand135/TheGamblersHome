@@ -1,9 +1,18 @@
 import Vue from 'vue'
 import App from './App.vue'
 import Vuex from 'vuex'
-import Router from './router'
-
+import Router from './router.js'
+// const express  =require('express')
+// const cors = require('cors')
+// import Express from 'express'
+// App.use(cors())
+// Vue.use(Express)
 Vue.use(Vuex)
+Vue.use(Router)
+// const app = express()
+// app.use(express.json())
+
+
 
 
 Vue.config.devtools = true
@@ -14,26 +23,20 @@ const state = {
   bool: true,
   card: {},
   cardsOnTable: [],
-  players: [{}],
-  player1: {
-    cards: [],
-    money: null,
-    name: '',
-    isTurn: true,
-    isRoundOver: false
-  },
-  player2: {
-    cards: [],
-    money: null,
-    name: 'Daniel Negreanu',
-    isTurn: false,
-    isRoundOver: false
-  },
+  //playerNames: ["player1","player2", "dealer"],
+  // playerNames:[{name:"dealer", money:null},{name:"Sandra", money:1000}, {name:"Esther", money:1000}],
+  playerNames:[{cards:[], money:null, name:"dealer", isTurn: false}],
+
+  player1: {cards: [], money: 0, name: '', isTurn: false},
+  player2: {cards: [], money: 0, name: 'Daniel Negreanu', isTurn: false},
   pot: 100,
+
   currentBet: null,
   value: 50,
-  authenticated: false
+  authenticated: false,
+  currentPlayer: null 
 }
+
 
 const actions = {
   // Är en async metod som anropas från signin komponenten
@@ -55,6 +58,22 @@ const mutations = {
   },
   bet(state) {
     state.pot = Number(state.pot) + Number(state.value)
+
+    fetch('http://localhost:8080/api/'+state.currentPlayer , {
+      body: JSON.stringify({
+        "money": 500
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'PUT'
+    })
+      .then(response => response.text())
+      .then(result => {
+        state.players = result
+        console.log(result)
+      })
+
   },
   dealCardsToPlayer(state) {
     console.log('dealCardsToPlayer metod')
@@ -294,9 +313,11 @@ const store = new Vuex.Store({
 new Vue({
   el: '#app',
   created() {
+    this.$store.state.playerNames.push(this.$store.state.player1)
+    this.$store.state.playerNames.push(this.$store.state.player2)
     this.$store.commit('createDeck')
-    this.$store.commit('dealCardsToPlayer')
-    this.$store.commit('drawFlop')
+    //this.$store.commit('drawFlop')
+    //this.$store.commit('dealCardsToPlayer')
   },
   store: store,
   router: Router,
