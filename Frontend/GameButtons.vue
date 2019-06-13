@@ -28,7 +28,8 @@
       return {
         playerNameText: this.$store.state.playerNames[0].name,
         counter: 0,
-        rounds: 1
+        rounds: 1,
+        swap:false
       }
     },
     methods: {
@@ -49,6 +50,7 @@
         }else{
           this.counter ++
         }
+
         this.playerNameText = this.$store.state.playerNames[this.counter].name
         this.$store.state.playerNames[this.counter].isTurn = true
 
