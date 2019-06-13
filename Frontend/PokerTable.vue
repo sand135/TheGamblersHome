@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <div id="bg">
       <img src="poker-table-drawing-11.png">
     </div>
@@ -8,18 +7,27 @@
 
       <div id="player1">
       <img src="Images/player_avatars/avatar1.png" class="avatar">
-      <div class="playerNameText">JONATAN</div>
+      <div class="playerNameText">{{ $store.state.player1.name }}</div>
     <div>
-    <img src="Images/Playing_cards/backsides/playingcard_backside.jpg" id="player1_card1" class="playercards">
-    <img src="Images/Playing_cards/backsides/playingcard_backside.jpg" id="player1_card2" class="playercards">
+      <img v-if="$store.state.player1.isTurn === true" :src="$store.state.player1.cards[0].imageUrl" id="player1_card1" class="playercards">
+      <img v-else="" src="Images/Playing_cards/backsides/playingcard_backside.jpg" id="player1_card1" class="playercards">
+
+
+      <img v-if="$store.state.player1.isTurn === true" :src="$store.state.player1.cards[1].imageUrl" id="player1_card2" class="playercards">
+      <img v-else="" src="Images/Playing_cards/backsides/playingcard_backside.jpg" id="player1_card2" class="playercards">
     </div>
     </div>
 
       <div id="player2">
       <img src="Images/player_avatars/avatar2.png" class="avatar">
-      <div class="playerNameText">ALEXANDER</div>
-    <img src="Images/Playing_cards/backsides/playingcard_backside.jpg" id="player2_card1" class="playercards">
-    <img src="Images/Playing_cards/backsides/playingcard_backside.jpg" id="player2_card2" class="playercards">
+      <div class="playerNameText">{{ $store.state.player2.name }}</div>
+
+    <img v-if="$store.state.player2.isTurn === true" :src="$store.state.player2.cards[0].imageUrl" id="player2_card1" class="playercards">
+    <img v-else="" src="Images/Playing_cards/backsides/playingcard_backside.jpg" id="player2_card1" class="playercards">
+
+    <img v-if="$store.state.player2.isTurn === true" :src="$store.state.player2.cards[1].imageUrl" id="player2_card2" class="playercards">
+    <img v-else="" src="Images/Playing_cards/backsides/playingcard_backside.jpg" id="player2_card2" class="playercards">
+
         <div class="betSlider">
        <input type="range" min="0" max="100" step="5" v-model="$store.state.value">
        <input type="number" v-model="$store.state.value"/>
@@ -29,23 +37,24 @@
 </div>
     </div>
 
+    <game-button />
 
     <img v-for="card in $store.state.cardsOnTable" :src="card.imageUrl" :id="card.id" class="tablecards"/>
 
-
-
     <div id="totalpot">
-        Total pot: {{ $store.state.pot }}
-            </div>
-
-
-  </div>
+        Total pot: {{ $store.state.pot }}$
+    </div>
+</div>
 </template>
 <script>
+  import GameButtons from './GameButtons.vue'
 export default {
+  components: {
+    'game-button': GameButtons
+  },
   data() {
     return {
-        value: 50
+
     }
   },
    computed:{
@@ -149,13 +158,13 @@ export default {
 .playercards {
     width: 15%;
 }
-
 .betSlider{
    color: black;
    background-color: aliceblue;
-
 }
 #betbutton {
     position: relative;
 }
+
+
 </style>

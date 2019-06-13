@@ -1,23 +1,47 @@
 import Vue from 'vue'
 import App from './App.vue'
 import Vuex from 'vuex'
-import Router from './router'
-
+import Router from './router.js'
+// const express  =require('express')
+// const cors = require('cors')
+// import Express from 'express'
+// App.use(cors())
+// Vue.use(Express)
 Vue.use(Vuex)
+Vue.use(Router)
+// const app = express()
+// app.use(express.json())
+
+
+
 
 Vue.config.devtools = true
 
+
+// Express.use((request, response, next) => {
+//   response.header('Access-Control-Allow-Origin', '*')
+//   next()
+// })
+
+
 const state = {
-  imgArray: [],
   deck: null,
   bool: true,
   card: {},
   cardsOnTable: [],
-  players: [{}],
+  //playerNames: ["player1","player2", "dealer"],
+  // playerNames:[{name:"dealer", money:null},{name:"Sandra", money:1000}, {name:"Esther", money:1000}],
+  playerNames:[{cards:[], money:null, name:"dealer", isTurn: false}],
+
+  player1: {cards: [], money: 0, name: '', isTurn: false},
+  player2: {cards: [], money: 0, name: 'Daniel Negreanu', isTurn: false},
   pot: 100,
+
   currentBet: null,
   value: 50,
-  authenticated: false
+  authenticated: false,
+  currentPlayer: null ,
+
 
 }
 
@@ -25,8 +49,41 @@ const mutations = {
 
   bet(state) {
     state.pot = Number(state.pot) + Number(state.value)
-  },
 
+    fetch('http://localhost:8080/api/'+state.currentPlayer , {
+      body: JSON.stringify({
+        "money": 500
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'PUT'
+    })
+      .then(response => response.text())
+      .then(result => {
+        state.players = result
+        console.log(result)
+      })
+
+  },
+  dealCardsToPlayer(state) {
+
+    let playerOne2Cards = false
+    let playerTwoCards = false
+    //Lägger till 2 kort till varje spelare, ska igentligen ge ett till p1 sen ett till p2 sen ett till p1 sen ett till p2. Ej två till p1 sen två till p2
+    while (playerOne2Cards == false && playerTwoCards == false) {
+      if(state.player1.cards.length < 2) {
+        state.player1.cards.push(state.deck[0])
+        state.deck.splice(0,1)
+      } else if(state.player2.cards.length < 2) {
+        state.player2.cards.push(state.deck[0])
+        state.deck.splice(0,1)
+      } else {
+        playerOne2Cards = true
+        playerTwoCards = true
+      }
+    }
+  },
   drawTurnAndRiver(state) {
     // Lägger till turn och river till cardsOnTable
     // Om cardsOnTable.length är 3 så ska id vara tablecard4 annars tablecard5
@@ -34,21 +91,26 @@ const mutations = {
       state.deck.splice(0, 1)
       let card = {suit: state.deck[0].suit, value: state.deck[0].value, imageUrl: state.deck[0].imageUrl, id: "tablecard3"}
       state.cardsOnTable.push(card)
-    } else {
+      state.deck.splice(0, 1)
+    } else if (state.cardsOnTable.length === 4) {
       state.deck.splice(0, 1)
       let card = {suit: state.deck[0].suit, value: state.deck[0].value, imageUrl: state.deck[0].imageUrl, id: "tablecard4"}
       state.cardsOnTable.push(card)
+      state.deck.splice(0, 1)
     }
   },
   drawFlop(state) {
+    // Tar bort översta kortet innan man delar ut flop
+    state.deck.splice(0,1)
     for (var i = 0; i < 3; i++) {
       state.deck[i].id = 'tablecard'+i
       state.cardsOnTable.push(state.deck[i])
     }
     state.deck.splice(0,3)
-    this.commit('drawTurnAndRiver')
+    // this.commit('drawTurnAndRiver')
   },
   createDeck(state) {
+
     const arr = []
     const suits = ['♥', '♠', '♦', '♣']
     const values = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K']
@@ -227,12 +289,15 @@ const store = new Vuex.Store({
 })
 
 new Vue({
-  created() {
-    this.$store.commit('createDeck')
-    this.$store.commit('drawFlop')
-  },
   el: '#app',
+  created() {
+    this.$store.state.playerNames.push(this.$store.state.player1)
+    this.$store.state.playerNames.push(this.$store.state.player2)
+    this.$store.commit('createDeck')
+    //this.$store.commit('drawFlop')
+    //this.$store.commit('dealCardsToPlayer')
+  },
   store: store,
-  router:Router,
+  router: Router,
   render: h => h(App)
 })
