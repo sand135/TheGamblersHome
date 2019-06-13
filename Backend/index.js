@@ -95,7 +95,6 @@ app.put('/:username', (request, response) =>{
   let username = request.params.username
   let betMoney = request.body.money
 
- // let currentMoney = 100-Number(betMoney)
       db.run('UPDATE users SET money=? WHERE username=?', [betMoney, username]).then(()=>{
       }).catch(err =>{
         console.log(err);
