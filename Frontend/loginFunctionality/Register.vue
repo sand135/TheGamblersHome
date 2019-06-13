@@ -46,8 +46,8 @@
         }).then(response => {
           console.log(response)
           if(response.status !== 200 ){
-            alert("Username already excists. Please try again!")
-            console.log("Username already excists. Please try again!")
+            alert("Username already exists. Please try again!")
+            console.log("Username already exists. Please try again!")
           }else{
             this.$store.state.authenticated = true
             this.$router.replace({ name: "main" })

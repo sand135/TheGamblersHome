@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <div id="bg">
       <img src="poker-table-drawing-11.png">
     </div>

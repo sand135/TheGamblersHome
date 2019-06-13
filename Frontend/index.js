@@ -36,15 +36,30 @@ const state = {
   player2: "hej12"
 
 }
+const actions = {
+  // Är en async metod som anropas från signin komponenten
+  fetchPlayer(context) {
+    if (state.authenticated === true) {
+      fetch('http://localhost:8080/api/users/' +state.player1.username)
+        .then(response => response.json())
+        .then(result => {
+          context.commit('setPlayerInfo', result.money)
+        })
+    }
+  }
+}
 
 const mutations = {
+  setPlayerInfo(state, money) {
+    state.player1.money = money
+  },
 
   bet(state) {
     state.pot = Number(state.pot) + Number(state.value)
-   
-    fetch('http://localhost:8080/api/'+state.currentPlayer , {
+     this.$store.dispatch('fetchPlayer')
+    fetch('http://localhost:8080/api/Kalle' , {
       body: JSON.stringify({
-        "money": 500
+        "money": state.player1.money - state.value
       }),
       headers: {
         'Content-Type': 'application/json'
@@ -267,6 +282,7 @@ const mutations = {
 }
 
 const store = new Vuex.Store({
+  actions,
   mutations,
   state
 })

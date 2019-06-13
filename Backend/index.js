@@ -51,8 +51,8 @@ app.post('/', (request, response) =>{
   console.log(request.body.username);
   let username = request.body.username
   let password = request.body.password
-  let moneyForNewregisteredPlayer = 1000
-      db.run('INSERT INTO users VALUES (?,?,?)', [username, password, moneyForNewregisteredPlayer]).then(()=>{
+  let betMoney = 1000
+      db.run('INSERT INTO users VALUES (?,?,?)', [username, password, betMoney]).then(()=>{
         response.status(200)
         response.send("New user registered")
       }).catch(err =>{
@@ -68,8 +68,20 @@ app.post('/', (request, response) =>{
 app.put('/:username', (request, response) =>{
   console.log(request.body.username);
   let username = request.params.username
-  let moneyForNewregisteredPlayer = request.body.money
-      db.run('UPDATE users SET money=? WHERE username=?', [moneyForNewregisteredPlayer, username]).then(()=>{
+  let betMoney = request.body.money
+ 
+  
+  let currentMoney = 100-Number(betMoney)
+  // db.all('SELECT * FROM users').then(users=>{
+  //   for(var user of users){
+  //     console.log(user.username);
+  //     return      
+  //     if (username == user.username) {
+  //       currentMoney =  Number(user.money) - Number(state.value)
+  //     }
+  //   }
+  // })
+      db.run('UPDATE users SET money=? WHERE username=?', [currentMoney, username]).then(()=>{
       }).catch(err =>{
         console.log(err);
         response.status(409)
