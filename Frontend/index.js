@@ -32,7 +32,7 @@ const state = {
   //playerNames: ["player1","player2", "dealer"],
   // playerNames:[{name:"dealer", money:null},{name:"Sandra", money:1000}, {name:"Esther", money:1000}],
   playerNames:[{cards:[], money:null, name:"dealer", isTurn: false}],
-  dealer:{name:"dealer", money:null},
+
   player1: {cards: [], money: 0, name: '', isTurn: false},
   player2: {cards: [], money: 0, name: 'Daniel Negreanu', isTurn: false},
   pot: 100,

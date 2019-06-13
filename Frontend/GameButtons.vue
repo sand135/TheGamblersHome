@@ -43,8 +43,6 @@
         this.nextPlayersTurn()
       },
       nextPlayersTurn() {
-        console.log('counter' + this.counter);
-        console.log('rounds' + this.rounds);
         if (this.counter === this.$store.state.playerNames.length -1){
           this.counter = 0
           this.rounds ++
@@ -55,11 +53,9 @@
         this.$store.state.playerNames[this.counter].isTurn = true
 
         if(this.$store.state.playerNames[this.counter].name === "dealer" && this.rounds === 2){
-          console.log("ifen körs");
           this.$store.commit('drawFlop')
           this.nextPlayersTurn()
         }else if (this.$store.state.playerNames[this.counter].name === "dealer" && this.rounds < 4){
-          console.log("elsen körs");
           this.$store.commit('drawTurnAndRiver')
           this.nextPlayersTurn()
         }else if (this.$store.state.playerNames[this.counter].name === "dealer" && this.rounds === 4){
