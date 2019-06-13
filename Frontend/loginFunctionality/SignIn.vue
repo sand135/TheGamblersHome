@@ -102,10 +102,15 @@
      border: 3px solid rgba(0, 0, 0, 0.515); 
 }
 #btn{
-  background-color: rgba(75, 213, 48, 0.755);
+   background-color:rgba(75, 213, 48, 0.755); 
    width: 50%;
    padding: 5px 5px;
    margin: 10px 100px;
+   transition-duration: 0.4s;
+}
+#btn:hover{
+  background-color: white;
+  color: black;
 }
     #login {
      background-color: rgba(255, 255, 255, 0.433); 

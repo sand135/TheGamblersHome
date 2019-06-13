@@ -1,5 +1,6 @@
 <template>
 <div>
+  <!-- <h1>The Gamblers home</h1> -->
   <div id="bg">
       <img src="./images/pokerCardsBackground.jpg">
     </div>
@@ -10,13 +11,13 @@
       <input
         id="inputFields"
         type="text"
-        placeholder="Username"
+        placeholder="New Username"
         v-model="input.username">
       <input
         id="inputFields"
         type="password"
         v-model="input.password"
-        placeholder="password">
+        placeholder="New password">
       <input
         id="btn"
         type="button"
@@ -78,7 +79,6 @@
 
  #registerIcon{
     width: 20%;
-      /* padding: 5px 5px; */
    margin: 10px 180px;
   }
 
@@ -110,15 +110,19 @@
     background-color: #e0dadac6;
     border: none;
     border-radius: 25px;  
-     border: 3px solid rgba(0, 0, 0, 0.515); 
+    border: 3px solid rgba(0, 0, 0, 0.515); 
 }
 #btn{
   background-color: rgba(75, 213, 48, 0.755);
    width: 50%;
    padding: 5px 5px;
    margin: 10px 100px;
+    transition-duration: 0.4s;
 }
-
+#btn:hover{
+  background-color: white;
+  color: black;
+}
   h1{
     color: black;
   }
