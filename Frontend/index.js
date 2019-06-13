@@ -77,7 +77,7 @@ const mutations = {
   drawTurnAndRiver(state) {
     console.log('drawTurnAndRiver metod')
     // Lägger till turn och river till cardsOnTable
-    // Om cardsOnTable.length är 3 så ska id vara tablecard4 annars tablecard5
+    // Om cardsOnTable.length är 3 så ska id vara tablecard3 annars tablecard4
     if (state.cardsOnTable.length === 3) {
       state.deck.splice(0, 1)
       let card = {
