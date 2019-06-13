@@ -22,10 +22,8 @@
     "html"
   ],
   "rules": {
-    "indent": ["error", 2],
     "no-console": "off",
     "semi": [2, "never"],
-    "sort-keys": ["warn", "asc"],
     "vue/no-v-html": "off",
     "vue/script-indent": ["error", 2, { "baseIndent": 1 }]
   }

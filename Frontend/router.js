@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import LoginComponent from "./loginFunctionality/SignIn.vue"
-import MainComponent from "./Main.vue"
+// import MainComponent from "./Main.vue"
 import GameComponent from "./GameTable.vue"
 import SignInUpComponent from "./loginFunctionality/SignInUp.vue"
 import RegisterComponent from "./loginFunctionality/Register.vue"
@@ -34,8 +34,8 @@ export default new Router({
       component: LoginComponent
     },
     {
-      path: "/main",
-      name: "Main",
+      path: "/game",
+      name: "game",
       component: GameComponent
     }
   ]

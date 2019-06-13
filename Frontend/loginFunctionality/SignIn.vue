@@ -32,17 +32,19 @@
       login() {
         fetch('http://localhost:8080/api/users/'+this.input.username+'/'+this.input.password,)
           .then(response => {
-            console.log(response);
+            console.log(response)
             console.log(response.status)
-            if(response.status === 400){
+            if(response.status >= 400 && response.status <= 499){
               console.log('Login Failed')
             }else{
               console.log('Login Successfull' + response.statusText)
               this.$store.state.authenticated = true
-              this.$router.replace({ name: "main" })
+              this.$store.state.player1.name = this.input.username
+              this.$store.dispatch('fetchPlayer')
+              this.$router.replace({ name: "game" })
             }
           })
-      }
+      },
     }
   }
 </script>

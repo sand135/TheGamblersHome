@@ -1,5 +1,12 @@
 <template>
-  
+  <div class="outline">
+    <input
+       type="button"
+       value="Dela ut ett kort"
+       v-on:click="$store.commit('drawTurnAndRiver')"
+       >
+  </div>
+
 </template>
 <script>
   export default {
@@ -19,5 +26,6 @@
   }
   .outline {
     color: white;
+    position: absolute;
   }
 </style>
