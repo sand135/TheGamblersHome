@@ -37,10 +37,9 @@
 </div>
     </div>
 
+    <game-button />
 
     <img v-for="card in $store.state.cardsOnTable" :src="card.imageUrl" :id="card.id" class="tablecards"/>
-
-
 
     <div id="totalpot">
         Total pot: {{ $store.state.pot }}$
@@ -50,7 +49,11 @@
   </div>
 </template>
 <script>
+  import GameButtons from './GameButtons.vue'
 export default {
+  components: {
+    'game-button': GameButtons
+  },
   data() {
     return {
     
@@ -157,13 +160,13 @@ export default {
 .playercards {
     width: 15%;
 }
-
 .betSlider{
    color: black;
    background-color: aliceblue;
-
 }
 #betbutton {
     position: relative;
 }
+
+
 </style>
