@@ -47,7 +47,9 @@ const actions = {
       fetch('http://localhost:8080/api/users/' + state.player1.name)
         .then(response => response.json())
         .then(result => {
-          context.commit('setPlayerInfo', result.money)
+        context.commit('setPlayerInfo', result.money)
+      
+        
         })
     }
   }
@@ -57,13 +59,18 @@ const mutations = {
   setPlayerInfo(state, money) {
     // Sätter money till player via action metoden fetchPlayer
     state.player1.money = money
+    // state.player1.name = name
   },
+
   bet(state) {
     state.pot = Number(state.pot) + Number(state.value)
-     this.$store.dispatch('fetchPlayer')
-    fetch('http://localhost:8080/api/Kalle' , {
+    // state.$store.dispatch('fetchPlayer')
+    let totalMoney = Number(state.player1.money) - Number(state.value)
+    console.log(totalMoney)
+    
+    fetch('http://localhost:8080/api/'+state.player1.name , {
       body: JSON.stringify({
-        "money": state.player1.money - state.value
+        "money": totalMoney
       }),
       headers: {
         'Content-Type': 'application/json'
