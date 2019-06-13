@@ -5,6 +5,7 @@
     </div>
 <div id ="login">
   <h1>Login</h1>
+    <img id="loginIcon" src="./images/user.png">
     <input
     id="inputFields"
       type="text"
@@ -62,6 +63,14 @@
   }
 </script>
 <style>
+
+  #loginIcon{
+    width: 20%;
+      /* padding: 5px 5px; */
+   margin: 10px 180px;
+  }
+
+
 #bg {
   position: fixed;
   top: -50%;

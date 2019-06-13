@@ -5,7 +5,8 @@
     </div>
   <div id="container"> 
     <div id="register">
-       <h1>Register</h1>
+       <h1>Register new user</h1>
+       <img id="registerIcon" src="./images/new-user.png">
       <input
         id="inputFields"
         type="text"
@@ -74,6 +75,12 @@
   }
 </script>
 <style scoped>
+
+ #registerIcon{
+    width: 20%;
+      /* padding: 5px 5px; */
+   margin: 10px 180px;
+  }
 
 #bg {
   position: fixed;
