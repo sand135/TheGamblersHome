@@ -45,18 +45,21 @@ const actions = {
       fetch('http://localhost:8080/api/users/' + state.player1.name)
         .then(response => response.json())
         .then(result => {
-          state.player1.money = result.money
+          context.commit('setPlayerInfo', result)
         })
     }
   }
 }
 
 const mutations = {
-  // setPlayerInfo(state, money) {
-  //   // Sätter money till player via action metoden fetchPlayer
-  //   state.player1.money = money
-  //   // state.player1.name = name
-  // },
+  setPlayerInfo(state, result) {
+    console.log(result)
+    console.log(state.player1.name)
+    
+    // Sätter money till player via action metoden fetchPlayer
+    state.player1.money = result.money
+    // state.player1.name = name
+  },
 
   bet(state) {
     state.pot = Number(state.pot) + Number(state.value)
@@ -321,6 +324,8 @@ new Vue({
     this.$store.state.playerNames.push(this.$store.state.player1)
     this.$store.state.playerNames.push(this.$store.state.player2)
     this.$store.commit('createDeck')
+    console.log(this.$state.player1)
+    
     //this.$store.commit('drawFlop')
     //this.$store.commit('dealCardsToPlayer')
   },

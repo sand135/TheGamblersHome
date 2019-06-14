@@ -40,6 +40,10 @@
               console.log('Login Successfull' + response.statusText)
               this.$store.state.authenticated = true
               this.$store.state.player1.name = this.input.username
+              console.log(this.input.username);
+              console.log(this.$store.state.player1.name);
+              
+              
               // this.$store.state.player1.money = 
               this.$store.dispatch('fetchPlayer')
               this.$router.replace({ name: "game" })

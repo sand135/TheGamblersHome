@@ -7,7 +7,7 @@
         class="button"
         type="button"
         value="Raise"
-        @click="testBet()">
+        @click="raise()">
 
       <input
         class="start"
@@ -41,11 +41,8 @@
         this.$store.state.playerNames[this.counter].isTurn = false
         console.log('raisebutton clicked')
         this.nextPlayersTurn()
+        this.$store.commit('bet')
       },
-      testBet() {
-      this.$store.commit('bet')
-      },
-
       nextPlayersTurn() {
         if (this.counter === this.$store.state.playerNames.length -1){
           this.counter = 0

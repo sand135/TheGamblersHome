@@ -28,18 +28,20 @@ app.get('/', (request, response) => {
 
 app.get('/users/:username/', (request, response) => {
   var isFound = false
+  var user =''
   db.all('SELECT * FROM users').then(users => {
     for (var index in users) {
       if (users[index].username === request.params.username) {
         isFound = true
+        user = users[index]
       }
     }
     if (isFound) {
       console.log("Login Successfull");
       console.log('Match')
-      console.log(users[index].username)
+      console.log(user.username)
       response.status(200)
-      response.send(users[index])
+      response.send(user)
     } else {
       console.log("Fetching user failed");
       response.status(400)
