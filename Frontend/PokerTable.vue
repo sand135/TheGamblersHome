@@ -3,8 +3,6 @@
     <div id="bg">
       <img src="poker-table-drawing-11.png">
     </div>
-
-
       <div id="player1">
       <img src="Images/player_avatars/avatar1.png" class="avatar">
       <div class="playerNameText">{{ $store.state.player1.name }}</div>
@@ -17,7 +15,6 @@
       <img v-else="" src="Images/Playing_cards/backsides/playingcard_backside.jpg" id="player1_card2" class="playercards">
     </div>
     </div>
-
       <div id="player2">
       <img src="Images/player_avatars/avatar2.png" class="avatar">
       <div class="playerNameText">{{ $store.state.player2.name }}</div>
@@ -54,14 +51,14 @@ export default {
   },
   data() {
     return {
-
     }
   },
-   computed:{
+  computed:{
          total: function(){
             return this.value + "$"
          }
-         },
+  },
+  
   methods: {
     onClick() {}
   }
@@ -99,6 +96,9 @@ export default {
   resize: both;
   overflow: auto;
 } */
+
+
+
 #totalpot {
     position: fixed;
     bottom: 65%;

@@ -9,11 +9,6 @@ import Router from './router.js'
 // Vue.use(Express)
 Vue.use(Vuex)
 Vue.use(Router)
-// const app = express()
-// app.use(express.json())
-
-
-
 
 Vue.config.devtools = true
 
@@ -134,15 +129,10 @@ const mutations = {
     console.log('createDeck metod')
     const arr = []
     const suits = ['♥', '♠', '♦', '♣']
-    const values = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K']
+    const values = ['A',2,3,4,5,6,7,8,9,10,'J','Q','K']
     for (var i = 0; i < suits.length; i++) {
       for (var n = 0; n < values.length; n++) {
-        arr.push({
-          suit: suits[i],
-          value: values[n],
-          imageUrl: '',
-          id: ''
-        })
+        arr.push({suit:suits[i], value: values[n], imageUrl: '', id: ''})
       }
     }
     state.deck = arr
@@ -300,15 +290,19 @@ const mutations = {
           }
           break
       }
+      break
     }
   }
-}
+  }
+
 
 const store = new Vuex.Store({
   actions,
   mutations,
   state
 })
+
+
 
 new Vue({
   el: '#app',
