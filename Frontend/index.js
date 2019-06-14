@@ -23,20 +23,19 @@ const state = {
   bool: true,
   card: {},
   cardsOnTable: [],
-  //playerNames: ["player1","player2", "dealer"],
-  // playerNames:[{name:"dealer", money:null},{name:"Sandra", money:1000}, {name:"Esther", money:1000}],
   playerNames:[{cards:[], money:null, name:"dealer", isTurn: false}],
 
-  player1: {cards: [], money: 0, name: '', isTurn: false},
-  player2: {cards: [], money: 0, name: 'Daniel Negreanu', isTurn: false},
-  pot: 100,
-
+  player1: {cards: [], money: 0, name: '', isTurn: false, isFirstPlayer: true, hasAct: false, activePot: 0},
+  player2: {cards: [], money: 0, name: 'Daniel Negreanu', isTurn: false, isFirstPlayer: false, hasAct: false, activePot: 0},
+  pot: 0,
+  rounds: 0,
   currentBet: null,
-  value: 50,
+  value: 0,
   authenticated: false,
-  currentPlayer: null 
+  currentPlayer: null,
+  halfPot: 0,
+  counter: 0
 }
-
 
 const actions = {
   // Är en async metod som anropas från signin komponenten
@@ -52,6 +51,158 @@ const actions = {
 }
 
 const mutations = {
+  raise(state){
+    //state.playerNames[this.counter].isTurn = false
+    console.log('raisebutton clicked')
+    this.commit('testBet')
+    this.commit('checkForActions')
+    // this.commit('nextPlayersTurn')
+  },
+  check(state) {
+    //state.playerNames[this.counter].isTurn = false
+    console.log('Check button clicked')
+    this.commit('testBet')
+    this.commit('checkForActions')
+  },
+  call(state) {
+    //state.playerNames[this.counter].isTurn = false
+    console.log('Call button clicked')
+    this.commit('testBet')
+    this.commit('checkForActions')
+    // this.commit('nextPlayersTurn')
+  },
+  checkForActions(state) {
+    console.log('checkForActions metod')
+    // Jämför player isTurns aktiva pot ifall den är hälften av vad pot är. Då ska nextPlayersTurn anropas och byta spelare
+    if (state.playerNames[1].isTurn === true) {
+      // Player1 har agerat och vi vill sätta isTurn på player 2 till true ifall aktiva poten är hälften av totalpot
+      state.halfPot = state.pot / 2
+      console.log(state.halfPot)
+      if (state.halfPot === 40) {
+        // Player1 har investerat hälften av totalpot första agerande. Alltså en call preflop
+        console.log('Player1 Check eller call preflop')
+        state.playerNames[1].hasAct = true
+        state.playerNames[0].isTurn = true
+        state.rounds ++
+        this.commit('nextPlayersTurn')
+      }
+      if (state.halfPot === state.playerNames[1].activePot && state.halfPot > 40) {
+        // Player1 har investerat hälften av totalpot, alltså en call eller check
+        console.log('Player1 Call eller check')
+        state.playerNames[0].isTurn = true
+        this.commit('nextPlayersTurn')
+      } else if (state.halfPot < state.playerNames[1].activePot) {
+        // Player1 har investerat mer än vad halfpot är, alltså en raise.
+        console.log('Player1 Raise')
+        // state.playerNames[1].isTurn = !state.playerNames[1].isTurn
+        // state.playerNames[2].isTurn = !state.playerNames[2].isTurn
+        this.commit('nextPlayersTurn')
+      }
+    } else if (state.playerNames[2].isTurn === true) {
+      // Player2 har agerat och vi vill sätta isTurn på player 1 till true ifall aktiva poten är hälften av totalpot
+      state.halfPot = state.pot / 2
+      console.log(state.halfPot)
+      if (state.halfPot === 40) {
+        // Player2 har investerat hälften av totalpot första agerande. Alltså en call preflop
+        console.log('Player2 Check eller call preflop')
+        state.playerNames[1].hasAct = true
+        state.playerNames[0].isTurn = true
+        state.rounds ++
+        this.commit('nextPlayersTurn')
+      }
+      console.log('Här loggar vi halfpot'+state.halfPot)
+      if (state.halfPot === state.playerNames[2].activePot && state.halfPot > 40) {
+        // Player2 har investerat hälften av totalpot, alltså en call eller check.
+        console.log('Player2 Call eller check')
+        state.playerNames[0].isTurn = true
+        this.commit('nextPlayersTurn')
+      } else if (state.halfPot < state.playerNames[2].activePot) {
+        // Player2 har investerat mer än vad halfpot är, alltså en raise.
+        console.log('Player2 Raise')
+      }
+    }
+  },
+  testBet(state) {
+    if (state.playerNames[1].isTurn === true) {
+      state.playerNames[1].activePot += Number(state.value)
+      console.log('Player1 är isTurn true i bet')
+    } else {
+      state.playerNames[2].activePot += Number(state.value)
+      console.log('Player2 är isTurn true i bet')
+    }
+    state.pot = state.playerNames[1].activePot + state.playerNames[2].activePot
+  },
+  nextPlayersTurn(state) {
+    // Första valet innan flop osv...
+    if (state.playerNames[1].isFirstPlayer === true && state.playerNames[1].activePot === 20 && state.cardsOnTable < 2) {
+      console.log('Player1 är firstplayer och börjar agera')
+      state.player1.isTurn = false
+      state.player2.isTurn = true
+    } else if (state.playerNames[2].isFirstPlayer === true && state.playerNames[2].activePot === 20 && state.cardsOnTable < 2) {
+      console.log('Player2 är firstplayer och börjar agera')
+      state.player2.isTurn = false
+      state.player1.isTurn = true
+    }
+
+    console.log('Här testar vi')
+    console.log(state.playerNames[1].hasAct)
+    console.log('Detta är false right? '+state.playerNames[2].hasAct)
+
+    if (state.playerNames[0].isTurn === true) {
+      if (state.halfPot > 40) {
+        state.rounds ++
+        state.playerNames[0].isTurn = false
+      } else if (state.halfPot === 40 && state.playerNames[1].hasAct === true && state.playerNames[2].hasAct === true) {
+        // Call av player1 preflop och check av player2 preflop
+          state.playerNames[1].hasAct = false
+          state.playerNames[2].hasAct = false
+          state.rounds++
+      }
+    }
+
+    state.playerNames[1].isTurn = !state.playerNames[1].isTurn
+    state.playerNames[2].isTurn = !state.playerNames[2].isTurn
+
+    console.log(state.playerNames[0].isTurn)
+    if(state.playerNames[0].isTurn === true && state.rounds === 2){
+      console.log('Körs detta??')
+      state.playerNames[0].isTurn === false
+      this.commit('drawFlop')
+      // this.nextPlayersTurn()
+    }else if (state.playerNames[0].isTurn === true && state.rounds < 5){
+      state.playerNames[0].isTurn === false
+      this.commit('drawTurnAndRiver')
+      // this.nextPlayersTurn()
+    }else if (state.playerNames[0].isTurn === true && state.rounds === 5){
+      state.playerNames[0].isTurn === false
+      this.commit('drawTurnAndRiver')
+      console.log('Count your points!!! :D i am toooooo tired')
+    }
+  },
+  payBlinds(state) {
+    if (state.player1.isFirstPlayer === true) {
+      // Dra av small blind från player1 money
+      console.log('Player 1 betalar SB')
+      state.pot += 20
+      state.player1.activePot += 20
+    } else {
+      console.log('Player1 betalar BB')
+      // Dra av big blind från player1 money
+      state.pot += 40
+      state.player1.activePot += 40
+    }
+    if (state.player2.isFirstPlayer === true) {
+      // Dra av small blind från player2 money
+      console.log('Player2 betalar SB')
+      state.pot += 20
+      state.player2.activePot += 20
+    } else {
+      // Dra av big blind från player2 money
+      console.log('Player2 betalar BB')
+      state.pot += 40
+      state.player2.activePot += 40
+    }
+  },
   setPlayerInfo(state, money) {
     // Sätter money till player via action metoden fetchPlayer
     state.player1.money = money
