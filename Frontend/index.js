@@ -29,7 +29,7 @@ const state = {
 
   player1: {cards: [], money: 0, name: '', isTurn: false},
   player2: {cards: [], money: 0, name: 'Daniel Negreanu', isTurn: false},
-  pot: 100,
+  pot: 0,
 
   currentBet: null,
   value: 50,
@@ -52,6 +52,22 @@ const actions = {
 }
 
 const mutations = {
+
+  gameFinished(state, winnerPlayer) {
+    let newMoney = null
+    newMoney = winnerPlayer.money + state.pot
+    fetch('http://localhost:8080/api/'+winnerPlayer.name , {
+      body: JSON.stringify({
+        "money": newMoney
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'PUT'
+    })
+  state.pot = 0
+  },
+
   setPlayerInfo(state, result) {
     console.log(result)
     console.log(state.player1.name)

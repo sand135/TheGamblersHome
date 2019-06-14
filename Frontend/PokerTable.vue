@@ -33,11 +33,14 @@
        <input type="number" v-model="$store.state.value"/>
        <input type="button" value="Bet" id="betbutton"
        v-on:click="$store.commit('bet')">
+        <input type="button" value="Finish Game" id="finishGameButton"
+       v-on:click="$store.commit('gameFinished', $store.state.player1)">
        <span v-text="$store.state.value+'$'"></span>
 </div>
     </div>
 
     <game-button />
+    
 
     <img v-for="card in $store.state.cardsOnTable" :src="card.imageUrl" :id="card.id" class="tablecards"/>
 
