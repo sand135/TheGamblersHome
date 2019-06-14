@@ -40,23 +40,31 @@ const actions = {
       fetch('http://localhost:8080/api/users/' + state.player1.name)
         .then(response => response.json())
         .then(result => {
-          context.commit('setPlayerInfo', result.money)
+          context.commit('setPlayerInfo', result)
         })
     }
   }
 }
 
 const mutations = {
-  setPlayerInfo(state, money) {
+  setPlayerInfo(state, result) {
+    console.log(result)
+    console.log(state.player1.name)
+    
     // Sätter money till player via action metoden fetchPlayer
-    state.player1.money = money
+    state.player1.money = result.money
+    // state.player1.name = name
   },
+
   bet(state) {
     state.pot = Number(state.pot) + Number(state.value)
-
-    fetch('http://localhost:8080/api/'+state.currentPlayer , {
+    store.dispatch('fetchPlayer')
+    let totalMoney = Number(state.player1.money) - Number(state.value)
+    console.log(totalMoney)
+    
+    fetch('http://localhost:8080/api/'+state.player1.name , {
       body: JSON.stringify({
-        "money": 500
+        "money": totalMoney
       }),
       headers: {
         'Content-Type': 'application/json'
@@ -68,7 +76,7 @@ const mutations = {
         state.players = result
         console.log(result)
       })
-
+   
   },
   dealCardsToPlayer(state) {
     console.log('dealCardsToPlayer metod')
@@ -310,6 +318,8 @@ new Vue({
     this.$store.state.playerNames.push(this.$store.state.player1)
     this.$store.state.playerNames.push(this.$store.state.player2)
     this.$store.commit('createDeck')
+    console.log(this.$state.player1)
+    
     //this.$store.commit('drawFlop')
     //this.$store.commit('dealCardsToPlayer')
   },

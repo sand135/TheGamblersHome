@@ -23,6 +23,11 @@
     "webpack-dev-server": "^3.5.1"
   },
   "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "install": "^0.12.2",
+    "npm": "^6.9.0",
+    "sqlite": "^3.0.3",
     "vue": "^2.6.10",
     "vue-router": "^3.0.6",
     "vuex": "^3.1.1"

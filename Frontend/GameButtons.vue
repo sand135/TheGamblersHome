@@ -41,6 +41,7 @@
         this.$store.state.playerNames[this.counter].isTurn = false
         console.log('raisebutton clicked')
         this.nextPlayersTurn()
+        this.$store.commit('bet')
       },
       nextPlayersTurn() {
         if (this.counter === this.$store.state.playerNames.length -1){

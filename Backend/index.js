@@ -2,6 +2,12 @@ const express = require('express')
 const app = express()
 const sqlite = require('sqlite')
 const bodyParser = require('body-parser')
+
+app.use((request, response, next) => {
+  response.header('Access-Control-Allow-Origin', '*')
+  next()
+})
+
 app.use(bodyParser.json())
 
 app.use((request, response, next) => {
@@ -22,18 +28,20 @@ app.get('/', (request, response) => {
 
 app.get('/users/:username/', (request, response) => {
   var isFound = false
+  var user =''
   db.all('SELECT * FROM users').then(users => {
     for (var index in users) {
       if (users[index].username === request.params.username) {
         isFound = true
+        user = users[index]
       }
     }
     if (isFound) {
       console.log("Login Successfull");
       console.log('Match')
-      console.log(users[index].username)
+      console.log(user.username)
       response.status(200)
-      response.send(users[index])
+      response.send(user)
     } else {
       console.log("Fetching user failed");
       response.status(400)
@@ -66,24 +74,41 @@ app.get('/users/:username/:password', (request, response) => {
   })
 })
 
-app.post('/', (request, response) => {
-  console.log(request.body);
+app.post('/', (request, response) =>{
+  console.log(request.body.username);
   let username = request.body.username
   let password = request.body.password
-  let moneyForNewregisteredPlayer = 1000
-  db.run('INSERT INTO users VALUES (?,?,?)', [username, password, moneyForNewregisteredPlayer]).then(() => {
-      response.status(200)
-      response.send("New user registered")
-    }).catch(err => {
-      console.log(err);
-      response.status(409)
-      response.send("User already excists!")
-    })
-    .catch(err => {
-      console.log(err)
-    })
+  let betMoney = 1000
+      db.run('INSERT INTO users VALUES (?,?,?)', [username, password, betMoney]).then(()=>{
+        response.status(200)
+        response.send("New user registered")
+      }).catch(err =>{
+        console.log(err);
+        response.status(409)
+        response.send("User already excists!")
+      })
+  .catch(err=>{
+    console.log(err);
+  })
 })
 
-app.listen(3000, () => {
+app.put('/:username', (request, response) =>{
+  console.log(request.body.username);
+  let username = request.params.username
+  let betMoney = request.body.money
+
+      db.run('UPDATE users SET money=? WHERE username=?', [betMoney, username]).then(()=>{
+      }).catch(err =>{
+        console.log(err);
+        response.status(409)
+        response.send("User not found!")
+      })
+  .catch(err=>{
+    console.log(err);
+  })
+})
+
+app.listen(3000, ()=>{
   console.log('Server is running!');
 })
+
