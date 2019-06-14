@@ -1,26 +1,31 @@
 <template >
 <div>
 <div id="bg">
-      <img src="./images/pokerCardsBackground.jpg">
+   <img src="./images/pokerCardsBackground.jpg">
     </div>
 <div id ="login">
   <h1>Login</h1>
+   
     <img id="loginIcon" src="./images/user.png">
+    
     <input
     id="inputFields"
       type="text"
       placeholder="Username"
       v-model="input.username">
+   
     <input
-     id="inputFields"
+    id="inputFields"
       type="password"
       v-model="input.password"
       placeholder="password">
+  
     <input
     id="btn"
       type="button"
       value="Sign in"
       v-on:click="login()">
+   
     <input
     id="btn"
     type="button"
