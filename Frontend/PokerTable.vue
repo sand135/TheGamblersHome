@@ -18,10 +18,6 @@
       <img v-else-if="$store.state.player1.isTurn === true" :src="$store.state.player1.cards[1].imageUrl" id="player1_card2" class="playercards">
       <img v-else="" src="Images/Playing_cards/backsides/playingcard_backside.jpg" id="player1_card2" class="playercards">
 
-
-
-
-
     </div>
     </div>
 

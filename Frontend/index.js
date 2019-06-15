@@ -321,6 +321,7 @@ const mutations = {
       console.log('Inga kort i array' + state.player1.cards.length)
     }
   },
+  // TODO: Lägga till SB och BB i databasen. Ifall BB bara kan checka hela vägen så uppdateras inte hans money förens i slutet när man kör giveMoneyToLoser
   payBlinds(state) {
     if (state.player1.isFirstPlayer === true) {
       // Dra av small blind från player1 money
