@@ -9,12 +9,19 @@
       <img src="Images/player_avatars/avatar1.png" class="avatar">
       <div class="playerNameText">{{ $store.state.player1.name }}</div>
     <div>
-      <img v-if="$store.state.player1.isTurn === true" :src="$store.state.player1.cards[0].imageUrl" id="player1_card1" class="playercards">
+
+      <img v-if="$store.state.player1.cards.length === 0" src="Images/Playing_cards/backsides/playingcard_backside.jpg" id="player1_card1" class="playercards">
+      <img v-else-if="$store.state.player1.isTurn === true" :src="$store.state.player1.cards[0].imageUrl" id="player1_card1" class="playercards">
       <img v-else="" src="Images/Playing_cards/backsides/playingcard_backside.jpg" id="player1_card1" class="playercards">
 
-
-      <img v-if="$store.state.player1.isTurn === true" :src="$store.state.player1.cards[1].imageUrl" id="player1_card2" class="playercards">
+      <img v-if="$store.state.player1.cards.length === 0" src="Images/Playing_cards/backsides/playingcard_backside.jpg" id="player1_card2" class="playercards">
+      <img v-else-if="$store.state.player1.isTurn === true" :src="$store.state.player1.cards[1].imageUrl" id="player1_card2" class="playercards">
       <img v-else="" src="Images/Playing_cards/backsides/playingcard_backside.jpg" id="player1_card2" class="playercards">
+
+
+
+
+
     </div>
     </div>
 
@@ -22,11 +29,14 @@
       <img src="Images/player_avatars/avatar2.png" class="avatar">
       <div class="playerNameText">{{ $store.state.player2.name }}</div>
 
-    <img v-if="$store.state.player2.isTurn === true" :src="$store.state.player2.cards[0].imageUrl" id="player2_card1" class="playercards">
-    <img v-else="" src="Images/Playing_cards/backsides/playingcard_backside.jpg" id="player2_card1" class="playercards">
+      <img v-if="$store.state.player2.cards.length === 0" src="Images/Playing_cards/backsides/playingcard_backside.jpg" id="player2_card1" class="playercards">
+      <img v-else-if="$store.state.player2.isTurn === true" :src="$store.state.player2.cards[0].imageUrl" id="player2_card1" class="playercards">
+      <img v-else="" src="Images/Playing_cards/backsides/playingcard_backside.jpg" id="player2_card1" class="playercards">
 
-    <img v-if="$store.state.player2.isTurn === true" :src="$store.state.player2.cards[1].imageUrl" id="player2_card2" class="playercards">
-    <img v-else="" src="Images/Playing_cards/backsides/playingcard_backside.jpg" id="player2_card2" class="playercards">
+      <img v-if="$store.state.player2.cards.length === 0" src="Images/Playing_cards/backsides/playingcard_backside.jpg" id="player2_card2" class="playercards">
+      <img v-else-if="$store.state.player2.isTurn === true" :src="$store.state.player2.cards[1].imageUrl" id="player2_card2" class="playercards">
+      <img v-else="" src="Images/Playing_cards/backsides/playingcard_backside.jpg" id="player2_card2" class="playercards">
+
 
         <div class="betSlider">
        <input type="range" min="0" max="100" step="5" v-model="$store.state.value">

@@ -22,18 +22,20 @@ app.get('/', (request, response) => {
 
 app.get('/users/:username/', (request, response) => {
   var isFound = false
+  var user =''
   db.all('SELECT * FROM users').then(users => {
     for (var index in users) {
       if (users[index].username === request.params.username) {
         isFound = true
+        user = users[index]
       }
     }
     if (isFound) {
       console.log("Login Successfull");
       console.log('Match')
-      console.log(users[index].username)
+      console.log(user.username)
       response.status(200)
-      response.send(users[index])
+      response.send(user)
     } else {
       console.log("Fetching user failed");
       response.status(400)
@@ -82,6 +84,13 @@ app.post('/', (request, response) => {
     .catch(err => {
       console.log(err)
     })
+})
+
+app.put('/users/:username/', (request, response) => {
+  console.log(request.params.username)
+  let money = request.body.money
+  db.run('UPDATE users SET money=? WHERE username=?', [money, request.params.username])
+  response.send("Uppdaterat money på spelarobjektet")
 })
 
 app.listen(3000, () => {
