@@ -105,12 +105,12 @@ app.get('/cards', (request, response) => {
 
 //För att sätta till kort i databasen
 app.post('/cards', (request, response) => {
-  console.log(request.body);
+  //console.log(request.body);
   let value = request.body.value
   let suit = request.body.suit
   let imageUrl = request.body.imageUrl
-  let used = 0
-  db.run('INSERT INTO cards VALUES (?,?,?,?)', [value, suit,imageUrl, used]).then(() => {
+  let id = request.body.id
+  db.run('INSERT INTO cards VALUES (?,?,?,?)', [value, suit,imageUrl, id]).then(() => {
       response.status(200)
       response.send("card inserted!")
     }).catch(err => {

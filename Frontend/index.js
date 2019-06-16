@@ -161,10 +161,201 @@ const mutations = {
       console.log(result)
       })
   },
+//   addCardsToDb(){
+//     for (var i = 0; i < state.deck.length; i++) {
+//       fetch('http://localhost:8080/api/cards', {
+//         body: '{"value":"'+ state.deck[i].value+'", "suit":"'+state.deck[i].suit+'", "imageUrl":"'+state.deck[i].imageUrl+'","id":"'+state.deck[i].id+'"}',
+//         headers: {
+//           'Content-Type':'application/json'
+//         },
+//         method: 'POST'
+//       }).then(response => {
+//         console.log(response)
+//       }).catch(e => console.log(e))
+//   }
+// },
   createDeck(state) {
     console.log('createDeck metod')
     this.commit('getUnusedCardsFromDb')
   },
+  // createDeck(state) {
+  //     console.log('createDeck metod')
+  //     const arr = []
+  //     const suits = ['♥', '♠', '♦', '♣']
+  //     const values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+  //     for (var i = 0; i < suits.length; i++) {
+  //       for (var n = 0; n < values.length; n++) {
+  //         arr.push({
+  //           suit: suits[i],
+  //           value: values[n],
+  //           imageUrl: '',
+  //           id: ''
+  //         })
+  //       }
+  //     }
+  //     state.deck = arr
+  //
+  //     // for (let i = state.deck.length - 1; i > 0; i--) {
+  //     //   let j = Math.floor(Math.random() * (i + 1));
+  //     //   [state.deck[i], state.deck[j]] = [state.deck[j], state.deck[i]]
+  //     // }
+  //     this.commit('addCardsToTable')
+  //
+  //     this.commit('addCardsToDb')
+  //
+  //
+  //
+  //   },
+  // addCardsToTable(state) {
+  //   for (var index in state.deck) {
+  //     switch (state.deck[index].value) {
+  //       case 1:
+  //         if (state.deck[index].suit === '♥') {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/ace_of_hearts.png'
+  //         } else if (state.deck[index].suit === '♠') {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/ace_of_spades.png'
+  //         } else if (state.deck[index].suit === '♦') {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/ace_of_diamonds.png'
+  //         } else {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/ace_of_clubs.png'
+  //         }
+  //         break
+  //       case 2:
+  //         if (state.deck[index].suit === '♥') {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/2_of_hearts.png'
+  //         } else if (state.deck[index].suit === '♠') {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/2_of_spades.png'
+  //         } else if (state.deck[index].suit === '♦') {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/2_of_diamonds.png'
+  //         } else {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/2_of_clubs.png'
+  //         }
+  //         break
+  //       case 3:
+  //         if (state.deck[index].suit === '♥') {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/3_of_hearts.png'
+  //         } else if (state.deck[index].suit === '♠') {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/3_of_spades.png'
+  //         } else if (state.deck[index].suit === '♦') {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/3_of_diamonds.png'
+  //         } else {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/3_of_clubs.png'
+  //         }
+  //         break
+  //       case 4:
+  //         if (state.deck[index].suit === '♥') {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/4_of_hearts.png'
+  //         } else if (state.deck[index].suit === '♠') {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/4_of_spades.png'
+  //         } else if (state.deck[index].suit === '♦') {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/4_of_diamonds.png'
+  //         } else {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/4_of_clubs.png'
+  //         }
+  //         break
+  //       case 5:
+  //         if (state.deck[index].suit === '♥') {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/5_of_hearts.png'
+  //         } else if (state.deck[index].suit === '♠') {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/5_of_spades.png'
+  //         } else if (state.deck[index].suit === '♦') {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/5_of_diamonds.png'
+  //         } else {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/5_of_clubs.png'
+  //         }
+  //         break
+  //       case 6:
+  //         if (state.deck[index].suit === '♥') {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/6_of_hearts.png'
+  //         } else if (state.deck[index].suit === '♠') {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/6_of_spades.png'
+  //         } else if (state.deck[index].suit === '♦') {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/6_of_diamonds.png'
+  //         } else {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/6_of_clubs.png'
+  //         }
+  //         break
+  //       case 7:
+  //         if (state.deck[index].suit === '♥') {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/7_of_hearts.png'
+  //         } else if (state.deck[index].suit === '♠') {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/7_of_spades.png'
+  //         } else if (state.deck[index].suit === '♦') {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/7_of_diamonds.png'
+  //         } else {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/7_of_clubs.png'
+  //         }
+  //         break
+  //       case 8:
+  //         if (state.deck[index].suit === '♥') {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/8_of_hearts.png'
+  //         } else if (state.deck[index].suit === '♠') {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/8_of_spades.png'
+  //         } else if (state.deck[index].suit === '♦') {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/8_of_diamonds.png'
+  //         } else {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/8_of_clubs.png'
+  //         }
+  //         break
+  //       case 9:
+  //         if (state.deck[index].suit === '♥') {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/9_of_hearts.png'
+  //         } else if (state.deck[index].suit === '♠') {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/9_of_spades.png'
+  //         } else if (state.deck[index].suit === '♦') {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/9_of_diamonds.png'
+  //         } else {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/9_of_clubs.png'
+  //         }
+  //         break
+  //       case 10:
+  //         if (state.deck[index].suit === '♥') {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/10_of_hearts.png'
+  //         } else if (state.deck[index].suit === '♠') {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/10_of_spades.png'
+  //         } else if (state.deck[index].suit === '♦') {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/10_of_diamonds.png'
+  //         } else {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/10_of_clubs.png'
+  //         }
+  //         break
+  //       case 11:
+  //         if (state.deck[index].suit === '♥') {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/jack_of_hearts.png'
+  //         } else if (state.deck[index].suit === '♠') {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/jack_of_spades.png'
+  //         } else if (state.deck[index].suit === '♦') {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/jack_of_diamonds.png'
+  //         } else {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/jack_of_clubs.png'
+  //         }
+  //         break
+  //       case 12:
+  //         if (state.deck[index].suit === '♥') {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/queen_of_hearts.png'
+  //         } else if (state.deck[index].suit === '♠') {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/queen_of_spades.png'
+  //         } else if (state.deck[index].suit === '♦') {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/queen_of_diamonds.png'
+  //         } else {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/queen_of_clubs.png'
+  //         }
+  //         break
+  //       case 13:
+  //         if (state.deck[index].suit === '♥') {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/king_of_hearts.png'
+  //         } else if (state.deck[index].suit === '♠') {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/king_of_spades.png'
+  //         } else if (state.deck[index].suit === '♦') {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/king_of_diamonds.png'
+  //         } else {
+  //           state.deck[index].imageUrl = 'Images/Playing_cards/king_of_clubs.png'
+  //         }
+  //         break
+  //     }
+  //   }
+  //}
+
   // raise(){
   //   state.players[state.counter].isTurn = false
   //   //console.log('raisebutton clicked')
