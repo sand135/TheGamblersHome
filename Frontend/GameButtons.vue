@@ -42,8 +42,12 @@
     methods: {
       startGame() {
         console.log('startGame clicked')
-        this.$store.commit('dealCardsToPlayer')
+        this.$store.dispatch('dealCardsToPlayer')
+
+        //TODO flytta ut till index.js och gör en funktion som körcontext.commit('nextPlayersTurn')
         this.nextPlayersTurn()
+
+
       },
       raise(){
         this.$store.state.players[this.counter].isTurn = false

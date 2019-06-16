@@ -4,6 +4,8 @@ const sqlite = require('sqlite')
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 
+let deck =[]
+
 app.use((request, response, next) => {
   response.header('Access-Control-Allow-Origin', '*')
   next()
@@ -65,6 +67,65 @@ app.get('/users/:username/:password', (request, response) => {
     }
   })
 })
+
+app.get('/cards/drawflop', (request, response)=>{
+  // Tar bort översta kortet innan man delar ut flop
+  this.deck.splice(0, 1)
+  var flop = []
+    for (var i = 0; i < 3; i++) {
+        this.deck[i].id = 'tablecard' + i
+        flop.push(this.deck[i])
+    }
+  this.deck.splice(0, 3)
+    response.send(flop)
+    })
+
+app.get('/cards/playerCards', (request, response)=>{
+  var cardsForTwoPlayers = []
+  for (var i = 0; i < 4; i++) {
+    cardsForTwoPlayers.push(this.deck[0])
+    this.deck.splice(0, 1)
+  }
+  response.send(cardsForTwoPlayers)
+})
+
+
+app.get('/cards', (request, response) => {
+  db.all('SELECT * FROM cards').then(cards => {
+    //Gör en array som håller deck här och svarar med kort som finns kvar när frontend vill ha det.
+    this.deck = []
+    this.deck = cards
+    for (let i = cards.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      [this.deck[i], this.deck[j]] = [this.deck[j], this.deck[i]]
+    }
+    response.send('nytt deck har skapats!')
+  })
+})
+
+//För att sätta till kort i databasen
+app.post('/cards', (request, response) => {
+  console.log(request.body);
+  let value = request.body.value
+  let suit = request.body.suit
+  let imageUrl = request.body.imageUrl
+  let used = 0
+  db.run('INSERT INTO cards VALUES (?,?,?,?)', [value, suit,imageUrl, used]).then(() => {
+      response.status(200)
+      response.send("card inserted!")
+    }).catch(err => {
+      console.log(err);
+      response.status(409)
+      response.send("Fail")
+    })
+    .catch(err => {
+      console.log(err)
+    })
+})
+
+
+
+
 
 app.post('/', (request, response) => {
   console.log(request.body);
