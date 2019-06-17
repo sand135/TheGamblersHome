@@ -68,15 +68,7 @@ const actions = {
           context.commit('setPlayerInfo', result)
         })
     }
-  }
-}
-
-const mutations = {
-
-  betAllIn() {
-   
   },
-
   gameFinished(state, winnerPlayer) {
     let newMoney = null
     newMoney = winnerPlayer.money + state.pot
@@ -91,8 +83,6 @@ const mutations = {
     })
   state.pot = 0
   },
-
-
   bet(state) {
     state.pot = Number(state.pot) + Number(state.value)
     store.dispatch('fetchPlayer')
@@ -228,8 +218,13 @@ const mutations = {
         console.log(result)
         this.dispatch('fetchLoser')
       })
-  
-},
+    }
+}
+const mutations = {
+
+  betAllIn() {
+   
+  },
 
   raise(state) {
     console.log('raisebutton clicked')

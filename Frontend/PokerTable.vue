@@ -38,12 +38,13 @@
        <input type="range" min="0" max="100" step="5" v-model="$store.state.value">
        <input type="number" v-model="$store.state.value"/>
        <input type="button" value="Bet" id="betbutton"
+       v-on:click="$store.commit('betMoney')">
        <!-- v-on:click="$store.commit('bet')">
         <input type="button" value="Finish Game" id="finishGameButton"
        v-on:click="$store.commit('gameFinished', $store.state.player1)"> -->
 
 
-       v-on:click="$store.commit('testBet')">
+       
        <span v-text="$store.state.value+'$'"></span>
 </div>
     </div>
