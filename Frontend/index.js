@@ -140,6 +140,8 @@ const actions = {
       state.currentPlayer = state.player2
       state.player2.startMoney = state.sum
     }
+    state.player1.isWinner = false
+    state.player2.isWinner = false
     fetch('http://localhost:8080/api/users/' + state.currentPlayer.name, {
         body: JSON.stringify({
           "money": state.sum
@@ -170,6 +172,8 @@ const actions = {
       state.currentPlayer = state.player1
       state.player1.startMoney = state.sum
     }
+    state.player1.isWinner = false
+    state.player2.isWinner = false
     fetch('http://localhost:8080/api/users/' + state.currentPlayer.name, {
         body: JSON.stringify({
           "money": state.sum
@@ -224,6 +228,19 @@ const mutations = {
     this.dispatch('betMoney')
     this.commit('nextPlayersTurn')
   },
+  fold(state) {
+    console.log('Fold button clicked')
+    if (state.player1.isTurn === true) {
+      state.player2.isWinner = true
+      this.dispatch('giveMoneyToWinner')
+      this.dispatch('giveMoneyToLoser')
+    } else {
+      state.player1.isWinner = true
+      this.dispatch('giveMoneyToWinner')
+      this.dispatch('giveMoneyToLoser')
+    }
+    // 
+  },
   checkForActions(state) {
     console.log('checkForActions metod')
     // Jämför player isTurns aktiva pot ifall den är mer än av isTurns === false är. Då ska nextPlayersTurn anropas och byta spelare
@@ -246,16 +263,16 @@ const mutations = {
       }
     }
   },
-  testBet(state) {
-    if (state.playerNames[1].isTurn === true) {
-      state.playerNames[1].activePot += Number(state.value)
-      console.log('Player1 isTurn är true i bet')
-    } else {
-      state.playerNames[2].activePot += Number(state.value)
-      console.log('Player2 isTurn är true i bet')
-    }
-    state.pot = state.playerNames[1].activePot + state.playerNames[2].activePot
-  },
+  // testBet(state) {
+  //   if (state.playerNames[1].isTurn === true) {
+  //     state.playerNames[1].activePot += Number(state.value)
+  //     console.log('Player1 isTurn är true i bet')
+  //   } else {
+  //     state.playerNames[2].activePot += Number(state.value)
+  //     console.log('Player2 isTurn är true i bet')
+  //   }
+  //   state.pot = state.playerNames[1].activePot + state.playerNames[2].activePot
+  // },
   nextPlayersTurn(state) {
     // Första valet innan flop osv...
     if (state.playerNames[1].isFirstPlayer === true && state.playerNames[1].activePot === 20 && state.cardsOnTable < 2) {
@@ -301,18 +318,18 @@ const mutations = {
       this.commit('drawTurnAndRiver')
       console.log('Count your points!!! :D i am toooooo tired')
     } else if (state.playerNames[0].isTurn === true && state.rounds === 4 && state.player1.hasAct === true && state.player2.hasAct === true) {
-      // TODO: //Kör ny runda, resetta alla värden och arrayer som krävs för ny runda
+      // TODO: Kör ny runda, resetta alla värden och arrayer som krävs för ny runda
       console.log('WHEOOOOO WINNER WINNER CHICKEN DINNER')
       state.player1.isWinner = true
 
       this.dispatch('giveMoneyToWinner')
       this.dispatch('giveMoneyToLoser')
 
-      console.log('Loggar spelare 1 money '+state.player1.money)
-      console.log('Loggar spelare 1 startMoney '+state.player1.startMoney)
+      console.log('Loggar spelare 1 money ' + state.player1.money)
+      console.log('Loggar spelare 1 startMoney ' + state.player1.startMoney)
 
-      console.log('Loggar spelare 2 money '+state.player2.money)
-      console.log('Loggar spelare 2 startmoney '+state.player2.startMoney)
+      console.log('Loggar spelare 2 money ' + state.player2.money)
+      console.log('Loggar spelare 2 startmoney ' + state.player2.startMoney)
 
       state.player1.isWinner = false
       state.deck.length = 0
