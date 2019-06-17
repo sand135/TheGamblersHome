@@ -53,6 +53,10 @@ const actions = {
 
 const mutations = {
 
+  betAllIn() {
+   
+  },
+
   gameFinished(state, winnerPlayer) {
     let newMoney = null
     newMoney = winnerPlayer.money + state.pot

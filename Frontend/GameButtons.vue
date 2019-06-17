@@ -14,10 +14,17 @@
         type="button"
         value="StartGame"
         @click="startGame()">
+ 
+          <input
+        class="button"
+        type="button"
+        value="All-In"
+        @click="this.$store.commit('betAllIn')">
 
       <button class="button">Call</button>
       <button class="button">Bet</button>
       <button class="button">Fold</button>
+      
     </div>
     <div class="playerNameText">{{ playerNameText }}</div>
   </div>
