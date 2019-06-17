@@ -4,6 +4,9 @@ const sqlite = require('sqlite')
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 
+
+var fourthCardIsDrawn = false
+var fifthCardIsDrawn = false
 let deck =[]
 
 app.use((request, response, next) => {
@@ -14,6 +17,8 @@ app.use((request, response, next) => {
 let db
 sqlite.open('users.sqlite').then(database => {
   db = database
+
+
 })
 
 app.get('/', (request, response) => {
@@ -70,6 +75,46 @@ app.get('/users/:username/:password', (request, response) => {
   })
 })
 
+//Korthanteringen
+app.get('/cards/drawTurnAndRiver',(request, response)=>{
+
+  // Lägger till turn och river till cardsOnTable
+  // Om endast flopen(3 kort är dragna så ska id vara tablecard3 annars tablecard4
+  if (!this.fourthCardIsDrawn) {
+    this.deck.splice(0, 1)
+    let card = {
+      suit: this.deck[0].suit,
+      value: this.deck[0].value,
+      imageUrl: this.deck[0].imageUrl,
+      id: "tablecard3"
+    }
+    this.deck.splice(0, 1)
+    this.fourthCardIsDrawn = true
+    response.send(card)
+  } else if (this.fourthCardIsDrawn && !this.fifthCardIsDrawn) {
+    this.deck.splice(0, 1)
+    let card = {
+      suit: this.deck[0].suit,
+      value: this.deck[0].value,
+      imageUrl: this.deck[0].imageUrl,
+      id: "tablecard4"
+    }
+    this.deck.splice(0, 1)
+    this.fifthCardIsDrawn
+    response.send(card)
+  }else{
+    //inga fler kort ska dras så ett tomt objekt dras.
+    let card ={
+      suit: '',
+      value: null,
+      imageUrl: '',
+      id: ''
+    }
+    response.send(card)
+  }
+  })
+
+
 app.get('/cards/drawflop', (request, response)=>{
   // Tar bort översta kortet innan man delar ut flop
   this.deck.splice(0, 1)
@@ -78,7 +123,7 @@ app.get('/cards/drawflop', (request, response)=>{
         this.deck[i].id = 'tablecard' + i
         flop.push(this.deck[i])
     }
-  this.deck.splice(0, 3)
+    this.deck.splice(0, 3)
     response.send(flop)
     })
 
@@ -94,14 +139,14 @@ app.get('/cards/playerCards', (request, response)=>{
 
 app.get('/cards', (request, response) => {
   db.all('SELECT * FROM cards').then(cards => {
-    //Gör en array som håller deck här och svarar med kort som finns kvar när frontend vill ha det.
+    //hämtar 52 kort från databasen och sätter dem i en lokal array(deck). blandar om dem för att den ska vara redo att använda i spelet.
     this.deck = []
     this.deck = cards
     for (let i = cards.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + 1));
       [this.deck[i], this.deck[j]] = [this.deck[j], this.deck[i]]
     }
-    response.send('nytt deck har skapats!')
+    response.send({message:"new deck created"})
   })
 })
 

@@ -89,13 +89,6 @@ const actions = {
       console.log(state.player1.cards, state.player2.cards)
       context.commit('nextPlayersTurn', false)
     })
-  }
-}
-
-const mutations = {
-  setPlayerInfo(state, money) {
-    // Sätter money till player via action metoden fetchPlayer
-    state.player1.money = money
   },
   fetchCurrentPlayer(context) {
     if (state.authenticated === true) {
@@ -216,8 +209,43 @@ const mutations = {
         console.log(result)
         this.dispatch('fetchLoser')
       })
+  },
+  drawFlop(context) {
+    //Hämtar tre kort från backend och sätter id + skickar dem till metoden som sätter ut dem på bordet.
+    fetch('http://localhost:8080/api/cards/drawflop')
+    .then(response=>response.json())
+    .then(result =>{
+      context.commit('setFlopOnTable', result)
+    })
+  },
+  fetchCardsForPlayers(context){
+    //Hämtar fyra nya kort från backend
+    fetch('http://localhost:8080/api/cards/playerCards')
+    .then(response => response.json())
+    .then(result =>{
+      context.commit('dealCardsToPlayer', result)
+    })
+  },
+  createNewDeckInBackend(){
+    //skapar en ny blandad kortlek i backend
+    fetch('http://localhost:8080/api/cards')
+    .then(response => response.json())
+    .then(result =>{
+      console.log(result)
+    })
+
+  },
+  fetchTurnOrRiver(context){
+    fetch('http://localhost:8080/api/cards/drawTurnAndRiver')
+    .then(response => response.json())
+    .then(result =>{
+      if(result.suit !== ''){
+        context.commit('setTurnOrRiverOnTable', result)
+      }
+    })
   }
 }
+
 const mutations = {
   raise(state) {
     console.log('raisebutton clicked')
@@ -333,18 +361,17 @@ const mutations = {
       state.playerNames[0].isTurn === false
       state.player1.hasAct = false
       state.player2.hasAct = false
-      this.commit('drawFlop')
+      this.dispatch('drawFlop')
     } else if (state.playerNames[0].isTurn === true && state.rounds === 2 && state.player1.hasAct === true && state.player2.hasAct === true) {
       state.playerNames[0].isTurn === false
       state.player1.hasAct = false
       state.player2.hasAct = false
-      this.commit('drawTurnAndRiver')
+      this.dispatch('fetchTurnOrRiver')
     } else if (state.playerNames[0].isTurn === true && state.rounds === 3 && state.player1.hasAct === true && state.player2.hasAct === true) {
       state.playerNames[0].isTurn === false
       state.player1.hasAct = false
       state.player2.hasAct = false
-      this.commit('drawTurnAndRiver')
-      console.log('Count your points!!! :D i am toooooo tired')
+      this.dispatch('fetchTurnOrRiver')
     } else if (state.playerNames[0].isTurn === true && state.rounds === 4 && state.player1.hasAct === true && state.player2.hasAct === true) {
       // TODO: Kör ny runda, resetta alla värden och arrayer som krävs för ny runda
       console.log('WHEOOOOO WINNER WINNER CHICKEN DINNER')
@@ -359,12 +386,16 @@ const mutations = {
       console.log('Loggar spelare 2 money ' + state.player2.money)
       console.log('Loggar spelare 2 startmoney ' + state.player2.startMoney)
 
-      state.player1.isWinner = false
-      state.deck.length = 0
-      state.player1.cards.length = 0
-      state.player2.cards.length = 0
-      console.log('Inga kort i array' + state.player1.cards.length)
+
     }
+  },
+  resetAllValuesForNewGame(state){
+    state.player1.isWinner = false
+    state.player2.isWinner = false
+    this.dispatch('createNewDeckInBackend')
+    state.player1.cards = []
+    state.player2.cards =[]
+    console.log('Inga kort i array' + state.player1.cards.length)
   },
   // TODO: Lägga till SB och BB i databasen. Ifall BB bara kan checka hela vägen så uppdateras inte hans money förens i slutet när man kör giveMoneyToLoser
   payBlinds(state) {
@@ -428,69 +459,54 @@ const mutations = {
     }
   },
 
-  dealCardsToPlayer(state) {
+  dealCardsToPlayer(state, cards) {
     console.log('dealCardsToPlayer metod')
     //Lägger till 2 kort till varje spelare
-    fetch('http://localhost:8080/api/cards/playerCards')
-    .then(response => response.json())
-    .then(result =>{
-      console.log(result)
-      for (var i = 0; i < result.length; i++) {
+      console.log(cards)
+      for (var i = 0; i < cards.length; i++) {
         if(i % 2 == 0){
-          state.player1.cards.push(result[i])
+          state.player1.cards.push(cards[i])
         } else{
-          state.player2.cards.push(result[i])
+          state.player2.cards.push(cards[i])
         }
       }
       console.log(state.player1.cards, state.player2.cards)
-    })
-
+      this.commit('nextPlayersTurn')
   },
   //TODO Flytta till backend!
-  drawTurnAndRiver(state) {
+  setTurnOrRiverOnTable(state, card) {
     console.log('drawTurnAndRiver metod')
-    // Lägger till turn och river till cardsOnTable
-    // Om cardsOnTable.length är 3 så ska id vara tablecard3 annars tablecard4
-    if (state.cardsOnTable.length === 3) {
-      state.deck.splice(0, 1)
-      let card = {
-        suit: state.deck[0].suit,
-        value: state.deck[0].value,
-        imageUrl: state.deck[0].imageUrl,
-        id: "tablecard3"
-      }
+    // Lägger till turn och river till cardsOnTable efter att det hämtats ett kort från backend.
       state.cardsOnTable.push(card)
-      state.deck.splice(0, 1)
-    } else if (state.cardsOnTable.length === 4) {
-      state.deck.splice(0, 1)
-      let card = {
-        suit: state.deck[0].suit,
-        value: state.deck[0].value,
-        imageUrl: state.deck[0].imageUrl,
-        id: "tablecard4"
-      }
-      state.cardsOnTable.push(card)
-      state.deck.splice(0, 1)
-    }
+    // // Om cardsOnTable.length är 3 så ska id vara tablecard3 annars tablecard4
+    // if (state.cardsOnTable.length === 3) {
+    //   state.deck.splice(0, 1)
+    //   let card = {
+    //     suit: state.deck[0].suit,
+    //     value: state.deck[0].value,
+    //     imageUrl: state.deck[0].imageUrl,
+    //     id: "tablecard3"
+    //   }
+    //   state.cardsOnTable.push(card)
+    //   state.deck.splice(0, 1)
+    // } else if (state.cardsOnTable.length === 4) {
+    //   state.deck.splice(0, 1)
+    //   let card = {
+    //     suit: state.deck[0].suit,
+    //     value: state.deck[0].value,
+    //     imageUrl: state.deck[0].imageUrl,
+    //     id: "tablecard4"
+    //   }
+    //
+    //   state.deck.splice(0, 1)
+    // }
   },
-  drawFlop(state) {
-    console.log('drawFlop metod')
-    //Hämtar tre kort från backend och sätter id + delar ut dem på bordet
-    fetch('http://localhost:8080/api/cards/drawflop')
-    .then(response=>response.json())
-    .then(result =>{
+  setFlopOnTable(state, result) {
       for (var i = 0; i < result.length; i++) {
         state.cardsOnTable.push(result[i])
       }
-    })
   },
-  getUnusedCardsFromDb(){
-    fetch('http://localhost:8080/api/cards')
-    .then(response => response.text)
-    .then(result => {
-      console.log(result)
-      })
-  },
+
 //   addCardsToDb(){
 //     for (var i = 0; i < state.deck.length; i++) {
 //       fetch('http://localhost:8080/api/cards', {
@@ -506,7 +522,7 @@ const mutations = {
 // },
   createDeck(state) {
     console.log('createDeck metod')
-    this.commit('getUnusedCardsFromDb')
+    this.dispatch('createNewDeckInBackend')
   },
   // createDeck(state) {
   //     console.log('createDeck metod')
@@ -778,8 +794,8 @@ const store = new Vuex.Store({
 new Vue({
   el: '#app',
   created() {
-     this.$store.state.players.push(this.$store.state.player1)
-     this.$store.state.players.push(this.$store.state.player2)
+     this.$store.state.playerNames.push(this.$store.state.player1)
+     this.$store.state.playerNames.push(this.$store.state.player2)
     //this.$store.commit('addCardsToDb')
      this.$store.commit('createDeck')
     //this.$store.commit('drawFlop')

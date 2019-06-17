@@ -8,13 +8,7 @@
         type="button"
         value="Raise"
         @click="raise()">
-        <input
-          class="button"
-          type="button"
-          value="Call"
-          @click="call()">
-
-
+  
       <input
         class="start"
         type="button"
@@ -57,9 +51,9 @@
     methods: {
       startGame() {
         console.log('startGame clicked')
-        this.$store.commit('dealCardsToPlayer')
+        this.$store.dispatch('dealCardsToPlayer')
         this.$store.commit('payBlinds')
-        this.$store.commit('nextPlayersTurn')
+        //this.$store.commit('nextPlayersTurn')
       },
       raise(){
         console.log('raisebutton clicked')
