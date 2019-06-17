@@ -70,6 +70,7 @@ export default {
 };
 </script>
 <style scoped>
+
 #bg {
   position: fixed;
   top: -50%;

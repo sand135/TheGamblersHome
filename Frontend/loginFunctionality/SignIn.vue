@@ -25,7 +25,6 @@
       type="button"
       value="Sign in"
       v-on:click="login()">
-   
     <input
     id="btn"
     type="button"

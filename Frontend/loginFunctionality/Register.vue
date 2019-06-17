@@ -26,7 +26,7 @@
       <input
         id="btn"
         type="button"
-        value="Back to sign in"
+        value="Back to login"
         v-on:click="back()">
     </div>
 </div>
