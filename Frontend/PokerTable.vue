@@ -38,7 +38,7 @@
        <input type="range" min="0" max="100" step="5" v-model="$store.state.value">
        <input type="number" v-model="$store.state.value"/>
        <input type="button" value="Bet" id="betbutton"
-       v-on:click="$store.commit('testBet')">
+       v-on:click="$store.commit('betMoney')">
        <span v-text="$store.state.value+'$'"></span>
 </div>
     </div>
