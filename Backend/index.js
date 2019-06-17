@@ -108,7 +108,14 @@ app.put('/:username', (request, response) =>{
   })
 })
 
-app.listen(3000, ()=>{
+app.put('/users/:username/', (request, response) => {
+  console.log(request.params.username)
+  let money = request.body.money
+  db.run('UPDATE users SET money=? WHERE username=?', [money, request.params.username])
+  response.send("Uppdaterat money på spelarobjektet")
+})
+
+app.listen(3000, () => {
   console.log('Server is running!');
 })
 

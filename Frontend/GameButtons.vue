@@ -13,18 +13,33 @@
         class="start"
         type="button"
         value="StartGame"
-        @click="startGame()">
- 
-          <input
+        @click="startGame()"
+        >
+
+        <input
+          class="button"
+          type="button"
+          value="Call"
+          @click="call()"
+        >
+        <input
+          class="button"
+          type="button"
+          value="Check"
+          @click="check()"
+        >
+        <input
+          class="button"
+          type="button"
+          value="Fold"
+          @click="fold()">
+
+        <input
         class="button"
         type="button"
         value="All-In"
         @click="this.$store.commit('betAllIn')">
-
-      <button class="button">Call</button>
-      <button class="button">Bet</button>
-      <button class="button">Fold</button>
-      
+        
     </div>
     <div class="playerNameText">{{ playerNameText }}</div>
   </div>
@@ -34,42 +49,29 @@
     data() {
       return {
         playerNameText: this.$store.state.playerNames[0].name,
-        counter: 0,
-        rounds: 1
+        // counter: 0,
+        // rounds: 1,
+        // numberOfCalls: 0,
       }
     },
     methods: {
       startGame() {
         console.log('startGame clicked')
         this.$store.commit('dealCardsToPlayer')
-        this.nextPlayersTurn()
+        this.$store.commit('payBlinds')
+        this.$store.commit('nextPlayersTurn')
       },
       raise(){
-        this.$store.state.playerNames[this.counter].isTurn = false
         console.log('raisebutton clicked')
-        this.nextPlayersTurn()
-        this.$store.commit('bet')
+        this.$store.commit('raise')
       },
-      nextPlayersTurn() {
-        if (this.counter === this.$store.state.playerNames.length -1){
-          this.counter = 0
-          this.rounds ++
-        }else{
-          this.counter ++
-        }
-        this.playerNameText = this.$store.state.playerNames[this.counter].name
-        this.$store.state.playerNames[this.counter].isTurn = true
-
-        if(this.$store.state.playerNames[this.counter].name === "dealer" && this.rounds === 2){
-          this.$store.commit('drawFlop')
-          this.nextPlayersTurn()
-        }else if (this.$store.state.playerNames[this.counter].name === "dealer" && this.rounds < 4){
-          this.$store.commit('drawTurnAndRiver')
-          this.nextPlayersTurn()
-        }else if (this.$store.state.playerNames[this.counter].name === "dealer" && this.rounds === 4){
-          this.$store.commit('drawTurnAndRiver')
-          console.log('Count your points!!! :D i am toooooo tired')
-        }
+      check() {
+        console.log('Check button clicked')
+        this.$store.commit('check')
+      },
+      call() {
+        console.log('Check button clicked')
+        this.$store.commit('call')
       }
     }
   }
