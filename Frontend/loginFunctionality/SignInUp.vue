@@ -8,29 +8,22 @@
 </template>
 
 <script type="text/javascript">
-
-
 export default {
   name: 'SignInUp',
-
   methods: {
     redirectToLogin(){
         this.$router.push({ name: "SignIn" })
     },
-
     redirectToRegister(){
       this.$router.push({ name: "Register" })
     }
   }
 }
-
-
-
 </script>
 
 <style>
 .button {
-  background-color: #4CAF50; /* Green */
+  background-color: #4CAF50; 
   border: none;
   color: white;
   padding: 15px 32px;
@@ -39,6 +32,5 @@ export default {
   display: inline-block;
   font-size: 16px;
   border-radius: 25px;
-
 }
 </style>

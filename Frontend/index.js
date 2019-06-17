@@ -11,10 +11,6 @@ Vue.use(Vuex)
 Vue.use(Router)
 // const app = express()
 // app.use(express.json())
-
-
-
-
 Vue.config.devtools = true
 
 
@@ -52,6 +48,24 @@ const actions = {
 }
 
 const mutations = {
+
+    gameFinished(state,winner){
+        winner.money += state.pot
+      
+        fetch('http://localhost:8080/api/'+winner.name , {
+          body: JSON.stringify({
+            "money": winner.money
+          }),
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          method: 'PUT'
+        })
+          state.pot = 0
+    },
+
+
+
   setPlayerInfo(state, result) {
     console.log(result)
     console.log(state.player1.name)
@@ -324,7 +338,7 @@ new Vue({
     this.$store.state.playerNames.push(this.$store.state.player1)
     this.$store.state.playerNames.push(this.$store.state.player2)
     this.$store.commit('createDeck')
-    console.log(this.$state.player1)
+    // console.log(this.$state.player1)
     
     //this.$store.commit('drawFlop')
     //this.$store.commit('dealCardsToPlayer')
