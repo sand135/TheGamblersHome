@@ -15,6 +15,7 @@
     <input
     type="button"
     value="Back"
+    v-on:click="">>
   </div>
 </template>
 <script>

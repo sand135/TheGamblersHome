@@ -72,6 +72,10 @@
       call() {
         console.log('Check button clicked')
         this.$store.commit('call')
+      },
+      fold() {
+        console.log('Fold button clicked')
+        this.$store.commit('fold')
       }
     }
   }
