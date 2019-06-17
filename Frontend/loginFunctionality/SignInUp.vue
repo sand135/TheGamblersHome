@@ -23,11 +23,14 @@ export default {
     }
   }
 }
+
+
+
 </script>
 
 <style>
 .button {
-  background-color: #4CAF50; 
+  background-color: #4CAF50; /* Green */
   border: none;
   color: white;
   padding: 15px 32px;

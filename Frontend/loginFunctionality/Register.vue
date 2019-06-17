@@ -1,35 +1,26 @@
 <template>
-<div>
-  <!-- <h1>The Gamblers home</h1> -->
-  <div id="bg">
-      <img src="./images/pokerCardsBackground.jpg">
+  <div id="container">
+    <div id="image">
+      <img src="./images/casino_2.png">
     </div>
-  <div id="container"> 
     <div id="register">
-       <h1>Register new user</h1>
-       <img id="registerIcon" src="./images/new-user.png">
       <input
-        id="inputFields"
         type="text"
-        placeholder="New Username"
-        v-model="input.username">
+        placeholder="Username"
+        v-model="input.username">>
       <input
-        id="inputFields"
-        type="password"
+        type="text"
         v-model="input.password"
-        placeholder="New password">
+        placeholder="password">>
       <input
-        id="btn"
         type="button"
         value="Register"
-        v-on:click="register()">
+        v-on:click="register()">>
       <input
-        id="btn"
         type="button"
         value="Back"
-        v-on:click="back()">
+        v-on:click="back()">>
     </div>
-</div>
 </div>
 </template>
 <script>
@@ -77,67 +68,29 @@
   }
 </script>
 <style scoped>
-
- #registerIcon{
-    width: 20%;
-   margin: 10px 180px;
+  div {
+    background-color: #780001;
   }
-
-#bg {
-  position: fixed;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  z-index: -1;
-}
-#bg img {
-  z-index: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-  min-width: 45%;
-  min-height: 45%;
-}
-#inputFields{
-    z-index: 2;
-    height: 35px;
-    width: 70%;
-    padding: 5px 5px;
-    margin: 10px 60px;
-    background-color: #e0dadac6;
-    border: none;
-    border-radius: 25px;  
-    border: 3px solid rgba(0, 0, 0, 0.515); 
-}
-#btn{
-  background-color: rgba(75, 213, 48, 0.755);
-   width: 50%;
-   padding: 5px 5px;
-   margin: 10px 100px;
-    transition-duration: 0.4s;
-}
-#btn:hover{
-  background-color: white;
-  color: black;
-}
-  h1{
-    color: black;
+  #image{
+    flex-grow: 1;
+    margin: 40px 80px;
+    /* position: fixed; */
+  }
+  #image img {
+    height: 400px;
+  }
+  #container {
+    align-items: center;
+    display: flex;
   }
   #register {
-     background-color: rgba(255, 255, 255, 0.433); 
-    z-index: 1;
-     width: 30%; 
-     border: 3px solid black; 
-    margin: auto;
-    margin-top: 200px;
+    /* position: absolute; */
+    /* margin-top: 25%; */
+    /* margin-left: 400px; */
+    /* width: 50%; */
+    border: 3px solid #73AD21;
+    margin: 40px 80px;
+    padding: 10px;
     padding: 20px;
-    display:flex;
-    flex-direction: column;
-    padding: 15px;
-    text-align: center;
   }
 </style>
