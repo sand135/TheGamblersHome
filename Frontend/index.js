@@ -2,15 +2,9 @@ import Vue from 'vue'
 import App from './App.vue'
 import Vuex from 'vuex'
 import Router from './router.js'
-// const express  =require('express')
-// const cors = require('cors')
-// import Express from 'express'
-// App.use(cors())
-// Vue.use(Express)
 Vue.use(Vuex)
 Vue.use(Router)
-// const app = express()
-// app.use(express.json())
+
 
 Vue.config.devtools = true
 
@@ -190,8 +184,53 @@ const actions = {
         console.log(result)
         context.commit('updateMoneyToLoser', sum)
       })
+  },
+  drawFlop(context) {
+    //Hämtar tre kort från backend och sätter id + skickar dem till metoden som sätter ut dem på bordet.
+    fetch('http://localhost:8080/api/cards/drawflop')
+    .then(response=>response.json())
+    .then(result =>{
+      context.commit('setFlopOnTable', result)
+    })
+  },
+  fetchCardsForPlayers(context){
+    //Hämtar fyra nya kort från backend
+    fetch('http://localhost:8080/api/cards/playerCards')
+    .then(response => response.json())
+    .then(result =>{
+      context.commit('dealCardsToPlayer', result)
+    })
+  },
+  createNewDeckInBackend(context, secondRound){
+    if (secondRound){
+      fetch('http://localhost:8080/api/cards')
+      .then(response => response.json())
+      .then(result =>{
+        console.log(result)
+        this.commit('payBlinds')
+        this.dispatch('fetchCardsForPlayers')
+      })
+    }else{
+    //skapar en ny blandad kortlek i backend
+    fetch('http://localhost:8080/api/cards')
+    .then(response => response.json())
+    .then(result =>{
+      console.log(result)
+    })
+  }
+
+  },
+  fetchTurnOrRiver(context){
+    fetch('http://localhost:8080/api/cards/drawTurnAndRiver')
+    .then(response => response.json())
+    .then(result =>{
+      if(result.suit !== ''){
+        context.commit('setTurnOrRiverOnTable', result)
+      }
+    })
   }
 }
+
 const mutations = {
   raise(state) {
     console.log('raisebutton clicked')
@@ -271,10 +310,10 @@ const mutations = {
   },
   playNextRound(state) {
     // TODO: Fixa allt som ska resettas till ny runda
-    state.cardsOnTable.length = 0
-    state.deck.length = 0
-    state.player1.cards.length = 0
-    state.player2.cards.length = 0
+    state.cardsOnTable = []
+
+    state.player1.cards = []
+    state.player2.cards = []
     state.pot = 0
     state.rounds = 0
     state.player1.activePot = 0
@@ -287,10 +326,10 @@ const mutations = {
     state.player2.money = state.player2.startMoney
     state.player1.isWinner = false
     state.player2.isWinner = false
-    this.commit('createDeck')
-    this.commit('dealCardsToPlayer')
-    this.commit('payBlinds')
-    this.commit('nextPlayersTurn')
+    this.dispatch('createNewDeckInBackend', true)
+    // this.commit('payBlinds')
+    // this.dispatch('fetchCardsForPlayers')
+    //this.commit('nextPlayersTurn')
   },
   nextPlayersTurn(state) {
     // Första valet innan flop osv...
@@ -324,18 +363,17 @@ const mutations = {
       state.playerNames[0].isTurn === false
       state.player1.hasAct = false
       state.player2.hasAct = false
-      this.commit('drawFlop')
+      this.dispatch('drawFlop')
     } else if (state.playerNames[0].isTurn === true && state.rounds === 2 && state.player1.hasAct === true && state.player2.hasAct === true) {
       state.playerNames[0].isTurn === false
       state.player1.hasAct = false
       state.player2.hasAct = false
-      this.commit('drawTurnAndRiver')
+      this.dispatch('fetchTurnOrRiver')
     } else if (state.playerNames[0].isTurn === true && state.rounds === 3 && state.player1.hasAct === true && state.player2.hasAct === true) {
       state.playerNames[0].isTurn === false
       state.player1.hasAct = false
       state.player2.hasAct = false
-      this.commit('drawTurnAndRiver')
-      console.log('Count your points!!! :D i am toooooo tired')
+      this.dispatch('fetchTurnOrRiver')
     } else if (state.playerNames[0].isTurn === true && state.rounds === 4 && state.player1.hasAct === true && state.player2.hasAct === true) {
       // TODO: Kör ny runda, resetta alla värden och arrayer som krävs för ny runda
       console.log('WHEOOOOO WINNER WINNER CHICKEN DINNER')
@@ -353,6 +391,7 @@ const mutations = {
       this.commit('playNextRound')
     }
   },
+
   // TODO: Lägga till SB och BB i databasen. Ifall BB bara kan checka hela vägen så uppdateras inte hans money förens i slutet när man kör giveMoneyToLoser
   payBlinds(state) {
     if (state.player1.isFirstPlayer === true) {
@@ -416,231 +455,30 @@ const mutations = {
       state.player2.money = money
     }
   },
-  dealCardsToPlayer(state) {
-    console.log('dealCardsToPlayer metod')
-    let playerOne2Cards = false
-    let playerTwoCards = false
-    //Lägger till 2 kort till varje spelare, ska igentligen ge ett till p1 sen ett till p2 sen ett till p1 sen ett till p2. Ej två till p1 sen två till p2
-    while (playerOne2Cards == false && playerTwoCards == false) {
-      if (state.player1.cards.length < 2) {
-        state.player1.cards.push(state.deck[0])
-        state.deck.splice(0, 1)
-      } else if (state.player2.cards.length < 2) {
-        state.player2.cards.push(state.deck[0])
-        state.deck.splice(0, 1)
-      } else {
-        playerOne2Cards = true
-        playerTwoCards = true
-      }
-    }
-  },
-  drawTurnAndRiver(state) {
-    console.log('drawTurnAndRiver metod')
-    // Lägger till turn och river till cardsOnTable
-    // Om cardsOnTable.length är 3 så ska id vara tablecard3 annars tablecard4
-    if (state.cardsOnTable.length === 3) {
-      state.deck.splice(0, 1)
-      let card = {
-        suit: state.deck[0].suit,
-        value: state.deck[0].value,
-        imageUrl: state.deck[0].imageUrl,
-        id: "tablecard3"
-      }
-      state.cardsOnTable.push(card)
-      state.deck.splice(0, 1)
-    } else if (state.cardsOnTable.length === 4) {
-      state.deck.splice(0, 1)
-      let card = {
-        suit: state.deck[0].suit,
-        value: state.deck[0].value,
-        imageUrl: state.deck[0].imageUrl,
-        id: "tablecard4"
-      }
-      state.cardsOnTable.push(card)
-      state.deck.splice(0, 1)
-    }
-  },
-  drawFlop(state) {
-    console.log('drawFlop metod')
-    // Tar bort översta kortet innan man delar ut flop
-    state.deck.splice(0, 1)
-    for (var i = 0; i < 3; i++) {
-      state.deck[i].id = 'tablecard' + i
-      state.cardsOnTable.push(state.deck[i])
-    }
-    state.deck.splice(0, 3)
-  },
-  createDeck(state) {
-    console.log('createDeck metod')
-    const arr = []
-    const suits = ['♥', '♠', '♦', '♣']
-    const values = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K']
-    for (var i = 0; i < suits.length; i++) {
-      for (var n = 0; n < values.length; n++) {
-        arr.push({
-          suit: suits[i],
-          value: values[n],
-          imageUrl: '',
-          id: ''
-        })
-      }
-    }
-    state.deck = arr
 
-    for (let i = state.deck.length - 1; i > 0; i--) {
-      let j = Math.floor(Math.random() * (i + 1));
-      [state.deck[i], state.deck[j]] = [state.deck[j], state.deck[i]]
-    }
-    this.commit('addCardsToTable')
-  },
-  addCardsToTable(state) {
-    for (var index in state.deck) {
-      switch (state.deck[index].value) {
-        case 'A':
-          if (state.deck[index].suit === '♥') {
-            state.deck[index].imageUrl = 'Images/Playing_cards/ace_of_hearts.png'
-          } else if (state.deck[index].suit === '♠') {
-            state.deck[index].imageUrl = 'Images/Playing_cards/ace_of_spades.png'
-          } else if (state.deck[index].suit === '♦') {
-            state.deck[index].imageUrl = 'Images/Playing_cards/ace_of_diamonds.png'
-          } else {
-            state.deck[index].imageUrl = 'Images/Playing_cards/ace_of_clubs.png'
-          }
-          break
-        case 2:
-          if (state.deck[index].suit === '♥') {
-            state.deck[index].imageUrl = 'Images/Playing_cards/2_of_hearts.png'
-          } else if (state.deck[index].suit === '♠') {
-            state.deck[index].imageUrl = 'Images/Playing_cards/2_of_spades.png'
-          } else if (state.deck[index].suit === '♦') {
-            state.deck[index].imageUrl = 'Images/Playing_cards/2_of_diamonds.png'
-          } else {
-            state.deck[index].imageUrl = 'Images/Playing_cards/2_of_clubs.png'
-          }
-          break
-        case 3:
-          if (state.deck[index].suit === '♥') {
-            state.deck[index].imageUrl = 'Images/Playing_cards/3_of_hearts.png'
-          } else if (state.deck[index].suit === '♠') {
-            state.deck[index].imageUrl = 'Images/Playing_cards/3_of_spades.png'
-          } else if (state.deck[index].suit === '♦') {
-            state.deck[index].imageUrl = 'Images/Playing_cards/3_of_diamonds.png'
-          } else {
-            state.deck[index].imageUrl = 'Images/Playing_cards/3_of_clubs.png'
-          }
-          break
-        case 4:
-          if (state.deck[index].suit === '♥') {
-            state.deck[index].imageUrl = 'Images/Playing_cards/4_of_hearts.png'
-          } else if (state.deck[index].suit === '♠') {
-            state.deck[index].imageUrl = 'Images/Playing_cards/4_of_spades.png'
-          } else if (state.deck[index].suit === '♦') {
-            state.deck[index].imageUrl = 'Images/Playing_cards/4_of_diamonds.png'
-          } else {
-            state.deck[index].imageUrl = 'Images/Playing_cards/4_of_clubs.png'
-          }
-          break
-        case 5:
-          if (state.deck[index].suit === '♥') {
-            state.deck[index].imageUrl = 'Images/Playing_cards/5_of_hearts.png'
-          } else if (state.deck[index].suit === '♠') {
-            state.deck[index].imageUrl = 'Images/Playing_cards/5_of_spades.png'
-          } else if (state.deck[index].suit === '♦') {
-            state.deck[index].imageUrl = 'Images/Playing_cards/5_of_diamonds.png'
-          } else {
-            state.deck[index].imageUrl = 'Images/Playing_cards/5_of_clubs.png'
-          }
-          break
-        case 6:
-          if (state.deck[index].suit === '♥') {
-            state.deck[index].imageUrl = 'Images/Playing_cards/6_of_hearts.png'
-          } else if (state.deck[index].suit === '♠') {
-            state.deck[index].imageUrl = 'Images/Playing_cards/6_of_spades.png'
-          } else if (state.deck[index].suit === '♦') {
-            state.deck[index].imageUrl = 'Images/Playing_cards/6_of_diamonds.png'
-          } else {
-            state.deck[index].imageUrl = 'Images/Playing_cards/6_of_clubs.png'
-          }
-          break
-        case 7:
-          if (state.deck[index].suit === '♥') {
-            state.deck[index].imageUrl = 'Images/Playing_cards/7_of_hearts.png'
-          } else if (state.deck[index].suit === '♠') {
-            state.deck[index].imageUrl = 'Images/Playing_cards/7_of_spades.png'
-          } else if (state.deck[index].suit === '♦') {
-            state.deck[index].imageUrl = 'Images/Playing_cards/7_of_diamonds.png'
-          } else {
-            state.deck[index].imageUrl = 'Images/Playing_cards/7_of_clubs.png'
-          }
-          break
-        case 8:
-          if (state.deck[index].suit === '♥') {
-            state.deck[index].imageUrl = 'Images/Playing_cards/8_of_hearts.png'
-          } else if (state.deck[index].suit === '♠') {
-            state.deck[index].imageUrl = 'Images/Playing_cards/8_of_spades.png'
-          } else if (state.deck[index].suit === '♦') {
-            state.deck[index].imageUrl = 'Images/Playing_cards/8_of_diamonds.png'
-          } else {
-            state.deck[index].imageUrl = 'Images/Playing_cards/8_of_clubs.png'
-          }
-          break
-        case 9:
-          if (state.deck[index].suit === '♥') {
-            state.deck[index].imageUrl = 'Images/Playing_cards/9_of_hearts.png'
-          } else if (state.deck[index].suit === '♠') {
-            state.deck[index].imageUrl = 'Images/Playing_cards/9_of_spades.png'
-          } else if (state.deck[index].suit === '♦') {
-            state.deck[index].imageUrl = 'Images/Playing_cards/9_of_diamonds.png'
-          } else {
-            state.deck[index].imageUrl = 'Images/Playing_cards/9_of_clubs.png'
-          }
-          break
-        case 10:
-          if (state.deck[index].suit === '♥') {
-            state.deck[index].imageUrl = 'Images/Playing_cards/10_of_hearts.png'
-          } else if (state.deck[index].suit === '♠') {
-            state.deck[index].imageUrl = 'Images/Playing_cards/10_of_spades.png'
-          } else if (state.deck[index].suit === '♦') {
-            state.deck[index].imageUrl = 'Images/Playing_cards/10_of_diamonds.png'
-          } else {
-            state.deck[index].imageUrl = 'Images/Playing_cards/10_of_clubs.png'
-          }
-          break
-        case 'J':
-          if (state.deck[index].suit === '♥') {
-            state.deck[index].imageUrl = 'Images/Playing_cards/jack_of_hearts.png'
-          } else if (state.deck[index].suit === '♠') {
-            state.deck[index].imageUrl = 'Images/Playing_cards/jack_of_spades.png'
-          } else if (state.deck[index].suit === '♦') {
-            state.deck[index].imageUrl = 'Images/Playing_cards/jack_of_diamonds.png'
-          } else {
-            state.deck[index].imageUrl = 'Images/Playing_cards/jack_of_clubs.png'
-          }
-          break
-        case 'Q':
-          if (state.deck[index].suit === '♥') {
-            state.deck[index].imageUrl = 'Images/Playing_cards/queen_of_hearts.png'
-          } else if (state.deck[index].suit === '♠') {
-            state.deck[index].imageUrl = 'Images/Playing_cards/queen_of_spades.png'
-          } else if (state.deck[index].suit === '♦') {
-            state.deck[index].imageUrl = 'Images/Playing_cards/queen_of_diamonds.png'
-          } else {
-            state.deck[index].imageUrl = 'Images/Playing_cards/queen_of_clubs.png'
-          }
-          break
-        case 'K':
-          if (state.deck[index].suit === '♥') {
-            state.deck[index].imageUrl = 'Images/Playing_cards/king_of_hearts.png'
-          } else if (state.deck[index].suit === '♠') {
-            state.deck[index].imageUrl = 'Images/Playing_cards/king_of_spades.png'
-          } else if (state.deck[index].suit === '♦') {
-            state.deck[index].imageUrl = 'Images/Playing_cards/king_of_diamonds.png'
-          } else {
-            state.deck[index].imageUrl = 'Images/Playing_cards/king_of_clubs.png'
-          }
-          break
+  dealCardsToPlayer(state, cards) {
+    console.log('dealCardsToPlayer metod')
+    //Lägger till 2 kort till varje spelare
+      console.log(cards)
+      for (var i = 0; i < cards.length; i++) {
+        if(i % 2 == 0){
+          state.player1.cards.push(cards[i])
+        } else{
+          state.player2.cards.push(cards[i])
+        }
       }
-    }
+      console.log(state.player1.cards, state.player2.cards)
+      this.commit('nextPlayersTurn')
+  },
+  setTurnOrRiverOnTable(state, card) {
+    console.log('drawTurnAndRiver metod')
+    // Lägger till turn och river till cardsOnTable efter att det hämtats ett kort från backend.
+      state.cardsOnTable.push(card)
+  },
+  setFlopOnTable(state, result) {
+      for (var i = 0; i < result.length; i++) {
+        state.cardsOnTable.push(result[i])
+      }
   }
 }
 
@@ -655,7 +493,7 @@ new Vue({
   created() {
     this.$store.state.playerNames.push(this.$store.state.player1)
     this.$store.state.playerNames.push(this.$store.state.player2)
-    this.$store.commit('createDeck')
+    this.$store.dispatch('createNewDeckInBackend', false)
   },
   store: store,
   router: Router,

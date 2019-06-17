@@ -51,9 +51,9 @@
     methods: {
       startGame() {
         console.log('startGame clicked')
-        this.$store.commit('dealCardsToPlayer')
+        this.$store.dispatch('fetchCardsForPlayers')
         this.$store.commit('payBlinds')
-        this.$store.commit('nextPlayersTurn')
+        //this.$store.commit('nextPlayersTurn')
       },
       raise(){
         console.log('raisebutton clicked')
