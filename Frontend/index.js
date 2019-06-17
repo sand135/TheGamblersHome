@@ -59,7 +59,7 @@ const actions = {
       fetch('http://localhost:8080/api/users/' + state.player1.name)
         .then(response => response.json())
         .then(result => {
-          context.commit('setPlayerInfo', result.money)
+          context.commit('setPlayerInfo', result)
         })
     }
   },

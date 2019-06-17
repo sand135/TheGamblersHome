@@ -49,8 +49,10 @@
 
     <div id="totalpot">
         Total pot: {{ $store.state.pot }}$
-    </div>
-</div>
+            </div>
+
+
+  </div>
 </template>
 <script>
   import GameButtons from './GameButtons.vue'
@@ -60,7 +62,7 @@ export default {
   },
   data() {
     return {
-
+    
     }
   },
    computed:{
@@ -74,6 +76,7 @@ export default {
 };
 </script>
 <style scoped>
+
 #bg {
   position: fixed;
   top: -50%;

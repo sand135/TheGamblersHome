@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="nav">
-      <router-link id="logout" v-if="this.$store.state.authenticated" to="/SignInUp" v-on:click.native="logout()" replace>Logout</router-link>
+      <router-link id="logout" v-if="this.$store.state.authenticated" to="/signinup/signin" v-on:click.native="logout()" replace>Logout</router-link>
     </div>
     <router-view />
   </div>
@@ -11,12 +11,12 @@
     name: 'SignupHelper',
     mounted() {
       if(!this.$store.state.authenticated) {
-        this.$router.replace({ name: "SignInUp" })
+        this.$router.push({ name: "SignIn" })
       }
       window.onpopstate = () => {
         if (
           this.$store.state.authenticated &&
-          this.$route.path == "/signinup"
+          this.$route.path == "/signinup/signin"
         ) {
           this.$router.push("/game")
         }
