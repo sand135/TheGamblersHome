@@ -29,7 +29,7 @@
     <input
     id="btn"
     type="button"
-    value="Back"
+    value="Register a new account"
     v-on:click="back()">
   </div>
   </div>
@@ -61,7 +61,7 @@
           })
       },
        back(){
-        this.$router.replace({ name: "SignInUp" })
+        this.$router.replace({ name: "Register" })
       }
     }
   }

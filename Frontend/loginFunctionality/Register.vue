@@ -26,7 +26,7 @@
       <input
         id="btn"
         type="button"
-        value="Back"
+        value="Back to sign in"
         v-on:click="back()">
     </div>
 </div>
@@ -67,7 +67,7 @@
         }
       },
       back(){
-        this.$router.replace({ name: "SignInUp" })
+        this.$router.replace({ name: "SignIn" })
       }
     }
   }
