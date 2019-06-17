@@ -1,25 +1,22 @@
 <template>
   <div id="game">
-    <!-- Buttons -->
-
     <div class="btn-group">
       <input
         class="button"
         type="button"
-        value="Raise"
-        @click="raise()">
-
+        value="Raise/Bet"
+        @click="raise()"
+      >
       <input
         class="start"
         type="button"
         value="StartGame"
-        @click="startGame()">
-
+        @click="startGame()"
+      >
       <button class="button">Call</button>
-      <button class="button">Bet</button>
+      <button class="button">Check</button>
       <button class="button">Fold</button>
     </div>
-    <div class="playerNameText">{{ playerNameText }}</div>
   </div>
 </template>
 <script>
@@ -75,10 +72,11 @@
 
 .btn-group .button {
   position: relative;
-  background-color: #4CAF50; /* Green */
-  border: 1px solid green;
+  margin-top: 50%;
+  background-color: #f44336;
+  /* border-radius: 12px; */
   color: white;
-  padding: 15px 32px;
+  padding: 8px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
