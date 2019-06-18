@@ -2,6 +2,8 @@ import Vue from 'vue'
 import App from './App.vue'
 import Vuex from 'vuex'
 import Router from './router.js'
+var Hand = require('pokersolver').Hand
+
 Vue.use(Vuex)
 Vue.use(Router)
 
@@ -331,7 +333,7 @@ const mutations = {
     }
   },
   playNextRound(state) {
-    // TODO: Fixa allt som ska resettas till ny runda
+
     state.cardsOnTable = []
 
     state.player1.cards = []
@@ -349,9 +351,7 @@ const mutations = {
     state.player1.isWinner = false
     state.player2.isWinner = false
     this.dispatch('createNewDeckInBackend', true)
-    // this.commit('payBlinds')
-    // this.dispatch('fetchCardsForPlayers')
-    //this.commit('nextPlayersTurn')
+
   },
   nextPlayersTurn(state) {
     // Första valet innan flop osv...
@@ -401,6 +401,9 @@ const mutations = {
       console.log('WHEOOOOO WINNER WINNER CHICKEN DINNER')
       state.player1.isWinner = true
 
+      //kollar vem som vann och sätter den spelaren till winner = true
+      this.commit('countPointsAndSetWinner')
+
       this.dispatch('giveMoneyToWinner')
       this.dispatch('giveMoneyToLoser')
 
@@ -410,7 +413,9 @@ const mutations = {
       console.log('Loggar spelare 2 money ' + state.player2.money)
       console.log('Loggar spelare 2 startmoney ' + state.player2.startMoney)
 
+      //Resettar alla värden och börjar en ny runda
       this.commit('playNextRound')
+
     }
   },
 
@@ -501,6 +506,214 @@ const mutations = {
       for (var i = 0; i < result.length; i++) {
         state.cardsOnTable.push(result[i])
       }
+  },
+
+  countPointsAndSetWinner(state){
+    var player1Hand = state.player1.cards
+    var player2Hand = state.player2.cards
+    //Sätter även in korten på bordet i spelarnas "händer"
+    for (var i = 0; i < state.cardsOnTable.length; i++) {
+      player1Hand.push(state.cardsOnTable[i])
+      player2Hand.push(state.cardsOnTable[i])
+    }
+    //konverterar båda spelarnas händer till rätt format för att kunna evaluera poängen.
+    this.commit('convertHand', player1Hand)
+    this.commit('convertHand', player2Hand)
+
+    var finalHand1 = []
+    var finalHand2 = []
+
+    //sätter in endast kortets name
+    for (var j = 0; j < player1Hand.length; j++) {
+      finalHand1.push(player1Hand[j].name)
+      finalHand2.push(player2Hand[j].name)
+    }
+
+    var solvedHand1 = Hand.solve(finalHand1)
+    var solvedHand2 = Hand.solve(finalHand2)
+    var winner = Hand.winners([solvedHand2, solvedHand1])
+    console.log(solvedHand1.descr)
+    console.log(solvedHand2.descr)
+
+    var winner1Helper = 0
+    var winner2Helper = 0
+
+    //Loop som jämför winnarhanden(winner[0].cardPool) med spelarnas händer för att kolla vem av dem som har den vinnande handen.
+    for (var m = 0; m < 7; m++) {
+      var card = winner[0].cardPool[0].value + winner[0].cardPool[0].suit
+      console.log(card)
+        for (var s = 0; s < 7; s++) {
+          if(card === finalHand1[s]){
+            console.log("player1 ++")
+            winner1Helper ++
+          }
+          if(card === finalHand2[s]){
+            console.log("player2 ++")
+            winner2Helper ++
+          }
+        }
+      //tar bort första kortet i winnerhand-arrayen efter att man kollat om samma kort fanns i spelaranas arrayer.
+      winner[0].cardPool.splice(0, 1)
+    }
+    //kollar vilken winnerhelper som blivit 7, d.v.s. alla kort matchade med winnerkort-arrayen, och sätter vilken spelare som vann.
+    if(winner1Helper === 7){
+      alert(""+ state.player1.name+" won with: "+ solvedHand1.descr+ ", "+state.player2.name +" had: "+ solvedHand2.descr )
+      state.player1.isWinner = true
+      
+    }else if( winner2Helper === 7){
+      alert(""+ state.player2.name+" won with: "+ solvedHand2.descr+ ", "+state.player1.name +" had: "+ solvedHand1.descr )
+      state.player2.isWinner = true
+    }
+  },
+
+  convertHand(state, cards){
+    for (var i = 0; i < cards.length; i++) {
+      switch (cards[i].value) {
+        case 1:
+          if (cards[i].suit === '♥') {
+            cards[i].name = 'Ah'
+          } else if (cards[i].suit === '♠') {
+            cards[i].name = 'As'
+          } else if (cards[i].suit === '♦') {
+            cards[i].name = 'Ad'
+          } else {
+            cards[i].name = 'Ac'
+          }
+          break
+        case 2:
+          if (cards[i].suit === '♥') {
+            cards[i].name = '2h'
+          } else if (cards[i].suit === '♠') {
+            cards[i].name = '2s'
+          } else if (cards[i].suit === '♦') {
+            cards[i].name = '2d'
+          } else {
+            cards[i].name = '2c'
+          }
+          break
+        case 3:
+        if (cards[i].suit === '♥') {
+          cards[i].name = '3h'
+        } else if (cards[i].suit === '♠') {
+          cards[i].name = '3s'
+        } else if (cards[i].suit === '♦') {
+          cards[i].name = '3d'
+        } else {
+          cards[i].name = '3c'
+        }
+        break
+        case 4:
+          if (cards[i].suit === '♥') {
+            cards[i].name = '4h'
+          } else if (cards[i].suit === '♠') {
+            cards[i].name = '4s'
+          } else if (cards[i].suit === '♦') {
+            cards[i].name = '4d'
+          } else {
+            cards[i].name = '4c'
+          }
+          break
+        case 5:
+          if (cards[i].suit === '♥') {
+            cards[i].name = '5h'
+          } else if (cards[i].suit === '♠') {
+            cards[i].name = '5s'
+          } else if (cards[i].suit === '♦') {
+            cards[i].name = '5d'
+          } else {
+            cards[i].name = '5c'
+          }
+          break
+        case 6:
+          if (cards[i].suit === '♥') {
+            cards[i].name = '6h'
+          } else if (cards[i].suit === '♠') {
+            cards[i].name = '6s'
+          } else if (cards[i].suit === '♦') {
+            cards[i].name = '6d'
+          } else {
+            cards[i].name = '6c'
+          }
+          break
+        case 7:
+          if (cards[i].suit === '♥') {
+            cards[i].name = '7h'
+          } else if (cards[i].suit === '♠') {
+            cards[i].name = '7s'
+          } else if (cards[i].suit === '♦') {
+            cards[i].name = '7d'
+          } else {
+            cards[i].name = '7c'
+          }
+          break
+        case 8:
+          if (cards[i].suit === '♥') {
+            cards[i].name = '8h'
+          } else if (cards[i].suit === '♠') {
+            cards[i].name = '8s'
+          } else if (cards[i].suit === '♦') {
+            cards[i].name = '8d'
+          } else {
+            cards[i].name = '8c'
+          }
+          break
+        case 9:
+          if (cards[i].suit === '♥') {
+            cards[i].name = '9h'
+          } else if (cards[i].suit === '♠') {
+            cards[i].name = '9s'
+          } else if (cards[i].suit === '♦') {
+            cards[i].name = '9d'
+          } else {
+            cards[i].name = '9c'
+          }
+          break
+        case 10:
+          if (cards[i].suit === '♥') {
+            cards[i].name = 'Th'
+          } else if (cards[i].suit === '♠') {
+            cards[i].name = 'Ts'
+          } else if (cards[i].suit === '♦') {
+            cards[i].name = 'Td'
+          } else {
+            cards[i].name = 'Tc'
+          }
+          break
+        case 11:
+          if (cards[i].suit === '♥') {
+            cards[i].name = 'Jh'
+          } else if (cards[i].suit === '♠') {
+            cards[i].name = 'Js'
+          } else if (cards[i].suit === '♦') {
+            cards[i].name = 'Jd'
+          } else {
+            cards[i].name = 'Jc'
+          }
+          break
+        case 12:
+          if (cards[i].suit === '♥') {
+            cards[i].name = 'Qh'
+          } else if (cards[i].suit === '♠') {
+            cards[i].name = 'Qs'
+          } else if (cards[i].suit === '♦') {
+            cards[i].name = 'Qd'
+          } else {
+            cards[i].name = 'Qc'
+          }
+          break
+        case 13:
+          if (cards[i].suit === '♥') {
+            cards[i].name = 'Kh'
+          } else if (cards[i].suit === '♠') {
+            cards[i].name = 'Ks'
+          } else if (cards[i].suit === '♦') {
+            cards[i].name = 'Kd'
+          } else {
+            cards[i].name = 'Kc'
+          }
+          break
+      }
+    }
   }
 }
   const store = new Vuex.Store({
@@ -509,12 +722,15 @@ const mutations = {
     state
   })
 
+
+
 new Vue({
   el: '#app',
   created() {
     this.$store.state.playerNames.push(this.$store.state.player1)
     this.$store.state.playerNames.push(this.$store.state.player2)
     this.$store.dispatch('createNewDeckInBackend', false)
+    //this.$store.commit('countPoints')
   },
   store: store,
   router: Router,

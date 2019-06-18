@@ -59,11 +59,12 @@
             console.log("Username already excists. Please try again!")
           }else{
             this.$store.state.authenticated = true
-            this.$router.replace({ name: "main" })
+            this.$store.state.player1.name = this.input.username
+            this.$router.replace({ name: "game" })
           }
         }).catch(e => console.log(e))
         if(this.authenticated){
-          this.$router.replace({ name: "main" })
+          this.$router.replace({ name: "game" })
         }
       },
       back(){

@@ -36,14 +36,6 @@
 </template>
 <script>
   export default {
-    data() {
-      return {
-        playerNameText: this.$store.state.playerNames[0].name,
-        // counter: 0,
-        // rounds: 1,
-        // numberOfCalls: 0,
-      }
-    },
     methods: {
       startGame() {
         console.log('startGame clicked')
