@@ -56,6 +56,12 @@
               console.log('Login Successfull' + response.statusText)
               this.$store.state.authenticated = true
               this.$store.state.player1.name = this.input.username
+              //Nytt från Jonatans
+              this.$store.state.player2.name = 'Daniel Negreanu'
+              this.$store.dispatch('fetchPlayer')
+              this.$store.dispatch('fetchPlayer2')
+
+              //
               this.$router.replace({ name: "game" })
             }
           })
