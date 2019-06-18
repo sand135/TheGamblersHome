@@ -5,8 +5,9 @@
     </div>
 
     <game-button />
-    <bank />
 
+
+    <bank />
     <div id="player1">
       <img
         class="avatar"
@@ -89,12 +90,12 @@
         v-model="$store.state.value"
         type="number"
       >
-      <input
+      <!-- <input
         id="betbutton"
         type="button"
         value="Bet"
         @click="$store.commit('bet')"
-      >
+      > -->
       <span v-text="$store.state.value+'$'" />
     </div>
 
@@ -110,6 +111,10 @@
       <img
         src="Images/stack-chips.png"
         class="chips"
+      >
+      <img
+        src="Images/pile-of-poker-chips.png"
+        class="pot_chips"
       >
     </div>
 
@@ -220,7 +225,7 @@
 }
 #player2 {
   position: fixed;
-  bottom: 0%;
+  bottom: 10%;
   left: 85%;
 }
 .avatar {
@@ -280,4 +285,5 @@
   right: 47%;
   width: 15%;
 }
+
 </style>

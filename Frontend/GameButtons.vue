@@ -76,7 +76,7 @@
 
 .btn-group .button {
   position: relative;
-  margin-top: 50%;
+  margin-top: 10%;
   background-color: #f44336;
   border-radius: 12px;
   color: white;
@@ -98,7 +98,7 @@
 }
 
 .start {
-  position: fixed;
+  margin-left: 50%;
   background-color: #4CAF50;
   border: none;
   border-radius: 50%;
