@@ -535,10 +535,11 @@ const mutations = {
     }
     //kollar vilken winnerhelper som blivit 7, d.v.s. alla kort matchade med winnerkort-arrayen, och sätter vilken spelare som vann.
     if(winner1Helper === 7){
-      alert("player 1 won with: "+ solvedHand1.descr+ "player 2 had: "+ solvedHand2.descr )
+      alert(""+ state.player1.name+" won with: "+ solvedHand1.descr+ ", "+state.player2.name +" had: "+ solvedHand2.descr )
       state.player1.isWinner = true
+      
     }else if( winner2Helper === 7){
-      alert("player 2 won with: "+ solvedHand2.descr+ "player 1 had: "+ solvedHand1.descr)
+      alert(""+ state.player2.name+" won with: "+ solvedHand2.descr+ ", "+state.player1.name +" had: "+ solvedHand1.descr )
       state.player2.isWinner = true
     }
   },
