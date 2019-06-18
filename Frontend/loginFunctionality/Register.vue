@@ -4,7 +4,7 @@
   <div id="bg">
       <img src="./images/pokerCardsBackground.jpg">
     </div>
-  <div id="container"> 
+  <div id="container">
     <div id="register">
        <h1>Register new user</h1>
        <img id="registerIcon" src="./images/new-user.png">
@@ -59,6 +59,7 @@
             console.log("Username already excists. Please try again!")
           }else{
             this.$store.state.authenticated = true
+            this.$store.state.player1.name = this.input.username
             this.$router.replace({ name: "main" })
           }
         }).catch(e => console.log(e))
@@ -104,8 +105,8 @@
     margin: 10px 60px;
     background-color: #e0dadac6;
     border: none;
-    border-radius: 25px;  
-    border: 3px solid rgba(0, 0, 0, 0.515); 
+    border-radius: 25px;
+    border: 3px solid rgba(0, 0, 0, 0.515);
 }
 #btn{
   background-color: rgba(75, 213, 48, 0.755);
@@ -122,10 +123,10 @@
     color: black;
   }
   #register {
-     background-color: rgba(255, 255, 255, 0.433); 
+     background-color: rgba(255, 255, 255, 0.433);
     z-index: 1;
-     width: 30%; 
-     border: 3px solid black; 
+     width: 30%;
+     border: 3px solid black;
     margin: auto;
     margin-top: 200px;
     padding: 20px;
