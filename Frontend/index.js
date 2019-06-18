@@ -76,6 +76,7 @@ const actions = {
       })
   },
   fetchCurrentPlayer(context) {
+    console.log('Loggar currentPlayer efter blinds' +state.currentPlayer.name)
     if (state.authenticated === true) {
       return fetch('http://localhost:8080/api/users/' + state.currentPlayer.name)
         .then(response => response.json())
@@ -106,8 +107,6 @@ const actions = {
     let sum = 0
     sum = state.currentPlayer.startMoney - state.currentPlayer.activePot
     console.log('Loggar currentPlayer' +state.currentPlayer.name)
-    console.log('Loggar player1 aktiva pot' +state.player1.activePot)
-    console.log('Loggar player2 aktiva pot' +state.player2.activePot)
 
     fetch('http://localhost:8080/api/users/' + state.currentPlayer.name, {
         body: JSON.stringify({
@@ -121,7 +120,9 @@ const actions = {
       .then(response => response.text())
       .then(result => {
         console.log(result)
-        this.dispatch('fetchCurrentPlayer')
+        // this.dispatch('fetchCurrentPlayer')
+        console.log('Loggar currentPlayer i then addBlindsToDB' +state.currentPlayer.name)
+        context.commit('updateMoneyToUser')
       })
   },
   betMoney() {
@@ -389,14 +390,14 @@ const mutations = {
       state.pot += 20
       state.player1.activePot += 20
       state.currentPlayer = state.player1
-      this.dispatch('addBlindsToDB')
+      //this.dispatch('addBlindsToDB')
     } else {
       console.log('Player1 betalar BB')
       // Dra av big blind från player1 money
       state.pot += 40
       state.player1.activePot += 40
       state.currentPlayer = state.player1
-      this.dispatch('addBlindsToDB')
+      //this.dispatch('addBlindsToDB')
     }
     if (state.player2.isFirstPlayer === true) {
       // Dra av small blind från player2 money
@@ -404,14 +405,14 @@ const mutations = {
       state.pot += 20
       state.player2.activePot += 20
       state.currentPlayer = state.player2
-      this.dispatch('addBlindsToDB')
+      //this.dispatch('addBlindsToDB')
     } else {
       // Dra av big blind från player2 money
       console.log('Player2 betalar BB')
       state.pot += 40
       state.player2.activePot += 40
       state.currentPlayer = state.player2
-      this.dispatch('addBlindsToDB')
+      //this.dispatch('addBlindsToDB')
     }
   },
   setPlayerInfo(state, money) {
