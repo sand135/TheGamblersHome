@@ -11,7 +11,6 @@ Vue.config.devtools = true
 
 const state = {
   deck: null,
-  bool: true,
   card: {},
   cardsOnTable: [],
   playerNames: [{
@@ -47,9 +46,7 @@ const state = {
   currentBet: null,
   value: 0,
   authenticated: false,
-  currentPlayer: null,
-  p1Active: 0,
-  p2Active: 0
+  currentPlayer: null
 }
 
 const actions = {
@@ -60,11 +57,21 @@ const actions = {
       fetch('http://localhost:8080/api/users/' + state.player1.name)
         .then(response => response.json())
         .then(result => {
-          context.commit('setPlayerInfo', result)
+          state.currentPlayer = state.player1
+          context.commit('setPlayerInfo', result.money)
         })
     }
   },
+  fetchPlayer2(context) {
+    fetch('http://localhost:8080/api/users/' +'Daniel Negreanu')
+      .then(response => response.json())
+      .then(result => {
+        state.currentPlayer = state.player2
+        context.commit('setPlayerInfo', result.money)
+      })
+  },
   fetchCurrentPlayer(context) {
+    console.log('Loggar currentPlayer efter blinds' +state.currentPlayer.name)
     if (state.authenticated === true) {
       return fetch('http://localhost:8080/api/users/' + state.currentPlayer.name)
         .then(response => response.json())
@@ -90,6 +97,28 @@ const actions = {
           context.commit('updateMoneyToLoser', result.money)
         })
     }
+  },
+  addBlindsToDB (context) {
+    let sum = 0
+    sum = state.currentPlayer.startMoney - state.currentPlayer.activePot
+    console.log('Loggar currentPlayer' +state.currentPlayer.name)
+
+    fetch('http://localhost:8080/api/users/' + state.currentPlayer.name, {
+        body: JSON.stringify({
+          "money": sum
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: 'PUT'
+      })
+      .then(response => response.text())
+      .then(result => {
+        console.log(result)
+        // this.dispatch('fetchCurrentPlayer')
+        console.log('Loggar currentPlayer i then addBlindsToDB' +state.currentPlayer.name)
+        context.commit('updateMoneyToUser')
+      })
   },
   betMoney() {
     let sum = 0
@@ -256,7 +285,7 @@ const actions = {
 }
 
 const mutations = {
-  raise(state) {
+  raise() {
     console.log('raisebutton clicked')
     this.dispatch('betMoney')
     this.commit('checkForActions')
@@ -426,28 +455,42 @@ const mutations = {
       console.log('Player 1 betalar SB')
       state.pot += 20
       state.player1.activePot += 20
+      state.currentPlayer = state.player1
+      //this.dispatch('addBlindsToDB')
     } else {
       console.log('Player1 betalar BB')
       // Dra av big blind från player1 money
       state.pot += 40
       state.player1.activePot += 40
+      state.currentPlayer = state.player1
+      //this.dispatch('addBlindsToDB')
     }
     if (state.player2.isFirstPlayer === true) {
       // Dra av small blind från player2 money
       console.log('Player2 betalar SB')
       state.pot += 20
       state.player2.activePot += 20
+      state.currentPlayer = state.player2
+      //this.dispatch('addBlindsToDB')
     } else {
       // Dra av big blind från player2 money
       console.log('Player2 betalar BB')
       state.pot += 40
       state.player2.activePot += 40
+      state.currentPlayer = state.player2
+      //this.dispatch('addBlindsToDB')
     }
   },
   setPlayerInfo(state, money) {
-    // Sätter money till player via action metoden fetchPlayer
-    state.player1.money = money
-    state.player1.startMoney = money
+    // Sätter money till players via action metoden fetchPlayer
+    if (state.currentPlayer.name === state.player1.name) {
+      state.player1.money = money
+      state.player1.startMoney = money
+    }
+    if (state.currentPlayer.name === state.player2.name) {
+      state.player2.money = money
+      state.player2.startMoney = money
+    }
   },
   updateMoneyToWinner(state, money) {
     if (state.player1.isWinner === true) {
@@ -559,8 +602,8 @@ const mutations = {
     if(winner1Helper === 7){
       alert(""+ state.player1.name+" won with: "+ solvedHand1.descr+ ", "+state.player2.name +" had: "+ solvedHand2.descr )
       state.player1.isWinner = true
-      
-    }else if( winner2Helper === 7){
+
+    } else if( winner2Helper === 7){
       alert(""+ state.player2.name+" won with: "+ solvedHand2.descr+ ", "+state.player1.name +" had: "+ solvedHand1.descr )
       state.player2.isWinner = true
     }
@@ -721,16 +764,12 @@ const mutations = {
     mutations,
     state
   })
-
-
-
 new Vue({
   el: '#app',
   created() {
     this.$store.state.playerNames.push(this.$store.state.player1)
     this.$store.state.playerNames.push(this.$store.state.player2)
     this.$store.dispatch('createNewDeckInBackend', false)
-    //this.$store.commit('countPoints')
   },
   store: store,
   router: Router,
