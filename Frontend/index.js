@@ -5,7 +5,6 @@ import Router from './router.js'
 Vue.use(Vuex)
 Vue.use(Router)
 
-
 Vue.config.devtools = true
 
 const state = {
@@ -228,7 +227,30 @@ const actions = {
         context.commit('setTurnOrRiverOnTable', result)
       }
     })
-  }
+  },
+  loanMoney(context) {
+      store.dispatch('fetchPlayer')
+
+    if (state.player1.isTurn) {
+      fetch('http://localhost:8080/api/bank/'+state.player1.name
+    )
+      .then(response => response.text())
+      .then(result => {
+        console.log(result)
+        state.player1.money += 500
+      })
+    }
+    else {
+      fetch('http://localhost:8080/api/bank/'+state.player2.name
+    )
+      .then(response => response.text())
+      .then(result => {
+      console.log(result)
+      state.player2.money += 500
+      })
+    }
+
+    }
 }
 
 const mutations = {
@@ -481,12 +503,11 @@ const mutations = {
       }
   }
 }
-
-const store = new Vuex.Store({
-  actions,
-  mutations,
-  state
-})
+  const store = new Vuex.Store({
+    actions,
+    mutations,
+    state
+  })
 
 new Vue({
   el: '#app',

@@ -2,15 +2,14 @@
 <template>
   <div>
     <poker-table />
-    <card />
   </div>
 </template>
 <script>
-  import Card from './Card.vue'
+  // import Card from './Card.vue'
   import PokerTable from './PokerTable.vue'
   export default {
     components: {
-      'card': Card,
+      // 'card': Card,
       'poker-table': PokerTable,
 
     },

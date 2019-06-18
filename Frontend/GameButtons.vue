@@ -1,41 +1,37 @@
 <template>
   <div id="game">
-    <!-- Buttons -->
-
     <div class="btn-group">
       <input
         class="button"
         type="button"
-        value="Raise"
-        @click="raise()">
-
+        value="Raise/Bet"
+        @click="raise()"
+      >
       <input
         class="start"
         type="button"
         value="StartGame"
         @click="startGame()"
-        >
-
-        <input
-          class="button"
-          type="button"
-          value="Call"
-          @click="call()"
-        >
-        <input
-          class="button"
-          type="button"
-          value="Check"
-          @click="check()"
-        >
-        <input
-          class="button"
-          type="button"
-          value="Fold"
-          @click="fold()"
-        >
+      >
+      <input
+        class="button"
+        type="button"
+        value="Call"
+        @click="call()"
+      >
+      <input
+        class="button"
+        type="button"
+        value="Check"
+        @click="check()"
+      >
+      <input
+        class="button"
+        type="button"
+        value="Fold"
+        @click="fold()"
+      >
     </div>
-    <div class="playerNameText">{{ playerNameText }}</div>
   </div>
 </template>
 <script>
@@ -78,15 +74,21 @@
 #game {
   position: relative;
   z-index: 2;
-  color: white;
+  /*color: white;*/
+}
+
+.btn-group {
+  position: fixed;
+  bottom: 0;
 }
 
 .btn-group .button {
   position: relative;
-  background-color: #4CAF50; /* Green */
-  border: 1px solid green;
+  margin-top: 50%;
+  background-color: #f44336;
+  border-radius: 12px;
   color: white;
-  padding: 15px 32px;
+  padding: 8px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -104,6 +106,17 @@
 }
 
 .start {
-  background-color: red;
+  position: fixed;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
 }
   </style>

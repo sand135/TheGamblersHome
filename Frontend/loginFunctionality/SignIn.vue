@@ -1,25 +1,25 @@
 <template >
 <div>
-<div id="bg">
+<div id="bgg">
    <img src="./images/pokerCardsBackground.jpg">
     </div>
 <div id ="login">
   <h1>Login</h1>
-   
+
     <img id="loginIcon" src="./images/user.png">
-    
+
     <input
     id="inputFields"
       type="text"
       placeholder="Username"
       v-model="input.username">
-   
+
     <input
     id="inputFields"
       type="password"
       v-model="input.password"
       placeholder="password">
-  
+
     <input
     id="btn"
       type="button"
@@ -65,13 +65,13 @@
     }
   }
 </script>
-<style>
+<style scoped>
   #loginIcon{
     width: 20%;
       /* padding: 5px 5px; */
    margin: 10px 180px;
   }
-#bg {
+#bgg {
   position: fixed;
   top: -50%;
   left: -50%;
@@ -79,7 +79,7 @@
   height: 200%;
   z-index: -1;
 }
-#bg img {
+#bgg img {
   z-index: 0;
   position: absolute;
   top: 0;
@@ -98,11 +98,11 @@
     margin: 10px 60px;
     background-color: #e0dadac6;
     border: none;
-    border-radius: 25px;  
-     border: 3px solid rgba(0, 0, 0, 0.515); 
+    border-radius: 25px;
+     border: 3px solid rgba(0, 0, 0, 0.515);
 }
 #btn{
-   background-color:rgba(75, 213, 48, 0.755); 
+   background-color:rgba(75, 213, 48, 0.755);
    width: 50%;
    padding: 5px 5px;
    margin: 10px 100px;
@@ -113,10 +113,10 @@
   color: black;
 }
     #login {
-     background-color: rgba(255, 255, 255, 0.433); 
+     background-color: rgba(255, 255, 255, 0.433);
     z-index: 1;
-     width: 30%; 
-     border: 3px solid black; 
+     width: 30%;
+     border: 3px solid black;
     margin: auto;
     margin-top: 200px;
     padding: 20px;

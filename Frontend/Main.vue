@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div id="secure">
     <div>
       <h1>Secure Area</h1>
@@ -20,8 +20,8 @@
       }
     }
   }
-</script>
-
+</script> -->
+<!--
 <style scoped>
     #secure {
         background-color: #FFFFFF;
@@ -29,4 +29,4 @@
         padding: 20px;
         margin-top: 10px;
     }
-</style>
+</style> -->

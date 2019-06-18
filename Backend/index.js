@@ -2,14 +2,7 @@ const express = require('express')
 const app = express()
 const sqlite = require('sqlite')
 const bodyParser = require('body-parser')
-
-app.use((request, response, next) => {
-  response.header('Access-Control-Allow-Origin', '*')
-  next()
-})
-
 app.use(bodyParser.json())
-
 
 var fourthCardIsDrawn = false
 var fifthCardIsDrawn = false
@@ -23,8 +16,6 @@ app.use((request, response, next) => {
 let db
 sqlite.open('users.sqlite').then(database => {
   db = database
-
-
 })
 
 app.get('/', (request, response) => {
@@ -148,8 +139,8 @@ app.get('/cards', (request, response) => {
   db.all('SELECT * FROM cards').then(cards => {
     //hämtar 52 kort från databasen och sätter dem i en lokal array(deck). blandar om dem för att den ska vara redo att använda i spelet.
     this.deck = []
-    this.fifthCardIsDrawn = false
-    this.fourthCardIsDrawn = false 
+    // this.fifthCardIsDrawn = false
+    // this.fourthCardIsDrawn = false
     this.deck = cards
     for (let i = cards.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + 1));
@@ -177,11 +168,7 @@ app.post('/cards', (request, response) => {
     .catch(err => {
       console.log(err)
     })
-})
-
-
-
-
+  })
 
 app.post('/', (request, response) => {
   console.log(request.body);
@@ -217,14 +204,39 @@ app.put('/:username', (request, response) =>{
   })
 })
 
-app.put('/users/:username/', (request, response) => {
+//FEL
+// app.put('/users/:username/', (request, response) => {
+//   console.log(request.params.username)
+//   let money = request.body.money
+//   db.run('UPDATE users SET money=? WHERE username=?', [money, request.params.username])
+//   response.send("Uppdaterat money på spelarobjektet")
+// })
+
+//Loan money from bank 500
+app.get('/bank/:username', (request, response) =>{
   console.log(request.params.username)
-  let money = request.body.money
-  db.run('UPDATE users SET money=? WHERE username=?', [money, request.params.username])
-  response.send("Uppdaterat money på spelarobjektet")
+  let bank = 500
+
+      db.all('SELECT * FROM users WHERE username=?', [request.params.username]).then(user=>{
+
+        let currentUserMoney = user[0].money
+        currentUserMoney = currentUserMoney + bank
+
+        db.run('UPDATE users SET money=? WHERE username=?', [currentUserMoney, request.params.username]).then(()=>{
+          response.send("500 was added to your account")
+        }).catch(err =>{
+          console.log(err);
+          response.status(409)
+          response.send("No money transferred")
+        })
+        .catch(err=>{
+          console.log(err);
+        })
+      }).catch(err=>{
+      console.log(err);
+    })
 })
 
 app.listen(3000, () => {
   console.log('Server is running!');
 })
-

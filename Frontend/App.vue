@@ -1,16 +1,15 @@
 <template>
   <div>
-    <sign-up-helper></sign-up-helper>
+    <sign-up-helper />
   </div>
-
 </template>
 <script>
   import SignupHelper from './loginFunctionality/SignupHelper.vue'
-  import Card from './Card.vue'
+  // import Card from './Card.vue'
   import PokerTable from './PokerTable.vue'
   export default{
     components: {
-       'sign-up-helper': SignupHelper
+      'sign-up-helper': SignupHelper
     }
   }
 </script>

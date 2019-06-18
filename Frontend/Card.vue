@@ -1,6 +1,6 @@
-<template>
+<!-- <template>
   <div class="outline">
-  
+
   </div>
 </template>
 <script>
@@ -24,4 +24,4 @@
     color: white;
     position: absolute;
   }
-</style>
+</style> -->
