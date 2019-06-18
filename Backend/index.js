@@ -78,6 +78,7 @@ app.get('/cards/drawTurnAndRiver',(request, response)=>{
   // Lägger till turn och river till cardsOnTable
   // Om endast flopen(3 kort är dragna så ska id vara tablecard3 annars tablecard4
   if (!this.fourthCardIsDrawn) {
+    console.log('Vad händer här');
     this.deck.splice(0, 1)
     let card = {
       suit: this.deck[0].suit,
@@ -87,6 +88,7 @@ app.get('/cards/drawTurnAndRiver',(request, response)=>{
     }
     this.deck.splice(0, 1)
     this.fourthCardIsDrawn = true
+    console.log(card);
     response.send(card)
   } else if (this.fourthCardIsDrawn && !this.fifthCardIsDrawn) {
     this.deck.splice(0, 1)
@@ -205,12 +207,13 @@ app.put('/:username', (request, response) =>{
 })
 
 //FEL
-// app.put('/users/:username/', (request, response) => {
-//   console.log(request.params.username)
-//   let money = request.body.money
-//   db.run('UPDATE users SET money=? WHERE username=?', [money, request.params.username])
-//   response.send("Uppdaterat money på spelarobjektet")
-// })
+//Denna funkar för mig
+app.put('/users/:username/', (request, response) => {
+  console.log(request.params.username)
+  let money = request.body.money
+  db.run('UPDATE users SET money=? WHERE username=?', [money, request.params.username])
+  response.send("Uppdaterat money på spelarobjektet")
+})
 
 //Loan money from bank 500
 app.get('/bank/:username', (request, response) =>{

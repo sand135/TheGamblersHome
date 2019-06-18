@@ -28,18 +28,20 @@ const state = {
     isFirstPlayer: true,
     hasAct: false,
     activePot: 0,
-    isWinner: false
+    isWinner: false,
+    isBigBlind: false
   },
   player2: {
     cards: [],
-    money: 1000,
-    startMoney: 1000,
+    money: 0,
+    startMoney: 0,
     name: 'Daniel Negreanu',
     isTurn: false,
     isFirstPlayer: false,
     hasAct: false,
     activePot: 0,
-    isWinner: false
+    isWinner: false,
+    isBigBlind: false
   },
   pot: 0,
   rounds: 0,
@@ -63,7 +65,7 @@ const actions = {
     }
   },
   fetchPlayer2(context) {
-    fetch('http://localhost:8080/api/users/' +'Daniel Negreanu')
+    fetch('http://localhost:8080/api/users/' + 'Daniel Negreanu')
       .then(response => response.json())
       .then(result => {
         state.currentPlayer = state.player2
@@ -71,7 +73,6 @@ const actions = {
       })
   },
   fetchCurrentPlayer(context) {
-    console.log('Loggar currentPlayer efter blinds' +state.currentPlayer.name)
     if (state.authenticated === true) {
       return fetch('http://localhost:8080/api/users/' + state.currentPlayer.name)
         .then(response => response.json())
@@ -98,12 +99,11 @@ const actions = {
         })
     }
   },
-  addBlindsToDB (context) {
+  addBlindsToDB() {
     let sum = 0
     sum = state.currentPlayer.startMoney - state.currentPlayer.activePot
-    console.log('Loggar currentPlayer' +state.currentPlayer.name)
 
-    fetch('http://localhost:8080/api/users/' + state.currentPlayer.name, {
+    return fetch('http://localhost:8080/api/users/' + state.currentPlayer.name, {
         body: JSON.stringify({
           "money": sum
         }),
@@ -115,9 +115,8 @@ const actions = {
       .then(response => response.text())
       .then(result => {
         console.log(result)
-        // this.dispatch('fetchCurrentPlayer')
-        console.log('Loggar currentPlayer i then addBlindsToDB' +state.currentPlayer.name)
-        context.commit('updateMoneyToUser')
+        console.log('Loggar currentPlayer i addBlindsToDB ' + state.currentPlayer.name)
+        return this.dispatch('fetchCurrentPlayer')
       })
   },
   betMoney() {
@@ -125,11 +124,13 @@ const actions = {
     if (state.player1.isTurn === true) {
       state.player1.activePot += Number(state.value)
       state.currentPlayer = state.player1
-      console.log('Player1 isTurn är true i betMoney ' +state.player1.activePot)
+      state.player1.money = state.player1.startMoney - state.player1.activePot
+      console.log('Player1 isTurn är true i betMoney ' + state.player1.activePot)
     } else {
       state.player2.activePot += Number(state.value)
-      console.log('Player2 isTurn är true i betMoney ' +state.player2.activePot)
+      console.log('Player2 isTurn är true i betMoney ' + state.player2.activePot)
       state.currentPlayer = state.player2
+      state.player2.money = state.player2.startMoney - state.player2.activePot
     }
     state.pot = state.player1.activePot + state.player2.activePot
     sum = state.currentPlayer.startMoney - state.currentPlayer.activePot
@@ -157,14 +158,14 @@ const actions = {
       state.currentPlayer = state.player1
       console.log('Loggar vinnaren 1 vilket borde vara Jonte ' + state.currentPlayer.name)
       state.player1.startMoney = sum
-      console.log('Loggar summan för vinnare Jonte '+sum)
+      console.log('Loggar summan för vinnare Jonte ' + sum)
     } else {
       //Player2 vann rundan
       sum = state.player2.money + state.pot
       console.log('Loggar vinnare 2 vilket borde vara danne ' + state.currentPlayer.name)
       state.currentPlayer = state.player2
       state.player2.startMoney = sum
-      console.log('Loggar summan för vinnare Danne '+sum)
+      console.log('Loggar summan för vinnare Danne ' + sum)
     }
     fetch('http://localhost:8080/api/users/' + state.currentPlayer.name, {
         body: JSON.stringify({
@@ -185,20 +186,20 @@ const actions = {
     let sum = 0
     if (state.player1.isWinner === true) {
       //Player2 förlora rundan
-      console.log('Loggar startMoney i spelare2 '+state.player2.startMoney)
-      console.log('Loggar spelare2 money '+state.player2.money)
+      console.log('Loggar startMoney i spelare2 ' + state.player2.startMoney)
+      console.log('Loggar spelare2 money ' + state.player2.money)
       sum = state.player2.money
       state.currentPlayer = state.player2
       console.log('Loggar förlorare 2 vilket borde vara Danne ' + state.currentPlayer.name)
       state.player2.startMoney = sum
-      console.log('Loggar sum i förlorare danne '+sum)
+      console.log('Loggar sum i förlorare danne ' + sum)
     } else {
       //Player1 förlora rundan
       sum = state.player1.money
       state.currentPlayer = state.player1
       console.log('Loggar förlorare 1 vilket borde vara Jonte ' + state.currentPlayer.name)
       state.player1.startMoney = sum
-      console.log('Loggar sum i förlorare Jonte '+sum)
+      console.log('Loggar sum i förlorare Jonte ' + sum)
     }
     fetch('http://localhost:8080/api/users/' + state.currentPlayer.name, {
         body: JSON.stringify({
@@ -218,70 +219,68 @@ const actions = {
   drawFlop(context) {
     //Hämtar tre kort från backend och sätter id + skickar dem till metoden som sätter ut dem på bordet.
     fetch('http://localhost:8080/api/cards/drawflop')
-    .then(response=>response.json())
-    .then(result =>{
-      context.commit('setFlopOnTable', result)
-    })
+      .then(response => response.json())
+      .then(result => {
+        context.commit('setFlopOnTable', result)
+      })
   },
-  fetchCardsForPlayers(context){
+  fetchCardsForPlayers(context) {
     //Hämtar fyra nya kort från backend
     fetch('http://localhost:8080/api/cards/playerCards')
-    .then(response => response.json())
-    .then(result =>{
-      context.commit('dealCardsToPlayer', result)
-    })
-  },
-  createNewDeckInBackend(context, secondRound){
-    if (secondRound){
-      fetch('http://localhost:8080/api/cards')
       .then(response => response.json())
-      .then(result =>{
-        console.log(result)
-        this.commit('payBlinds')
-        this.dispatch('fetchCardsForPlayers')
+      .then(result => {
+        context.commit('dealCardsToPlayer', result)
       })
-    }else{
-    //skapar en ny blandad kortlek i backend
-    fetch('http://localhost:8080/api/cards')
-    .then(response => response.json())
-    .then(result =>{
-      console.log(result)
-    })
-  }
-
   },
-  fetchTurnOrRiver(context){
+  createNewDeckInBackend(context, secondRound) {
+    if (secondRound) {
+      fetch('http://localhost:8080/api/cards')
+        .then(response => response.json())
+        .then(result => {
+          console.log(result)
+          this.commit('payBlinds')
+          this.dispatch('fetchCardsForPlayers')
+        })
+    } else {
+      //skapar en ny blandad kortlek i backend
+      fetch('http://localhost:8080/api/cards')
+        .then(response => response.json())
+        .then(result => {
+          console.log(result)
+        })
+    }
+  },
+  fetchTurnOrRiver(context) {
+    console.log('Loggas detta i fetchTurnOrRiver???')
     fetch('http://localhost:8080/api/cards/drawTurnAndRiver')
-    .then(response => response.json())
-    .then(result =>{
-      if(result.suit !== ''){
-        context.commit('setTurnOrRiverOnTable', result)
-      }
-    })
+      .then(response => response.json())
+      .then(result => {
+        console.log('Detta loggas')
+        if (result.suit !== '') {
+          console.log('Detta loggas inte')
+          context.commit('setTurnOrRiverOnTable', result)
+        }
+      })
   },
-  loanMoney(context) {
-      store.dispatch('fetchPlayer')
+  loanMoney() {
+    store.dispatch('fetchPlayer')
 
     if (state.player1.isTurn) {
-      fetch('http://localhost:8080/api/bank/'+state.player1.name
-    )
-      .then(response => response.text())
-      .then(result => {
-        console.log(result)
-        state.player1.money += 500
-      })
+      fetch('http://localhost:8080/api/bank/' + state.player1.name)
+        .then(response => response.text())
+        .then(result => {
+          console.log(result)
+          state.player1.money += 500
+        })
+    } else {
+      fetch('http://localhost:8080/api/bank/' + state.player2.name)
+        .then(response => response.text())
+        .then(result => {
+          console.log(result)
+          state.player2.money += 500
+        })
     }
-    else {
-      fetch('http://localhost:8080/api/bank/'+state.player2.name
-    )
-      .then(response => response.text())
-      .then(result => {
-      console.log(result)
-      state.player2.money += 500
-      })
-    }
-
-    }
+  }
 }
 
 const mutations = {
@@ -319,7 +318,7 @@ const mutations = {
       state.playerNames[0].isTurn = true
       state.player1.hasAct = true
     }
-    this.dispatch('betMoney').then (() => {
+    this.dispatch('betMoney').then(() => {
       this.commit('nextPlayersTurn')
     })
   },
@@ -327,12 +326,12 @@ const mutations = {
     console.log('Fold button clicked')
     if (state.player1.isTurn === true) {
       state.player2.isWinner = true
-      console.log('Loggar vinnare efter fold, spelare2 '+state.player2.name)
+      console.log('Loggar vinnare efter fold, spelare2 ' + state.player2.name)
       this.dispatch('giveMoneyToWinner')
       this.dispatch('giveMoneyToLoser')
     } else {
       state.player1.isWinner = true
-      console.log('Loggar vinnare efter fold, spelare1 '+state.player1.name)
+      console.log('Loggar vinnare efter fold, spelare1 ' + state.player1.name)
       this.dispatch('giveMoneyToWinner')
       this.dispatch('giveMoneyToLoser')
     }
@@ -397,7 +396,11 @@ const mutations = {
       // Här har båda agerat och nästa runda ska dras om de inte har raisat dvs!
       // Ska ha hand om call och check.
       console.log('Båda spelarna har agerat och är i nextPlayersTurn metoden')
+      console.log('Loggar dealer isTurn ' + state.playerNames[0].isTurn)
       state.rounds++
+      console.log('Loggar rounds ' + state.rounds)
+      console.log('Loggar player1 hasAct ' + state.player1.hasAct)
+      console.log('Loggar player2 hasAct ' + state.player2.hasAct)
       //Kollar vem som ska börja varje ny omgång efter man raisat osv.
       for (var i = 1; i < state.playerNames.length; i++) {
         if (state.playerNames[i].isFirstPlayer === true) {
@@ -416,6 +419,7 @@ const mutations = {
       state.player2.hasAct = false
       this.dispatch('drawFlop')
     } else if (state.playerNames[0].isTurn === true && state.rounds === 2 && state.player1.hasAct === true && state.player2.hasAct === true) {
+      console.log('Här är vi')
       state.playerNames[0].isTurn === false
       state.player1.hasAct = false
       state.player2.hasAct = false
@@ -426,7 +430,6 @@ const mutations = {
       state.player2.hasAct = false
       this.dispatch('fetchTurnOrRiver')
     } else if (state.playerNames[0].isTurn === true && state.rounds === 4 && state.player1.hasAct === true && state.player2.hasAct === true) {
-      // TODO: Kör ny runda, resetta alla värden och arrayer som krävs för ny runda
       console.log('WHEOOOOO WINNER WINNER CHICKEN DINNER')
       state.player1.isWinner = true
 
@@ -450,36 +453,53 @@ const mutations = {
 
   // TODO: Lägga till SB och BB i databasen. Ifall BB bara kan checka hela vägen så uppdateras inte hans money förens i slutet när man kör giveMoneyToLoser
   payBlinds(state) {
+
     if (state.player1.isFirstPlayer === true) {
       // Dra av small blind från player1 money
       console.log('Player 1 betalar SB')
       state.pot += 20
       state.player1.activePot += 20
       state.currentPlayer = state.player1
-      //this.dispatch('addBlindsToDB')
+      this.dispatch('addBlindsToDB').then(() => {
+        console.log('Nu borde player1 ha fått betala SB')
+        state.currentPlayer = state.player2
+        state.pot += 40
+        state.player2.activePot += 40
+        this.dispatch('addBlindsToDB')
+      })
     } else {
       console.log('Player1 betalar BB')
       // Dra av big blind från player1 money
       state.pot += 40
       state.player1.activePot += 40
+      state.player1.isBigBlind = true
       state.currentPlayer = state.player1
+      this.dispatch('addBlindsToDB').then(() => {
+        console.log('Nu borde player1 ha fått betala BB')
+        state.currentPlayer = state.player2
+        state.pot += 20
+        state.player2.activePot += 20
+        this.dispatch('addBlindsToDB')
+      })
+
       //this.dispatch('addBlindsToDB')
     }
-    if (state.player2.isFirstPlayer === true) {
-      // Dra av small blind från player2 money
-      console.log('Player2 betalar SB')
-      state.pot += 20
-      state.player2.activePot += 20
-      state.currentPlayer = state.player2
-      //this.dispatch('addBlindsToDB')
-    } else {
-      // Dra av big blind från player2 money
-      console.log('Player2 betalar BB')
-      state.pot += 40
-      state.player2.activePot += 40
-      state.currentPlayer = state.player2
-      //this.dispatch('addBlindsToDB')
-    }
+    // if (state.player2.isFirstPlayer === true) {
+    //   // Dra av small blind från player2 money
+    //   console.log('Player2 betalar SB')
+    //   state.pot += 20
+    //   state.player2.activePot += 20
+    //   // state.currentPlayer = state.player2
+    //   //this.dispatch('addBlindsToDB')
+    // } else {
+    //   // Dra av big blind från player2 money
+    //   console.log('Player2 betalar BB')
+    //   state.pot += 40
+    //   state.player2.activePot += 40
+    //   state.player2.isBigBlind = true
+    //   // state.currentPlayer = state.player2
+    //   //this.dispatch('addBlindsToDB')
+    // }
   },
   setPlayerInfo(state, money) {
     // Sätter money till players via action metoden fetchPlayer
@@ -495,8 +515,8 @@ const mutations = {
   updateMoneyToWinner(state, money) {
     if (state.player1.isWinner === true) {
       //Spelare1 har vunnit
-      console.log('Loggar vinnare player1 money i updateMoneyToWinner '+state.player1.money)
-      console.log('Loggar vinnare player1 startmoney i updateMoneyToWinner '+state.player1.startMoney)
+      console.log('Loggar vinnare player1 money i updateMoneyToWinner ' + state.player1.money)
+      console.log('Loggar vinnare player1 startmoney i updateMoneyToWinner ' + state.player1.startMoney)
       state.player1.money = money
       state.player1.startMoney = money
     } else if (state.player2.isWinner === true) {
@@ -525,33 +545,31 @@ const mutations = {
       state.player2.money = money
     }
   },
-
   dealCardsToPlayer(state, cards) {
     console.log('dealCardsToPlayer metod')
     //Lägger till 2 kort till varje spelare
-      console.log(cards)
-      for (var i = 0; i < cards.length; i++) {
-        if(i % 2 == 0){
-          state.player1.cards.push(cards[i])
-        } else{
-          state.player2.cards.push(cards[i])
-        }
+    console.log(cards)
+    for (var i = 0; i < cards.length; i++) {
+      if (i % 2 == 0) {
+        state.player1.cards.push(cards[i])
+      } else {
+        state.player2.cards.push(cards[i])
       }
-      console.log(state.player1.cards, state.player2.cards)
-      this.commit('nextPlayersTurn')
+    }
+    console.log(state.player1.cards, state.player2.cards)
+    this.commit('nextPlayersTurn')
   },
   setTurnOrRiverOnTable(state, card) {
     console.log('drawTurnAndRiver metod')
     // Lägger till turn och river till cardsOnTable efter att det hämtats ett kort från backend.
-      state.cardsOnTable.push(card)
+    state.cardsOnTable.push(card)
   },
   setFlopOnTable(state, result) {
-      for (var i = 0; i < result.length; i++) {
-        state.cardsOnTable.push(result[i])
-      }
+    for (var i = 0; i < result.length; i++) {
+      state.cardsOnTable.push(result[i])
+    }
   },
-
-  countPointsAndSetWinner(state){
+  countPointsAndSetWinner(state) {
     var player1Hand = state.player1.cards
     var player2Hand = state.player2.cards
     //Sätter även in korten på bordet i spelarnas "händer"
@@ -585,31 +603,30 @@ const mutations = {
     for (var m = 0; m < 7; m++) {
       var card = winner[0].cardPool[0].value + winner[0].cardPool[0].suit
       console.log(card)
-        for (var s = 0; s < 7; s++) {
-          if(card === finalHand1[s]){
-            console.log("player1 ++")
-            winner1Helper ++
-          }
-          if(card === finalHand2[s]){
-            console.log("player2 ++")
-            winner2Helper ++
-          }
+      for (var s = 0; s < 7; s++) {
+        if (card === finalHand1[s]) {
+          console.log("player1 ++")
+          winner1Helper++
         }
+        if (card === finalHand2[s]) {
+          console.log("player2 ++")
+          winner2Helper++
+        }
+      }
       //tar bort första kortet i winnerhand-arrayen efter att man kollat om samma kort fanns i spelaranas arrayer.
       winner[0].cardPool.splice(0, 1)
     }
     //kollar vilken winnerhelper som blivit 7, d.v.s. alla kort matchade med winnerkort-arrayen, och sätter vilken spelare som vann.
-    if(winner1Helper === 7){
-      alert(""+ state.player1.name+" won with: "+ solvedHand1.descr+ ", "+state.player2.name +" had: "+ solvedHand2.descr )
+    if (winner1Helper === 7) {
+      alert("" + state.player1.name + " won with: " + solvedHand1.descr + ", " + state.player2.name + " had: " + solvedHand2.descr)
       state.player1.isWinner = true
 
-    } else if( winner2Helper === 7){
-      alert(""+ state.player2.name+" won with: "+ solvedHand2.descr+ ", "+state.player1.name +" had: "+ solvedHand1.descr )
+    } else if (winner2Helper === 7) {
+      alert("" + state.player2.name + " won with: " + solvedHand2.descr + ", " + state.player1.name + " had: " + solvedHand1.descr)
       state.player2.isWinner = true
     }
   },
-
-  convertHand(state, cards){
+  convertHand(state, cards) {
     for (var i = 0; i < cards.length; i++) {
       switch (cards[i].value) {
         case 1:
@@ -635,16 +652,16 @@ const mutations = {
           }
           break
         case 3:
-        if (cards[i].suit === '♥') {
-          cards[i].name = '3h'
-        } else if (cards[i].suit === '♠') {
-          cards[i].name = '3s'
-        } else if (cards[i].suit === '♦') {
-          cards[i].name = '3d'
-        } else {
-          cards[i].name = '3c'
-        }
-        break
+          if (cards[i].suit === '♥') {
+            cards[i].name = '3h'
+          } else if (cards[i].suit === '♠') {
+            cards[i].name = '3s'
+          } else if (cards[i].suit === '♦') {
+            cards[i].name = '3d'
+          } else {
+            cards[i].name = '3c'
+          }
+          break
         case 4:
           if (cards[i].suit === '♥') {
             cards[i].name = '4h'
@@ -759,11 +776,11 @@ const mutations = {
     }
   }
 }
-  const store = new Vuex.Store({
-    actions,
-    mutations,
-    state
-  })
+const store = new Vuex.Store({
+  actions,
+  mutations,
+  state
+})
 new Vue({
   el: '#app',
   created() {

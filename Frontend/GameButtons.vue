@@ -1,66 +1,41 @@
 <template>
-  <div id="game">
-    <div class="btn-group">
-      <input
-        class="button"
-        type="button"
-        value="Raise/Bet"
-        @click="raise()"
-      >
-      <input
-        class="start"
-        type="button"
-        value="StartGame"
-        @click="startGame()"
-      >
-      <input
-        class="button"
-        type="button"
-        value="Call"
-        @click="call()"
-      >
-      <input
-        class="button"
-        type="button"
-        value="Check"
-        @click="check()"
-      >
-      <input
-        class="button"
-        type="button"
-        value="Fold"
-        @click="fold()"
-      >
-    </div>
+<div id="game">
+  <div class="btn-group">
+    <input class="button" type="button" value="Raise/Bet" @click="raise()">
+    <input class="start" type="button" value="StartGame" @click="startGame()">
+    <input class="button" type="button" value="Call" @click="call()">
+    <input class="button" type="button" value="Check" @click="check()">
+    <input class="button" type="button" value="Fold" @click="fold()">
   </div>
+</div>
 </template>
 <script>
-  export default {
-    methods: {
-      startGame() {
-        console.log('startGame clicked')
-        this.$store.dispatch('fetchCardsForPlayers')
-        this.$store.commit('payBlinds')
-        //this.$store.commit('nextPlayersTurn')
-      },
-      raise(){
-        console.log('raisebutton clicked')
-        this.$store.commit('raise')
-      },
-      check() {
-        console.log('Check button clicked')
-        this.$store.commit('check')
-      },
-      call() {
-        console.log('Check button clicked')
-        this.$store.commit('call')
-      },
-      fold() {
-        console.log('Fold button clicked')
-        this.$store.commit('fold')
-      }
+export default {
+  methods: {
+    startGame() {
+      console.log('startGame clicked')
+      this.$store.dispatch('fetchCardsForPlayers')
+      this.$store.commit('payBlinds')
+      this.$store.commit('nextPlayersTurn')
+    },
+    raise() {
+      console.log('raisebutton clicked')
+      this.$store.commit('raise')
+    },
+    check() {
+      console.log('Check button clicked')
+      this.$store.commit('check')
+    },
+    call() {
+      console.log('Check button clicked')
+      this.$store.commit('call')
+    },
+    fold() {
+      console.log('Fold button clicked')
+      this.$store.commit('fold')
     }
   }
+}
 </script>
 <style scoped>
 #game {
@@ -76,7 +51,7 @@
 
 .btn-group .button {
   position: relative;
-  margin-top: 10%;
+  margin-top: 3%;
   background-color: #f44336;
   border-radius: 12px;
   color: white;

@@ -5,7 +5,7 @@
   </div>
 
   <game-button />
-  
+
   <bank />
   <div id="player1">
     <img class="avatar" src="Images/player_avatars/avatar1.png">
@@ -37,14 +37,14 @@
   <div class="betSlider">
     <input v-model="$store.state.value" type="range" min="0" max="100" step="5">
     <input v-model="$store.state.value" type="number">
-    <span v-text="$store.state.value"/>
+    <span v-text="$store.state.value+'$'"/>
   </div>
 
   <div id="pokerchips">
     <img src="Images/small_blind.png" class="small_blind">
     <img src="Images/big_blind.png" class="big_blind">
     <img src="Images/stack-chips.png" class="chips">
-    <img src="Images/pile-of-poker-chips.png" class="pot_chips">
+    <!-- <img src="Images/pile-of-poker-chips.png" class="pot_chips"> -->
   </div>
 
   <img v-for="card in $store.state.cardsOnTable" :src="card.imageUrl" :id="card.id" class="tablecards" />
@@ -193,7 +193,7 @@ export default {
 
 .betSlider {
   position: fixed;
-  margin-top: 42%;
+  margin-bottom: 10%;
   /* margin-bottom: 30px; */
   background-color: #f44336;
   border-radius: 16px;
