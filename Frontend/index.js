@@ -142,6 +142,8 @@ const actions = {
     state.pot = state.player1.activePot + state.player2.activePot
     sum = state.currentPlayer.startMoney - state.currentPlayer.activePot
 
+    console.log("GÖR EN PUT PÅ (145) TILL ", state.currentPlayer.name)
+    
     return fetch('http://localhost:8080/api/users/' + state.currentPlayer.name, {
         body: JSON.stringify({
           "money": sum
@@ -174,6 +176,7 @@ const actions = {
       state.player2.startMoney = sum
       console.log('Loggar summan för vinnare Danne '+sum)
     }
+    console.log("GÖR EN PUT PÅ (179) TILL ", state.currentPlayer.name)
     fetch('http://localhost:8080/api/users/' + state.currentPlayer.name, {
         body: JSON.stringify({
           "money": sum
@@ -208,6 +211,7 @@ const actions = {
       state.player1.startMoney = sum
       console.log('Loggar sum i förlorare Jonte '+sum)
     }
+    console.log("GÖR EN PUT PÅ (214) TILL ", state.currentPlayer.name)
     fetch('http://localhost:8080/api/users/' + state.currentPlayer.name, {
         body: JSON.stringify({
           "money": sum
