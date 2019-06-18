@@ -55,6 +55,10 @@
 <script>
   import GameButtons from './GameButtons.vue'
 export default {
+
+  created() {
+
+  },
   components: {
     'game-button': GameButtons
   },

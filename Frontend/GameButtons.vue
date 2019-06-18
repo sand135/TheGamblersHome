@@ -7,7 +7,8 @@
         class="button"
         type="button"
         value="Raise"
-        @click="raise()">
+        @click="raise()"
+         >
 
       <input
         class="start"
@@ -34,12 +35,36 @@
           value="Fold"
           @click="fold()"
         >
+         <input
+          class="button"
+          type="button"
+          value="All-in"
+          @click="allIn()"
+        >
     </div>
     <div class="playerNameText">{{ playerNameText }}</div>
   </div>
 </template>
 <script>
   export default {
+      // mounted() {
+      //   this.$root.$on('GameButtonsComponent', () => {
+      //       // your code goes here
+      //       console.log("NO MONEY NO HONEY");
+            
+      //       this.c1meth()
+      //   })
+      // },
+    
+
+
+        created() {
+         // this.$store.state.buttons = document.getElementsByClassName("button")
+        // if (this.$store.state.player1.money <= 0) {
+        // document.getElementsByClassName("button").disabled = true; 
+        // }
+      },
+
     data() {
       return {
         playerNameText: this.$store.state.playerNames[0].name,
@@ -49,6 +74,12 @@
       }
     },
     methods: {
+
+      disableButtons() {
+        document.getElementsByClassName("button").disabled = true; 
+
+      },
+
       startGame() {
         console.log('startGame clicked')
         this.$store.commit('dealCardsToPlayer')
@@ -70,8 +101,14 @@
       fold() {
         console.log('Fold button clicked')
         this.$store.commit('fold')
+      },
+      allIn() {
+        console.log('All-in button clicked')
+        this.$store.commit('allIn')
+        
       }
     }
+
   }
 </script>
 <style scoped>

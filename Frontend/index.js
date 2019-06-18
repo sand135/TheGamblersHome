@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import Vuex from 'vuex'
 import Router from './router.js'
+
 // const express  =require('express')
 // const cors = require('cors')
 // import Express from 'express'
@@ -15,6 +16,7 @@ Vue.use(Router)
 Vue.config.devtools = true
 
 const state = {
+  buttons: null, 
   deck: null,
   card: {},
   cardsOnTable: [],
@@ -221,6 +223,38 @@ const actions = {
   }
 }
 const mutations = {
+  allIn(state) {
+    if (state.player1.isTurn === true) {
+      state.value = state.player1.money
+     state.player1.money = 0
+     state.currentPlayer = state.player1 
+    //  this.commit('updateMoneyToUser', 0)
+    } else {
+      state.value = state.player2.money
+      state.player2.money = 0
+      state.currentPlayer = state.player2
+      // this.commit('updateMoneyToUser', 0) 
+    }
+     console.log(state.currentPlayer.name, 'KÖR ALL-IN')
+     this.dispatch('betMoney')
+     this.commit('nextPlayersTurn')
+    // fetch('http://localhost:8080/api/users/' + state.currentPlayer.name, {
+    //   body: JSON.stringify({
+    //     "money": 0
+    //   }),
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   method: 'PUT'
+    // })
+    // .then(response => response.text())
+    // .then(result => {
+    //   console.log(result)
+    //   // context.commit('updateMoneyToWinner', sum)
+    // })
+
+  },
+
   raise() {
     console.log('raisebutton clicked')
     this.dispatch('betMoney')
@@ -388,6 +422,7 @@ const mutations = {
       console.log('Player 1 betalar SB')
       state.pot += 20
       state.player1.activePot += 20
+      state.player1.money -= 20
       state.currentPlayer = state.player1
       this.dispatch('addBlindsToDB')
     } else {
@@ -395,6 +430,7 @@ const mutations = {
       // Dra av big blind från player1 money
       state.pot += 40
       state.player1.activePot += 40
+      state.player1.money -= 40
       state.currentPlayer = state.player1
       this.dispatch('addBlindsToDB')
     }
@@ -403,6 +439,7 @@ const mutations = {
       console.log('Player2 betalar SB')
       state.pot += 20
       state.player2.activePot += 20
+      state.player2.money -= 20
       state.currentPlayer = state.player2
       this.dispatch('addBlindsToDB')
     } else {
@@ -410,11 +447,47 @@ const mutations = {
       console.log('Player2 betalar BB')
       state.pot += 40
       state.player2.activePot += 40
+      state.player2.money -= 20
       state.currentPlayer = state.player2
       this.dispatch('addBlindsToDB')
     }
   },
   setPlayerInfo(state, money) {
+        
+     if (money <= 0) {
+      
+
+         if (confirm('Du har inga pengar, vill du låna 500?')) {
+          fetch('http://localhost:8080/api/users/' + state.currentPlayer.name, {
+            body: JSON.stringify({
+              "money": 500
+            }),
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            method: 'PUT'
+          })
+          .then(response => response.text())
+          .then(result => {
+            console.log(result)
+          
+          })
+         } else {
+           console.log("Du lånade inga pengar!")
+           
+           
+         }
+      
+        
+        
+     }
+      
+      
+  
+       
+        
+      
+     
     // Sätter money till players via action metoden fetchPlayer
     if (state.currentPlayer.name === state.player1.name) {
       state.player1.money = money
@@ -450,6 +523,7 @@ const mutations = {
     }
   },
   updateMoneyToUser(state, money) {
+    console.log('UPDATING MONEY TO', state.currentPlayer.name, 'with', state.currentPlayer.activePot)
     if (state.player1.name === state.currentPlayer.name) {
       //Spelare1 ska uppdatera money
       state.player1.money = money
@@ -686,6 +760,7 @@ const mutations = {
   }
 }
 
+
 const store = new Vuex.Store({
   actions,
   mutations,
@@ -693,13 +768,21 @@ const store = new Vuex.Store({
 })
 
 new Vue({
+
+  
   el: '#app',
   created() {
     this.$store.state.playerNames.push(this.$store.state.player1)
     this.$store.state.playerNames.push(this.$store.state.player2)
     this.$store.commit('createDeck')
+   
+   
   },
   store: store,
   router: Router,
   render: h => h(App)
+
+  
 })
+
+

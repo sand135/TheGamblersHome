@@ -5,6 +5,7 @@ import LoginComponent from "./loginFunctionality/SignIn.vue"
 import GameComponent from "./GameTable.vue"
 import SignInUpComponent from "./loginFunctionality/SignInUp.vue"
 import RegisterComponent from "./loginFunctionality/Register.vue"
+import GameButtonsComponent from "./GameButtons.vue"
 
 Vue.use(Router)
 
@@ -37,6 +38,11 @@ export default new Router({
       path: "/game",
       name: "game",
       component: GameComponent
+    },
+    {
+      path: "/gamebuttons",
+      name: "gamebuttons",
+      component: GameButtonsComponent
     }
   ]
 })

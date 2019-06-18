@@ -45,6 +45,7 @@
               this.$store.dispatch('fetchPlayer')
               this.$store.dispatch('fetchPlayer2')
               this.$router.replace({ name: "game" })
+              
             }
           })
       },
