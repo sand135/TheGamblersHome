@@ -162,7 +162,7 @@ export default {
   font-family: sans-serif;
 }
 .playercards {
-    width: 15%;
+    width: 20%;
 }
 .betSlider{
    color: black;
