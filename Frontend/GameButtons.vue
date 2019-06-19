@@ -47,14 +47,9 @@
 </template>
 <script>
   export default {
-      // mounted() {
-      //   this.$root.$on('GameButtonsComponent', () => {
-      //       // your code goes here
-      //       console.log("NO MONEY NO HONEY");
-            
-      //       this.c1meth()
-      //   })
-      // },
+      mounted() {
+     
+      },
     
 
 

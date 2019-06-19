@@ -3,16 +3,8 @@ import App from './App.vue'
 import Vuex from 'vuex'
 import Router from './router.js'
 
-// const express  =require('express')
-// const cors = require('cors')
-// import Express from 'express'
-// App.use(cors())
-// Vue.use(Express)
 Vue.use(Vuex)
 Vue.use(Router)
-// const app = express()
-// app.use(express.json())
-
 Vue.config.devtools = true
 
 const state = {
@@ -35,7 +27,8 @@ const state = {
     isFirstPlayer: true,
     hasAct: false,
     activePot: 0,
-    isWinner: false
+    isWinner: false,
+    allIn: false
   },
   player2: {
     cards: [],
@@ -46,7 +39,8 @@ const state = {
     isFirstPlayer: false,
     hasAct: false,
     activePot: 0,
-    isWinner: false
+    isWinner: false,
+    allIn: false
   },
   pot: 0,
   rounds: 0,
@@ -228,30 +222,15 @@ const mutations = {
       state.value = state.player1.money
      state.player1.money = 0
      state.currentPlayer = state.player1 
-    //  this.commit('updateMoneyToUser', 0)
     } else {
       state.value = state.player2.money
       state.player2.money = 0
       state.currentPlayer = state.player2
-      // this.commit('updateMoneyToUser', 0) 
     }
      console.log(state.currentPlayer.name, 'KÖR ALL-IN')
      this.dispatch('betMoney')
      this.commit('nextPlayersTurn')
-    // fetch('http://localhost:8080/api/users/' + state.currentPlayer.name, {
-    //   body: JSON.stringify({
-    //     "money": 0
-    //   }),
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   method: 'PUT'
-    // })
-    // .then(response => response.text())
-    // .then(result => {
-    //   console.log(result)
-    //   // context.commit('updateMoneyToWinner', sum)
-    // })
+
 
   },
 
@@ -273,6 +252,8 @@ const mutations = {
     this.commit('nextPlayersTurn')
   },
   call(state) {
+
+    
     console.log('Call button clicked')
     let p1ActiveMoney = state.player1.activePot
     let p2ActiveMoney = state.player2.activePot
@@ -333,6 +314,14 @@ const mutations = {
   },
   playNextRound(state) {
     // TODO: Fixa allt som ska resettas till ny runda
+    if (state.player1.money <= 0) {
+      state.currentPlayer = state.player1
+     this.commit('loanMoney')
+    }
+    if (state.player2.money <= 0) {
+      state.currentPlayer = state.player2
+      this.commit('loanMoney')
+    }
     state.cardsOnTable.length = 0
     state.deck.length = 0
     state.player1.cards.length = 0
@@ -452,42 +441,34 @@ const mutations = {
       this.dispatch('addBlindsToDB')
     }
   },
-  setPlayerInfo(state, money) {
-        
-     if (money <= 0) {
-      
 
-         if (confirm('Du har inga pengar, vill du låna 500?')) {
-          fetch('http://localhost:8080/api/users/' + state.currentPlayer.name, {
-            body: JSON.stringify({
-              "money": 500
-            }),
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            method: 'PUT'
-          })
-          .then(response => response.text())
-          .then(result => {
-            console.log(result)
-          
-          })
-         } else {
-           console.log("Du lånade inga pengar!")
-           
-           
-         }
-      
-        
-        
-     }
-      
-      
-  
+  loanMoney() {
+      if (confirm(state.currentPlayer.name, 'har inga pengar, vill du låna 500?')) {
+       fetch('http://localhost:8080/api/users/' + state.currentPlayer.name, {
+         body: JSON.stringify({
+           "money": 500
+         }),
+         headers: {
+           'Content-Type': 'application/json'
+         },
+         method: 'PUT'
+       })
+       .then(response => response.text())
+       .then(result => {
+         console.log(result)
        
+       })
+      } else {
+        console.log("Du lånade inga pengar!")
+
         
-      
-     
+      }
+     },
+
+  setPlayerInfo(state, money) {
+        if (money <= 0) {
+      this.commit('loanMoney')   
+        }  
     // Sätter money till players via action metoden fetchPlayer
     if (state.currentPlayer.name === state.player1.name) {
       state.player1.money = money
