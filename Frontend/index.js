@@ -431,23 +431,13 @@ const mutations = {
       this.dispatch('fetchTurnOrRiver')
     } else if (state.playerNames[0].isTurn === true && state.rounds === 4 && state.player1.hasAct === true && state.player2.hasAct === true) {
       console.log('WHEOOOOO WINNER WINNER CHICKEN DINNER')
-      state.player1.isWinner = true
-
       //kollar vem som vann och sätter den spelaren till winner = true
       this.commit('countPointsAndSetWinner')
-
+      // Uppdaterar winner = true och winner = false
       this.dispatch('giveMoneyToWinner')
       this.dispatch('giveMoneyToLoser')
-
-      console.log('Loggar spelare 1 money ' + state.player1.money)
-      console.log('Loggar spelare 1 startMoney ' + state.player1.startMoney)
-
-      console.log('Loggar spelare 2 money ' + state.player2.money)
-      console.log('Loggar spelare 2 startmoney ' + state.player2.startMoney)
-
       //Resettar alla värden och börjar en ny runda
       this.commit('playNextRound')
-
     }
   },
 
@@ -481,25 +471,7 @@ const mutations = {
         state.player2.activePot += 20
         this.dispatch('addBlindsToDB')
       })
-
-      //this.dispatch('addBlindsToDB')
     }
-    // if (state.player2.isFirstPlayer === true) {
-    //   // Dra av small blind från player2 money
-    //   console.log('Player2 betalar SB')
-    //   state.pot += 20
-    //   state.player2.activePot += 20
-    //   // state.currentPlayer = state.player2
-    //   //this.dispatch('addBlindsToDB')
-    // } else {
-    //   // Dra av big blind från player2 money
-    //   console.log('Player2 betalar BB')
-    //   state.pot += 40
-    //   state.player2.activePot += 40
-    //   state.player2.isBigBlind = true
-    //   // state.currentPlayer = state.player2
-    //   //this.dispatch('addBlindsToDB')
-    // }
   },
   setPlayerInfo(state, money) {
     // Sätter money till players via action metoden fetchPlayer
@@ -515,8 +487,6 @@ const mutations = {
   updateMoneyToWinner(state, money) {
     if (state.player1.isWinner === true) {
       //Spelare1 har vunnit
-      console.log('Loggar vinnare player1 money i updateMoneyToWinner ' + state.player1.money)
-      console.log('Loggar vinnare player1 startmoney i updateMoneyToWinner ' + state.player1.startMoney)
       state.player1.money = money
       state.player1.startMoney = money
     } else if (state.player2.isWinner === true) {

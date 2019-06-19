@@ -35,7 +35,8 @@
   </div>
 
   <div class="betSlider">
-    <input v-model="$store.state.value" type="range" min="0" max="100" step="5">
+    <input v-if="$store.state.player1.isTurn === true" v-model="$store.state.value" type="range" min="40" :max="$store.state.player1.money" step="5">
+    <input v-else-if="$store.state.player2.isTurn === true" v-model="$store.state.value" type="range" min="40" :max="$store.state.player2.money" step="5">
     <input v-model="$store.state.value" type="number">
     <span v-text="$store.state.value+'$'"/>
   </div>

@@ -78,7 +78,6 @@ app.get('/cards/drawTurnAndRiver',(request, response)=>{
   // Lägger till turn och river till cardsOnTable
   // Om endast flopen(3 kort är dragna så ska id vara tablecard3 annars tablecard4
   if (!this.fourthCardIsDrawn) {
-    console.log('Vad händer här');
     this.deck.splice(0, 1)
     let card = {
       suit: this.deck[0].suit,
