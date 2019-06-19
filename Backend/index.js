@@ -74,9 +74,10 @@ app.get('/users/:username/:password', (request, response) => {
 
 //Korthanteringen
 app.get('/cards/drawTurnAndRiver',(request, response)=>{
-
   // Lägger till turn och river till cardsOnTable
   // Om endast flopen(3 kort är dragna så ska id vara tablecard3 annars tablecard4
+  console.log('fourthCardIsDrawn '+this.fourthCardIsDrawn)
+  console.log('fifthCardIsDrawn '+this.fifthCardIsDrawn)
   if (!this.fourthCardIsDrawn) {
     this.deck.splice(0, 1)
     let card = {
@@ -87,7 +88,7 @@ app.get('/cards/drawTurnAndRiver',(request, response)=>{
     }
     this.deck.splice(0, 1)
     this.fourthCardIsDrawn = true
-    console.log(card);
+    console.log(card)
     response.send(card)
   } else if (this.fourthCardIsDrawn && !this.fifthCardIsDrawn) {
     this.deck.splice(0, 1)
@@ -98,7 +99,9 @@ app.get('/cards/drawTurnAndRiver',(request, response)=>{
       id: "tablecard4"
     }
     this.deck.splice(0, 1)
-    this.fifthCardIsDrawn = true
+    this.fourthCardIsDrawn = false
+    this.fifthCardIsDrawn = false
+    console.log(card)
     response.send(card)
   }else{
     //inga fler kort ska dras så ett tomt objekt dras.

@@ -361,9 +361,7 @@ const mutations = {
     }
   },
   playNextRound(state) {
-
     state.cardsOnTable = []
-
     state.player1.cards = []
     state.player2.cards = []
     state.pot = 0
@@ -379,7 +377,6 @@ const mutations = {
     state.player1.isWinner = false
     state.player2.isWinner = false
     this.dispatch('createNewDeckInBackend', true)
-
   },
   nextPlayersTurn(state) {
     // Första valet innan flop osv...
@@ -419,7 +416,6 @@ const mutations = {
       state.player2.hasAct = false
       this.dispatch('drawFlop')
     } else if (state.playerNames[0].isTurn === true && state.rounds === 2 && state.player1.hasAct === true && state.player2.hasAct === true) {
-      console.log('Här är vi')
       state.playerNames[0].isTurn === false
       state.player1.hasAct = false
       state.player2.hasAct = false
@@ -440,10 +436,7 @@ const mutations = {
       this.commit('playNextRound')
     }
   },
-
-  // TODO: Lägga till SB och BB i databasen. Ifall BB bara kan checka hela vägen så uppdateras inte hans money förens i slutet när man kör giveMoneyToLoser
   payBlinds(state) {
-
     if (state.player1.isFirstPlayer === true) {
       // Dra av small blind från player1 money
       console.log('Player 1 betalar SB')

@@ -15,7 +15,6 @@ export default new Router({
       }
     },
    
-
     {
       path: "/signinup/register",
       name: "Register",
