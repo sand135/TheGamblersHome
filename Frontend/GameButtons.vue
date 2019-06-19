@@ -1,8 +1,13 @@
 <template>
 <div id="game">
-  <div class="btn-group">
+  <div v-if="$store.state.player1.isAllIn === false && $store.state.player2.isAllIn === false" class="btn-group">
     <input class="button" type="button" value="Raise/Bet" @click="raise()">
     <input class="start" type="button" value="StartGame" @click="startGame()">
+    <input class="button" type="button" value="Call" @click="call()">
+    <input class="button" type="button" value="Check" @click="check()">
+    <input class="button" type="button" value="Fold" @click="fold()">
+  </div>
+  <div v-else="" class="btn-group">
     <input class="button" type="button" value="Call" @click="call()">
     <input class="button" type="button" value="Check" @click="check()">
     <input class="button" type="button" value="Fold" @click="fold()">
@@ -62,6 +67,7 @@ export default {
   font-size: 16px;
   cursor: pointer;
   float: left;
+  disabled: true;
 }
 
 .btn-group .button:not(:last-child) {

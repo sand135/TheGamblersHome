@@ -29,7 +29,7 @@ const state = {
     hasAct: false,
     activePot: 0,
     isWinner: false,
-    isBigBlind: false
+    isAllIn: false
   },
   player2: {
     cards: [],
@@ -41,7 +41,7 @@ const state = {
     hasAct: false,
     activePot: 0,
     isWinner: false,
-    isBigBlind: false
+    isAllIn: false
   },
   pot: 0,
   rounds: 0,
@@ -121,19 +121,47 @@ const actions = {
   },
   betMoney() {
     let sum = 0
+    let totalBack = 0
     if (state.player1.isTurn === true) {
       state.player1.activePot += Number(state.value)
       state.currentPlayer = state.player1
       state.player1.money = state.player1.startMoney - state.player1.activePot
+      if (state.player1.money === 0 || state.player1.money < 0) {
+        state.player1.activePot = state.player1.startMoney
+        state.player1.isAllIn = true
+        state.player1.money = 0
+        if (state.player1.activePot > state.player2.money) {
+          //Player1 ska få tillbaka
+          //Spelare1 aktiva pot är 1000 och spelare2 har 700
+          state.player1.money = state.player1.activePot - state.player2.startMoney
+          state.player1.activePot = state.player2.startMoney
+        }
+      }
       console.log('Player1 isTurn är true i betMoney ' + state.player1.activePot)
     } else {
       state.player2.activePot += Number(state.value)
       console.log('Player2 isTurn är true i betMoney ' + state.player2.activePot)
       state.currentPlayer = state.player2
       state.player2.money = state.player2.startMoney - state.player2.activePot
+      if (state.player2.money === 0 || state.player2.money < 0) {
+        state.player2.isAllIn = true
+        state.player2.activePot = state.player2.startMoney
+        state.player2.money = 0
+        if (state.player2.activePot > state.player1.money) {
+          //Player2 ska få tillbaka
+          //Spelare2 aktiva pot är 1000 och spelare1 har 700
+          state.player2.money = state.player2.activePot - state.player1.startMoney
+          state.player2.activePot = state.player1.startMoney
+        }
+      }
     }
+
     state.pot = state.player1.activePot + state.player2.activePot
+    console.log('Loggar pot ' + state.pot)
     sum = state.currentPlayer.startMoney - state.currentPlayer.activePot
+
+    console.log('Loggar pot ' + state.pot)
+    console.log('Loggar totalBack ' + totalBack)
 
     return fetch('http://localhost:8080/api/users/' + state.currentPlayer.name, {
         body: JSON.stringify({
@@ -263,22 +291,30 @@ const actions = {
       })
   },
   loanMoney() {
-    store.dispatch('fetchPlayer')
-
-    if (state.player1.isTurn) {
-      fetch('http://localhost:8080/api/bank/' + state.player1.name)
-        .then(response => response.text())
-        .then(result => {
-          console.log(result)
-          state.player1.money += 500
-        })
+    if (confirm(state.currentPlayer.name + ' har inga pengar, vill du låna 500?')) {
+      store.dispatch('fetchPlayer')
+      console.log('loanMoney metoden, log')
+      if (state.player1.isTurn) {
+        return fetch('http://localhost:8080/api/bank/' + state.player1.name)
+          .then(response => response.text())
+          .then(result => {
+            console.log(result)
+            console.log('loanMoney är klar')
+            state.player1.money = 500
+            console.log('Loggar player1 money i loanMoney ' + state.player1.money)
+          })
+      } else {
+        return fetch('http://localhost:8080/api/bank/' + state.player2.name)
+          .then(response => response.text())
+          .then(result => {
+            console.log(result)
+            console.log('loanMoney är klar')
+            state.player2.money = 500
+            console.log('Loggar player2 money i loanMoney ' + state.player2.money)
+          })
+      }
     } else {
-      fetch('http://localhost:8080/api/bank/' + state.player2.name)
-        .then(response => response.text())
-        .then(result => {
-          console.log(result)
-          state.player2.money += 500
-        })
+      state.authenticated = false
     }
   }
 }
@@ -302,9 +338,9 @@ const mutations = {
     this.commit('nextPlayersTurn')
   },
   call(state) {
-    console.log('Call button clicked')
     let p1ActiveMoney = state.player1.activePot
     let p2ActiveMoney = state.player2.activePot
+    console.log('Call button clicked')
     if (p1ActiveMoney > p2ActiveMoney) {
       //Player 1 har raisat innan och player2 callar.
       let sum = p1ActiveMoney - p2ActiveMoney
@@ -372,6 +408,8 @@ const mutations = {
     state.player2.isFirstPlayer = !state.player2.isFirstPlayer
     state.player1.hasAct = false
     state.player2.hasAct = false
+    state.player1.isAllIn = false
+    state.player2.isAllIn = false
     state.player1.money = state.player1.startMoney
     state.player2.money = state.player2.startMoney
     state.player1.isWinner = false
@@ -432,8 +470,40 @@ const mutations = {
       // Uppdaterar winner = true och winner = false
       this.dispatch('giveMoneyToWinner')
       this.dispatch('giveMoneyToLoser')
-      //Resettar alla värden och börjar en ny runda
-      this.commit('playNextRound')
+      if (state.player1.money === 0) {
+        //Player1 vill låna 500 från banken
+        if (state.player1.isWinner === true) {
+          this.commit('playNextRound')
+        } else {
+          state.player2.isTurn = false
+          state.player1.isTurn = true
+          state.currentPlayer = state.player1
+          this.dispatch('loanMoney').then(() => {
+            console.log('Denna borde komma efter loanMoney loggen')
+            state.player1.startMoney = state.player1.money
+            console.log('Loggar player1 money efter loanMoney ' + state.player1.money)
+            this.commit('playNextRound')
+          })
+        }
+      } else if (state.player2.money === 0) {
+        //Player2 vill låna 500 från banken
+        if (state.player2.isWinner === true) {
+          this.commit('playNextRound')
+        } else {
+          state.player1.isTurn = false
+          state.player2.isTurn = true
+          state.currentPlayer = state.player2
+          this.dispatch('loanMoney').then(() => {
+            console.log('Denna borde komma efter loanMoney loggen')
+            state.player2.startMoney = state.player2.money
+            console.log('Loggar player2 money efter loanMoney ' + state.player2.money)
+            this.commit('playNextRound')
+          })
+        }
+      } else {
+        //Resettar alla värden och börjar en ny runda.
+        this.commit('playNextRound')
+      }
     }
   },
   payBlinds(state) {
@@ -443,11 +513,13 @@ const mutations = {
       state.pot += 20
       state.player1.activePot += 20
       state.currentPlayer = state.player1
+      state.player1.money -= 20
       this.dispatch('addBlindsToDB').then(() => {
         console.log('Nu borde player1 ha fått betala SB')
         state.currentPlayer = state.player2
         state.pot += 40
         state.player2.activePot += 40
+        state.player2.money -= 40
         this.dispatch('addBlindsToDB')
       })
     } else {
@@ -457,16 +529,22 @@ const mutations = {
       state.player1.activePot += 40
       state.player1.isBigBlind = true
       state.currentPlayer = state.player1
+      state.player1.money -= 40
       this.dispatch('addBlindsToDB').then(() => {
         console.log('Nu borde player1 ha fått betala BB')
         state.currentPlayer = state.player2
         state.pot += 20
         state.player2.activePot += 20
+        state.player2.money -= 20
         this.dispatch('addBlindsToDB')
       })
     }
   },
   setPlayerInfo(state, money) {
+    if (money <= 0) {
+      this.dispatch('loanMoney')
+      money = 500
+    }
     // Sätter money till players via action metoden fetchPlayer
     if (state.currentPlayer.name === state.player1.name) {
       state.player1.money = money

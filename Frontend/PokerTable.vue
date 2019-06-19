@@ -35,17 +35,26 @@
   </div>
 
   <div class="betSlider">
-    <input v-if="$store.state.player1.isTurn === true" v-model="$store.state.value" type="range" min="40" :max="$store.state.player1.money" step="5">
-    <input v-else-if="$store.state.player2.isTurn === true" v-model="$store.state.value" type="range" min="40" :max="$store.state.player2.money" step="5">
+
+    <input v-if="$store.state.player1.isTurn === true && $store.state.player1.isAllIn === false && $store.state.player2.isAllIn === false" v-model="$store.state.value" type="range" min="40" :max="$store.state.player1.money" step="5">
+    <input v-else-if="$store.state.player2.isTurn === true && $store.state.player1.isAllIn === false && $store.state.player2.isAllIn === false" v-model="$store.state.value" type="range" min="40" :max="$store.state.player2.money" step="5">
     <input v-model="$store.state.value" type="number">
     <span v-text="$store.state.value+'$'"/>
+
+
+    <input v-if="$store.state.player1.isTurn === true && $store.state.player2.isAllIn === true" v-model="$store.state.value" type="range" min="40" :max="$store.state.player2.activePot" step="5">
+    <input v-if="$store.state.player2.isTurn === true && $store.state.player1.isAllIn === true" v-model="$store.state.value" type="range" min="40" :max="$store.state.player1.activePot" step="5">
+
   </div>
 
   <div id="pokerchips">
-    <img src="Images/small_blind.png" class="small_blind">
-    <img src="Images/big_blind.png" class="big_blind">
+    <img v-if="$store.state.player1.isFirstPlayer === true" src="Images/small_blind.png" class="small_blind">
+    <img v-else-if="$store.state.player1.isFirstPlayer === false" src="Images/big_blind.png" class="small_blind">
+    <img v-if="$store.state.player2.isFirstPlayer === true" src="Images/small_blind.png" class="big_blind">
+    <img v-else-if="$store.state.player2.isFirstPlayer === false" src="Images/big_blind.png" class="big_blind">
+    <!-- <img src="Images/big_blind.png" class="big_blind"> -->
     <img src="Images/stack-chips.png" class="chips">
-    <!-- <img src="Images/pile-of-poker-chips.png" class="pot_chips"> -->
+    <!-- <img v-if="$store.state.pot >= 80" src="Images/pile-of-poker-chips.png" class="pot_chips"> -->
   </div>
 
   <img v-for="card in $store.state.cardsOnTable" :src="card.imageUrl" :id="card.id" class="tablecards" />
@@ -218,7 +227,7 @@ export default {
   position: fixed;
   bottom: 65%;
   right: 15%;
-  width: 4%;
+  width: 5%;
 }
 
 .big_blind {
@@ -233,5 +242,12 @@ export default {
   bottom: 74%;
   right: 47%;
   width: 15%;
+}
+
+.pot_chips {
+  position: fixed;
+  bottom: 62%;
+  right: 65%;
+  width: 10%;
 }
 </style>

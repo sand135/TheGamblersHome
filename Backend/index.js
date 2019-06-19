@@ -193,7 +193,7 @@ app.post('/', (request, response) => {
 })
 
 app.put('/:username', (request, response) =>{
-  console.log(request.body.username);
+  console.log(request.body.username)
   let username = request.params.username
   let betMoney = request.body.money
 
