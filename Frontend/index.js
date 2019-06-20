@@ -132,7 +132,6 @@ const actions = {
         state.player1.money = 0
         if (state.player1.activePot > state.player2.money) {
           //Player1 ska få tillbaka
-          //Spelare1 aktiva pot är 1000 och spelare2 har 700
           state.player1.money = state.player1.activePot - state.player2.startMoney
           state.player1.activePot = state.player2.startMoney
         }
@@ -149,7 +148,6 @@ const actions = {
         state.player2.money = 0
         if (state.player2.activePot > state.player1.money) {
           //Player2 ska få tillbaka
-          //Spelare2 aktiva pot är 1000 och spelare1 har 700
           state.player2.money = state.player2.activePot - state.player1.startMoney
           state.player2.activePot = state.player1.startMoney
         }
@@ -445,8 +443,8 @@ const mutations = {
         }
       }
     }
-    state.playerNames[1].isTurn = !state.playerNames[1].isTurn
-    state.playerNames[2].isTurn = !state.playerNames[2].isTurn
+    state.player1.isTurn = !state.player1.isTurn
+    state.player2.isTurn = !state.player2.isTurn
 
     if (state.playerNames[0].isTurn === true && state.rounds === 1 && state.player1.hasAct === true && state.player2.hasAct === true) {
       state.playerNames[0].isTurn === false

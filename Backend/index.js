@@ -6,7 +6,7 @@ app.use(bodyParser.json())
 
 var fourthCardIsDrawn = false
 var fifthCardIsDrawn = false
-let deck =[]
+let deck = []
 
 app.use((request, response, next) => {
   response.header('Access-Control-Allow-Origin', '*')
@@ -26,7 +26,7 @@ app.get('/', (request, response) => {
 
 app.get('/users/:username/', (request, response) => {
   var isFound = false
-  var user =''
+  var user = ''
   db.all('SELECT * FROM users').then(users => {
     for (var index in users) {
       if (users[index].username === request.params.username) {
@@ -73,11 +73,11 @@ app.get('/users/:username/:password', (request, response) => {
 })
 
 //Korthanteringen
-app.get('/cards/drawTurnAndRiver',(request, response)=>{
+app.get('/cards/drawTurnAndRiver', (request, response) => {
   // Lägger till turn och river till cardsOnTable
   // Om endast flopen(3 kort är dragna så ska id vara tablecard3 annars tablecard4
-  console.log('fourthCardIsDrawn '+this.fourthCardIsDrawn)
-  console.log('fifthCardIsDrawn '+this.fifthCardIsDrawn)
+  console.log('fourthCardIsDrawn ' + this.fourthCardIsDrawn)
+  console.log('fifthCardIsDrawn ' + this.fifthCardIsDrawn)
   if (!this.fourthCardIsDrawn) {
     this.deck.splice(0, 1)
     let card = {
@@ -103,9 +103,9 @@ app.get('/cards/drawTurnAndRiver',(request, response)=>{
     this.fifthCardIsDrawn = false
     console.log(card)
     response.send(card)
-  }else{
+  } else {
     //inga fler kort ska dras så ett tomt objekt dras.
-    let card ={
+    let card = {
       suit: '',
       value: null,
       imageUrl: '',
@@ -113,22 +113,22 @@ app.get('/cards/drawTurnAndRiver',(request, response)=>{
     }
     response.send(card)
   }
-  })
+})
 
 
-app.get('/cards/drawflop', (request, response)=>{
+app.get('/cards/drawflop', (request, response) => {
   // Tar bort översta kortet innan man delar ut flop
   this.deck.splice(0, 1)
   var flop = []
-    for (var i = 0; i < 3; i++) {
-        this.deck[i].id = 'tablecard' + i
-        flop.push(this.deck[i])
-    }
-    this.deck.splice(0, 3)
-    response.send(flop)
-    })
+  for (var i = 0; i < 3; i++) {
+    this.deck[i].id = 'tablecard' + i
+    flop.push(this.deck[i])
+  }
+  this.deck.splice(0, 3)
+  response.send(flop)
+})
 
-app.get('/cards/playerCards', (request, response)=>{
+app.get('/cards/playerCards', (request, response) => {
   //Hämtar 4 kort och returnerar dem till frontend
   var cardsForTwoPlayers = []
   for (var i = 0; i < 4; i++) {
@@ -150,7 +150,9 @@ app.get('/cards', (request, response) => {
       let j = Math.floor(Math.random() * (i + 1));
       [this.deck[i], this.deck[j]] = [this.deck[j], this.deck[i]]
     }
-    response.send({message:"new deck created"})
+    response.send({
+      message: "new deck created"
+    })
   })
 })
 
@@ -161,7 +163,7 @@ app.post('/cards', (request, response) => {
   let suit = request.body.suit
   let imageUrl = request.body.imageUrl
   let id = request.body.id
-  db.run('INSERT INTO cards VALUES (?,?,?,?)', [value, suit,imageUrl, id]).then(() => {
+  db.run('INSERT INTO cards VALUES (?,?,?,?)', [value, suit, imageUrl, id]).then(() => {
       response.status(200)
       response.send("card inserted!")
     }).catch(err => {
@@ -172,43 +174,42 @@ app.post('/cards', (request, response) => {
     .catch(err => {
       console.log(err)
     })
-  })
+})
 
 app.post('/', (request, response) => {
   console.log(request.body);
   let username = request.body.username
   let password = request.body.password
   let betMoney = 1000
-      db.run('INSERT INTO users VALUES (?,?,?)', [username, password, betMoney]).then(()=>{
-        response.status(200)
-        response.send("New user registered")
-      }).catch(err =>{
-        console.log(err);
-        response.status(409)
-        response.send("User already excists!")
-      })
-  .catch(err=>{
-    console.log(err);
-  })
+  db.run('INSERT INTO users VALUES (?,?,?)', [username, password, betMoney]).then(() => {
+      response.status(200)
+      response.send("New user registered")
+    }).catch(err => {
+      console.log(err);
+      response.status(409)
+      response.send("User already excists!")
+    })
+    .catch(err => {
+      console.log(err);
+    })
 })
 
-app.put('/:username', (request, response) =>{
+app.put('/:username', (request, response) => {
   console.log(request.body.username)
   let username = request.params.username
   let betMoney = request.body.money
 
-      db.run('UPDATE users SET money=? WHERE username=?', [betMoney, username]).then(()=>{
-      }).catch(err =>{
-        console.log(err);
-        response.status(409)
-        response.send("User not found!")
-      })
-  .catch(err=>{
-    console.log(err);
-  })
+  db.run('UPDATE users SET money=? WHERE username=?', [betMoney, username]).then(() => {}).catch(err => {
+      console.log(err);
+      response.status(409)
+      response.send("User not found!")
+    })
+    .catch(err => {
+      console.log(err);
+    })
 })
 
-//FEL
+//Används för insomnia anrop
 //Denna funkar för mig
 app.put('/users/:username/', (request, response) => {
   console.log(request.params.username)
@@ -218,28 +219,28 @@ app.put('/users/:username/', (request, response) => {
 })
 
 //Loan money from bank 500
-app.get('/bank/:username', (request, response) =>{
+app.get('/bank/:username', (request, response) => {
   console.log(request.params.username)
   let bank = 500
 
-      db.all('SELECT * FROM users WHERE username=?', [request.params.username]).then(user=>{
+  db.all('SELECT * FROM users WHERE username=?', [request.params.username]).then(user => {
 
-        let currentUserMoney = user[0].money
-        currentUserMoney = currentUserMoney + bank
+    let currentUserMoney = user[0].money
+    currentUserMoney = currentUserMoney + bank
 
-        db.run('UPDATE users SET money=? WHERE username=?', [currentUserMoney, request.params.username]).then(()=>{
-          response.send("500 was added to your account")
-        }).catch(err =>{
-          console.log(err);
-          response.status(409)
-          response.send("No money transferred")
-        })
-        .catch(err=>{
-          console.log(err);
-        })
-      }).catch(err=>{
-      console.log(err);
-    })
+    db.run('UPDATE users SET money=? WHERE username=?', [currentUserMoney, request.params.username]).then(() => {
+        response.send("500 was added to your account")
+      }).catch(err => {
+        console.log(err);
+        response.status(409)
+        response.send("No money transferred")
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }).catch(err => {
+    console.log(err);
+  })
 })
 
 app.listen(3000, () => {
